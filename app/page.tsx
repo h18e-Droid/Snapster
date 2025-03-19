@@ -1,9 +1,8 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from "next/image"
+import styles from "./page.module.css"
+import React from "react"
 
 export default function Home() {
-
-  //This is test brunch
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -62,5 +61,5 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  );
+  )
 }
