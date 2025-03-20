@@ -14,12 +14,12 @@ export type IconProps = {
 } & Omit<HTMLProps<HTMLSpanElement>, "color" | "size">
 
 export const IconWrapper = ({
-                       backgroundColor = "var(--color-neutral-light-50)",
-                       color: colorProp,
-                       icon,
-                       size: sizeProp,
-                       ...restProps
-                     }: { icon: ReactNode } & IconProps) => {
+  backgroundColor = "var(--color-neutral-light-50)",
+  color: colorProp,
+  icon,
+  size: sizeProp,
+  ...restProps
+}: { icon: ReactNode } & IconProps) => {
   const color = colorProp ? colorProp : "currentColor"
   const size = sizeProp ? `${sizeProp}px` : "24px"
 
@@ -34,7 +34,7 @@ export const IconWrapper = ({
           display: "inline-flex",
           fontSize: "inherit",
           height: size,
-          width: size
+          width: size,
         } as CSSProperties
       }
       {...restProps}
