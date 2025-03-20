@@ -10,4 +10,5 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  { "extends": "next/core-web-vitals" },
 ]
