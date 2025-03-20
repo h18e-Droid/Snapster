@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@radix-ui/themes": "^3.2.1",
     "@reduxjs/toolkit": "^2.6.1",
     "@types/jest": "^29.5.14",
     "next": "15.2.2",
