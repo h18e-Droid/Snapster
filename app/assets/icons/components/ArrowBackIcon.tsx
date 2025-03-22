@@ -1,6 +1,6 @@
-import { IconProps, IconWrapper } from "@/app/assets/icons/iconWrapper"
+import { IconProps, IconWrapper } from "@/app/assets/icons/IconWrapper"
 
-export const ArrowBack = (allProps: IconProps) => {
+export const ArrowBackIcon = (allProps: IconProps) => {
   const { svgProps: props, ...restProps } = allProps
 
   return (
