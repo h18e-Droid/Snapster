@@ -1,0 +1,45 @@
+.container {
+    position: relative;
+}
+
+.default {
+    background-color: var(--color-dark-500);
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 2px;
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+    border-top: hidden;
+    outline: none;
+    resize: none;
+    color: var(--color-light-1000);
+    border-color: var(--color-dark-100);
+    transition: border-color 0.5s ease, color 0.5s ease;
+
+    &:active {
+        color: var(--color-light-100);
+        border-color: var(--color-light-100)
+    }
+    &:focus {
+        border: 2px solid var(--color-info-500);
+        color: var(--color-light-100);
+    }
+
+    &:disabled {
+        color: var(--color-dark-100);
+    }
+}
+
+
+
+.labelError {
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-m);
+    color: var(--color-danger-500);
+    transition: all 0.3s ease;
+    border-color: var(--color-danger-500);
+}

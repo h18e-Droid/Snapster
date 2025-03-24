@@ -1,4 +1,4 @@
-import { IconProps, IconWrapper } from "@/app/assets/icons/IconWrapper"
+import { IconProps, IconWrapper } from "@/shared/assets/icons/IconWrapper"
 
 export const CalendarOutlineIcon = (allProps: IconProps) => {
   const { svgProps: props, ...restProps } = allProps
