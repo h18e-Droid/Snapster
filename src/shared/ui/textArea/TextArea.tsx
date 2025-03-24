@@ -24,9 +24,8 @@ export const TextArea = ({ width, height, error, ...props }: TextAreaProps) => {
       value={props.value}
     >{props.defaultValue}</textarea>
       {error &&
-        <label className={s.labelError}>Error text</label>
+        <label className={s.labelError}>{error}</label>
       }
-
     </div>
 
   )
