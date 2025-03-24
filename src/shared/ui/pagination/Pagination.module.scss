@@ -1,0 +1,15 @@
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  min-width: 490px;
+}
+
+.text{
+  color: var(--color-light-100);
+  height: var(--font-height-m);
+  font-weight: var(--font-weight-regular);
+  margin: 0 6px 0 15px;
+  &:last-of-type {
+    margin: 0 0 0 6px;
+  }
+}
