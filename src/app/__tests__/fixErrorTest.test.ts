@@ -1,4 +1,4 @@
-import fixErrorTest from "../fixErrorTest"
+import fixErrorTest from "@/app/fixErrorTest"
 
 describe("Fix error", () => {
   it("should be 2", () => {
