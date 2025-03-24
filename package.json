@@ -22,18 +22,18 @@
     "react-hook-form": "^7.54.2"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@eslint/js": "^9.22.0",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.23.0",
     "@next/eslint-plugin-next": "^15.2.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/node": "^20.17.27",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.27.0",
     "@typescript-eslint/parser": "^8.27.0",
-    "eslint": "^9.22.0",
+    "eslint": "^9.23.0",
     "eslint-config-next": "15.2.2",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^16.0.0",
@@ -45,7 +45,7 @@
     "stylelint-config-standard": "^37.0.0",
     "stylelint-order": "^6.0.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5",
-    "typescript-eslint": "^8.26.1"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.27.0"
   }
 }
