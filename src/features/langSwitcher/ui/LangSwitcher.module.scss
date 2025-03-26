@@ -53,6 +53,7 @@
   align-items: center;
 
   &:hover {
+    color: var(--color-info-500);
     background-color: var(--color-dark-300);
     border: none
   }
@@ -65,6 +66,13 @@
   span{
     display: flex;
   }
+}
+
+.itemMobile{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 7px 0 7px 4px;
 }
 
 .flagIcon{
