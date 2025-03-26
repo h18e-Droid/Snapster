@@ -1,0 +1,22 @@
+.navbar {
+  position: sticky;
+  border-right: 1px solid var(--color-dark-500);
+  top: 0;
+  min-width: 15%;
+  height: 100vh;
+  background-color: var(--color-dark-700);
+  color: white;
+  z-index: 10;
+  padding-top: 80px;
+  @media only screen and (max-width: 700px) {
+    width: 100%;
+    height: 60px;
+    margin: 0 auto;
+    border-top: 1px solid var(--color-dark-500);
+    border-right: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 2.5%;
+}
+}

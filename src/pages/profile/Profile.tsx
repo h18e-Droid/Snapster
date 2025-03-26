@@ -1,11 +1,5 @@
 const Profile = () => {
-  return (
-    <>
-      {Array.from({ length: 50 }).map((el, i) => {
-        return <div key={i}>{i}</div>
-      })}
-    </>
-  )
+  return <div>Profile</div>
 }
 
 export default Profile
