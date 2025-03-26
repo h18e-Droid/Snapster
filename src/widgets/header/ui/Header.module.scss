@@ -28,7 +28,14 @@
   align-items: center;
   width: 400px;
   overflow: visible;
+
 }
+
+.navigationGroupAuth{
+  flex-direction: row-reverse;
+  width: 250px;
+}
+
 
 .textButton {
   width: 100px;

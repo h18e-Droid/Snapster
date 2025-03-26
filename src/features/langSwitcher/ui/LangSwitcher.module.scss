@@ -14,7 +14,15 @@
   }
   span{
     display: flex;
+    align-items: center;
+    gap: 5px;
   }
+}
+
+.triggerMobile{
+  background-color: transparent;
+  border: none;
+  width: 60px;
 }
 
 .triggerIcon {
