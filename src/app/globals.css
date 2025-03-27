@@ -47,3 +47,30 @@ a {
     color-scheme: dark;
   }
 }
+
+
+
+
+::-webkit-scrollbar{
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background:transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-300);
+  border-radius: 3px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-light-1000);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
