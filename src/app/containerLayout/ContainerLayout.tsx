@@ -8,15 +8,19 @@ type ContainerLayoutProps = {
 }
 
 const ContainerLayout = ({ children }: ContainerLayoutProps) => {
+  const isAuth = true
+
   return (
     <div className={styles.containerWrapper}>
       <header className={styles.headerWrapper}>
         <Header />
       </header>
       <div className={styles.container}>
-        <nav className={styles.navbarWrapper}>
-          <Navbar />
-        </nav>
+        {isAuth && (
+          <nav className={styles.navbarWrapper}>
+            <Navbar />
+          </nav>
+        )}
         <section className={styles.contentWrapper}>{children}</section>
       </div>
     </div>
