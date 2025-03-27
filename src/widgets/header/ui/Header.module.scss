@@ -1,0 +1,65 @@
+.header {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigationGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  overflow: visible;
+
+}
+
+.navigationGroupAuth {
+  flex-direction: row-reverse;
+  width: 250px;
+}
+
+.navigationGroupMobileAuth {
+  width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.textButton {
+  width: 100px;
+  height: 36px;
+  color: var(--color-info-700);
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.containedButton {
+  width: 100px;
+  height: 36px;
+  color: var(--color-light-100);
+  background-color: var(--color-info-500);
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 26px;
+  line-height: 36px;
+}
+
+.moreButton {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
