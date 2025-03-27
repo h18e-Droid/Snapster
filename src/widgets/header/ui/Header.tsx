@@ -13,37 +13,35 @@ export const Header = () => {
   const isAuth = false
 
   return (
-    <header className={styles.headerContainer}>
-      <div className={styles.header}>
-        <h2 className={styles.title}>Snapster</h2>
-        <nav
-          className={clsx(styles.navigationGroup, {
-            [styles.navigationGroupAuth]: isAuth,
-            [styles.navigationGroupMobileAuth]: isMobile,
-          })}
-        >
-          <LangSwitcher />
+    <div className={styles.header}>
+      <h2 className={styles.title}>Snapster</h2>
+      <nav
+        className={clsx(styles.navigationGroup, {
+          [styles.navigationGroupAuth]: isAuth,
+          [styles.navigationGroupMobileAuth]: isMobile,
+        })}
+      >
+        <LangSwitcher />
 
-          {isAuth && !isMobile && (
-            <Badge badgeContent={3} max={10}>
-              <BellIcon />
-            </Badge>
-          )}
+        {isAuth && !isMobile && (
+          <Badge badgeContent={3} max={10}>
+            <BellIcon />
+          </Badge>
+        )}
 
-          {!isAuth && !isMobile && (
-            <>
-              <Button width={100} height={36} className={styles.textButton} title="Sign in" />
-              <Button width={100} height={36} className={styles.containedButton} title="Sign out" />
-            </>
-          )}
+        {!isAuth && !isMobile && (
+          <>
+            <Button width={100} height={36} className={styles.textButton} title="Sign in" />
+            <Button width={100} height={36} className={styles.containedButton} title="Sign out" />
+          </>
+        )}
 
-          {isMobile && !isAuth && (
-            <button className={styles.moreButton}>
-              <MoreHorizontalIcon style={{ cursor: "pointer" }} />
-            </button>
-          )}
-        </nav>
-      </div>
-    </header>
+        {isMobile && !isAuth && (
+          <button className={styles.moreButton}>
+            <MoreHorizontalIcon style={{ cursor: "pointer" }} />
+          </button>
+        )}
+      </nav>
+    </div>
   )
 }

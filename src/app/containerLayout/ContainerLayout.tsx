@@ -9,13 +9,17 @@ type ContainerLayoutProps = {
 
 const ContainerLayout = ({ children }: ContainerLayoutProps) => {
   return (
-    <>
-      <Header />
+    <div className={styles.containerWrapper}>
+      <header className={styles.headerWrapper}>
+        <Header />
+      </header>
       <div className={styles.container}>
-        <Navbar />
-        <section className={styles.selection}>{children}</section>
+        <nav className={styles.navbarWrapper}>
+          <Navbar />
+        </nav>
+        <section className={styles.contentWrapper}>{children}</section>
       </div>
-    </>
+    </div>
   )
 }
 export default ContainerLayout
