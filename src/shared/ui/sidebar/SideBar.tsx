@@ -16,6 +16,7 @@ import { MessageIcon } from "@/shared/assets/icons/components/MessageIcon"
 import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 
 
+
  type TypeItem = {
   id: number | string
   title: string
