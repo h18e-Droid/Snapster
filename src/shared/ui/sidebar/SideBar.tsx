@@ -16,7 +16,7 @@ import { MessageIcon } from "@/shared/assets/icons/components/MessageIcon"
 import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 
 
- type TypeItemsType = {
+ type TypeItem = {
   id: number | string
   title: string
   icon: React.ReactNode[]
@@ -48,7 +48,7 @@ const SideBar = () => {
   return (
     <nav className={styles.wrapper}>
       <ul className={styles.listContainer}>
-        {items.map((item: TypeItemsType) => (
+        {items.map((item: TypeItem) => (
           <div  className={item.id === 6 ? styles.itemStatistic : item.id === 7 ? styles.itemFavorite : styles.item}>
             <li className={styles.listItem} key={item.id}>
               <a href={item.link} className={styles.listItem}
