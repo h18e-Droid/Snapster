@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react"
-import s from "./SideBar.module.scss"
+import styles from "./SideBar.module.scss"
 import { HomeIcon } from "@/shared/assets/icons/components/HomeIcon"
 import { PlusSquareOutlineIcon } from "@/shared/assets/icons/components/PlusSquareOutlineIcon"
 import { PersonIcon } from "@/shared/assets/icons/components/PersonIcon"
@@ -15,19 +15,15 @@ import { PersonOutlineIcon } from "@/shared/assets/icons/components/PersonOutlin
 import { MessageIcon } from "@/shared/assets/icons/components/MessageIcon"
 import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 
-export type SideBarProps = {
-  items?: TypeItemsType[]
-  onClick?: () => void
-}
 
-export type TypeItemsType = {
+ type TypeItemsType = {
   id: number | string
   title: string
   icon: React.ReactNode[]
   link: string
 }
 
-const SideBar = ({ ...props }: SideBarProps) => {
+const SideBar = () => {
   const items = [
     { id: 1, title: "Home", icon: [<HomeIcon />, <HomeOutlineIcon />], link: "" },
     { id: 2, title: "Create", icon:[<PlusSquareIcon/>, <PlusSquareOutlineIcon />], link: "" },
@@ -50,23 +46,23 @@ const SideBar = ({ ...props }: SideBarProps) => {
   }
 
   return (
-    <nav className={s.wrapper}>
-      <ul className={s.listContainer}>
+    <nav className={styles.wrapper}>
+      <ul className={styles.listContainer}>
         {items.map((item: TypeItemsType) => (
-          <div  className={item.id === 6 ? s.itemStatistic : item.id === 7 ? s.itemFavorite : s.item}>
-            <li className={s.listItem} key={item.id}>
-              <a href={item.link} className={s.listItem}
+          <div  className={item.id === 6 ? styles.itemStatistic : item.id === 7 ? styles.itemFavorite : styles.item}>
+            <li className={styles.listItem} key={item.id}>
+              <a href={item.link} className={styles.listItem}
                  onMouseDown={()=>handleMouseDown(item.id)}
                  onMouseUp={()=>handleMouseUp(item.id)}
               >
                 {isActive[item.id] ?
-                  <span className={s.itemIcon}>
+                  <span className={styles.itemIcon}>
                     {item.icon[0]}
                   </span>
                   :
-                  <span className={s.itemIcon}
+                  <span className={styles.itemIcon}
                         >{item.icon[1]}</span>}
-                <span className={s.titleIcon}>{item.title}</span>
+                <span className={styles.titleIcon}>{item.title}</span>
               </a>
             </li>
           </div>
