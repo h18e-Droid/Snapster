@@ -1,15 +1,15 @@
 import * as React from "react"
 import { Tabs } from "radix-ui"
-import s from "./Tabs.module.css"
+import styles from "./Tabs.module.css"
 
 
-export type Tab = {
+type Tab = {
   id: string;
   label: string;
   content: React.ReactNode | string;
 }
 
-export type TabPropsType = {
+export type TabProps = {
   triggerClassName?: string,
   contentClassName?: string
   disabled?: boolean
@@ -21,11 +21,11 @@ export const Tab = ({
                       contentClassName,
                       disabled,
                       tabs
-                    }: TabPropsType) => {
+                    }: TabProps) => {
 
   return (
-    <Tabs.Root className={s.tabRoot}>
-      <Tabs.List className={s.tabList}>
+    <Tabs.Root className={styles.tabRoot}>
+      <Tabs.List className={styles.tabList}>
         {tabs.map((tab: Tab) => {
           return (
             <Tabs.Trigger className={triggerClassName} value={tab.id} key={tab.id} disabled={disabled}>
