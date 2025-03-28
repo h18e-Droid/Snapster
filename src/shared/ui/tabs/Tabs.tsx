@@ -3,7 +3,7 @@ import { Tabs } from "radix-ui"
 import styles from "./Tabs.module.css"
 
 
-export type Tab = {
+type Tab = {
   id: string;
   label: string;
   content: React.ReactNode | string;
