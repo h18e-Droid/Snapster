@@ -2,27 +2,20 @@ import * as React from "react"
 import { Tabs } from "radix-ui"
 import s from "./Tabs.module.css"
 
-
 export type Tab = {
-  id: string;
-  label: string;
-  content: React.ReactNode | string;
+  id: string
+  label: string
+  content: React.ReactNode | string
 }
 
 export type TabPropsType = {
-  triggerClassName?: string,
+  triggerClassName?: string
   contentClassName?: string
   disabled?: boolean
   tabs: Tab[]
 }
 
-export const Tab = ({
-                      triggerClassName,
-                      contentClassName,
-                      disabled,
-                      tabs
-                    }: TabPropsType) => {
-
+export const Tab = ({ triggerClassName, contentClassName, disabled, tabs }: TabPropsType) => {
   return (
     <Tabs.Root className={s.tabRoot}>
       <Tabs.List className={s.tabList}>
@@ -34,16 +27,15 @@ export const Tab = ({
           )
         })}
       </Tabs.List>
-        {tabs.map((tab:Tab) => {
-          return (
-            <div>
-              <Tabs.Content value={tab.id} key={tab.id} className={contentClassName}>
-                {tab.content}
-              </Tabs.Content>
-            </div>
-            )
-        })}
+      {tabs.map((tab: Tab) => {
+        return (
+          <div key={tab.id}>
+            <Tabs.Content value={tab.id} key={tab.id} className={contentClassName}>
+              {tab.content}
+            </Tabs.Content>
+          </div>
+        )
+      })}
     </Tabs.Root>
   )
 }
-

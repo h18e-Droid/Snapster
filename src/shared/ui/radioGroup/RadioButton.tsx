@@ -2,22 +2,21 @@ import styles from "./RadioButton.module.css"
 import { useId } from "react"
 
 type Props = {
-  label?: string;
-  checked?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  disabled?: boolean;
-};
+  label?: string
+  checked?: boolean
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  disabled?: boolean
+}
 
 export const RadioButton = ({ label, checked, onChange, disabled }: Props) => {
-
-  const id=useId()
+  const id = useId()
 
   return (
-
     <label className={styles["radio-group"]}>
-      <div className={`${styles["radio-group-container"]} ${disabled ? styles.disabled : ""}`}
-           tabIndex={0}
-           // костыль
+      <div
+        className={`${styles["radio-group-container"]} ${disabled ? styles.disabled : ""}`}
+        tabIndex={0}
+        // костыль
       >
         <input
           id={id}
@@ -29,9 +28,7 @@ export const RadioButton = ({ label, checked, onChange, disabled }: Props) => {
         />
       </div>
 
-      <span className={`${styles.label} ${disabled ? styles.disabled : ""}`}>
-        {label}
-      </span>
+      <span className={`${styles.label} ${disabled ? styles.disabled : ""}`}>{label}</span>
     </label>
   )
 }
