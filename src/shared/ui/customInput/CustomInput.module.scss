@@ -1,0 +1,112 @@
+$color-primary: #4C4C4C;
+$color-secondary: #8D9094;
+$color-focus: #397DF6;
+$color-active: #FFFFFF;
+$color-error: #CC1439;
+$color-background: #0D0D0D;
+$color-disabled: #4C4C4C;
+$color-placeholder: #8D9094;
+
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  width: 100%;
+  position: relative;
+  outline: none;
+}
+
+.label {
+  font-size: 14px;
+  color: $color-primary;
+  margin-bottom: 5px;
+}
+
+.placeholderContainer {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.placeholderText {
+  color: $color-placeholder;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border: 1px solid $color-primary;
+  border-radius: 2px;
+  font-size: 1rem;
+  background-color: $color-background;
+
+  &:hover {
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-focus;
+  }
+
+  &:active {
+    outline: none;
+    border-color: $color-active;
+  }
+
+  &:hover:active {
+    border-color: $color-active;
+  }
+
+  &:active:hover {
+    border-color: $color-active;
+  }
+
+  &.errorInput {
+    outline: none;
+    border-color: $color-error;
+    color: $color-active;
+  }
+
+  &::placeholder {
+    padding-left: 12px;
+  }
+}
+
+.error {
+  color: $color-error;
+  margin-top: 5px;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 12px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: $color-active;
+}
+
+.disabled {
+  border-color: $color-primary;
+  pointer-events: none;
+  color: $color-disabled;
+
+  .input::placeholder {
+    color: $color-disabled;
+  }
+}
