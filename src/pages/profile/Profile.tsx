@@ -1,12 +1,5 @@
-import { Recaptcha } from "@/shared/ui/recaptcha/Recaptcha"
-
 const Profile = () => {
-  return (
-    <div>
-      Profile
-      <Recaptcha />
-    </div>
-  )
+  return <div>Profile</div>
 }
 
 export default Profile
