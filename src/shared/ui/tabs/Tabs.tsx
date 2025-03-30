@@ -11,6 +11,7 @@ type Tab = {
 
 export type TabProps = {
   triggerClassName?: string,
+
   contentClassName?: string
   disabled?: boolean
   tabs: Tab[]
@@ -34,16 +35,15 @@ export const Tab = ({
           )
         })}
       </Tabs.List>
-        {tabs.map((tab:Tab) => {
-          return (
-            <div>
-              <Tabs.Content value={tab.id} key={tab.id} className={contentClassName}>
-                {tab.content}
-              </Tabs.Content>
-            </div>
-            )
-        })}
+      {tabs.map((tab: Tab) => {
+        return (
+          <div key={tab.id}>
+            <Tabs.Content value={tab.id} key={tab.id} className={contentClassName}>
+              {tab.content}
+            </Tabs.Content>
+          </div>
+        )
+      })}
     </Tabs.Root>
   )
 }
-
