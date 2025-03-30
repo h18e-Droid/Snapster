@@ -1,24 +1,32 @@
 import * as React from "react"
 import { Tabs } from "radix-ui"
-import s from "./Tabs.module.css"
+import styles from "./Tabs.module.css"
 
-export type Tab = {
-  id: string
-  label: string
-  content: React.ReactNode | string
+
+type Tab = {
+  id: string;
+  label: string;
+  content: React.ReactNode | string;
 }
 
-export type TabPropsType = {
-  triggerClassName?: string
+export type TabProps = {
+  triggerClassName?: string,
+
   contentClassName?: string
   disabled?: boolean
   tabs: Tab[]
 }
 
-export const Tab = ({ triggerClassName, contentClassName, disabled, tabs }: TabPropsType) => {
+export const Tab = ({
+                      triggerClassName,
+                      contentClassName,
+                      disabled,
+                      tabs
+                    }: TabProps) => {
+
   return (
-    <Tabs.Root className={s.tabRoot}>
-      <Tabs.List className={s.tabList}>
+    <Tabs.Root className={styles.tabRoot}>
+      <Tabs.List className={styles.tabList}>
         {tabs.map((tab: Tab) => {
           return (
             <Tabs.Trigger className={triggerClassName} value={tab.id} key={tab.id} disabled={disabled}>
