@@ -18,7 +18,7 @@ export type TabProps = {
 
 const color: Record<string, string> = {
   default: styles.default,
-  contrast: styles.contrast
+  contrast: styles.contrast,
 }
 
 export const Tab = ({
