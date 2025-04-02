@@ -10,26 +10,32 @@ type Tab = {
 }
 
 export type TabProps = {
-  triggerClassName?: string,
-
   contentClassName?: string
   disabled?: boolean
   tabs: Tab[]
+  variant: "default" | "contrast"
+}
+
+const color: Record<string, string> = {
+  default: styles.default,
+  contrast: styles.contrast,
 }
 
 export const Tab = ({
-                      triggerClassName,
                       contentClassName,
                       disabled,
-                      tabs
+                      tabs,
+                      variant
                     }: TabProps) => {
+
+  const variantName = variant ? color[variant] : styles.default
 
   return (
     <Tabs.Root className={styles.tabRoot}>
       <Tabs.List className={styles.tabList}>
         {tabs.map((tab: Tab) => {
           return (
-            <Tabs.Trigger className={triggerClassName} value={tab.id} key={tab.id} disabled={disabled}>
+            <Tabs.Trigger className={`${variantName}`} value={tab.id} key={tab.id} disabled={disabled}>
               {tab.label}
             </Tabs.Trigger>
           )
@@ -47,3 +53,4 @@ export const Tab = ({
     </Tabs.Root>
   )
 }
+
