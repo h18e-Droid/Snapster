@@ -10,7 +10,6 @@ type Tab = {
 }
 
 export type TabProps = {
-  triggerClassName?: string,
   contentClassName?: string
   disabled?: boolean
   tabs: Tab[]
@@ -54,3 +53,4 @@ export const Tab = ({
     </Tabs.Root>
   )
 }
+
