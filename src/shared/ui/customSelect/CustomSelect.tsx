@@ -3,6 +3,7 @@
 import styles from "./CustomSelect.module.scss"
 import React, { useEffect, useRef, useState } from "react"
 import { ArrowDownIcon } from "@/shared/assets/icons/components/ArrowDownIcon"
+import clsx from "clsx"
 
 type CustomSelectProps = {
   options: { id: string; title: string; iconSVG?: React.JSX.Element }[]
@@ -17,6 +18,18 @@ export const CustomSelect = ({ options, onChange, label, width, disabled }: Cust
   const [selectedValue, setSelectedValue] = useState<string>(options[0].id)
   const selectRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
+
+  const customSelectClassName = clsx(
+    styles.customSelect,
+    isOpen ? styles.selectOpen : "",
+    disabled ? styles.disabled : "",
+  )
+  const selectedValueClassName = clsx(
+    styles.selectedValue,
+    isOpen ? styles.active : "",
+    isHovered ? styles.hovered : "",
+    disabled ? styles.disabled : "",
+  )
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value
@@ -43,7 +56,7 @@ export const CustomSelect = ({ options, onChange, label, width, disabled }: Cust
       {label && <label className={styles.label}>{label}</label>}
       <div
         style={{ width }}
-        className={`${styles.customSelect} ${isOpen ? styles.selectOpen : ""} ${disabled ? styles.disabled : ""} `}
+        className={customSelectClassName}
         ref={selectRef}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -59,7 +72,7 @@ export const CustomSelect = ({ options, onChange, label, width, disabled }: Cust
           ))}
         </select>
         <div
-          className={`${styles.selectedValue}  ${isOpen ? styles.active : ""} ${isHovered ? styles.hovered : ""} ${disabled ? styles.disabled : ""}`}
+          className={selectedValueClassName}
           onClick={() => {
             setIsOpen(!isOpen)
             setIsHovered(false)
@@ -91,4 +104,3 @@ export const CustomSelect = ({ options, onChange, label, width, disabled }: Cust
     </div>
   )
 }
-
