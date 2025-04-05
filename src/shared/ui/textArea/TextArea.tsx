@@ -1,5 +1,5 @@
 import React, { ComponentPropsWithoutRef, CSSProperties } from "react"
-import styles from "@/components/ui/TextArea/TextArea.module.css"
+import s from "@/components/ui/TextArea/TextArea.module.css"
 
 type TextAreaProps = ComponentPropsWithoutRef<"textarea"> & {
   width: string | number,
@@ -17,15 +17,16 @@ export const TextArea = ({ width, height, error, ...props }: TextAreaProps) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={s.container}>
     <textarea
       className={props.className}
       style={{ ...buttonStyle }}
       value={props.value}
     >{props.defaultValue}</textarea>
       {error &&
-        <label className={styles.labelError}>{error}</label>
+        <label className={s.labelError}>Error text</label>
       }
+
     </div>
 
   )
