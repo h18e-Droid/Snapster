@@ -46,4 +46,3 @@ next-env.d.ts
 
 # Stylelint cache
 .stylelintcache
-*storybook.log
