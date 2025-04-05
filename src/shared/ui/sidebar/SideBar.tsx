@@ -26,7 +26,7 @@ import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 
 const SideBar = () => {
   const items = [
-    { id: 1, title: "Home", icon: [<HomeIcon />, <HomeOutlineIcon />], link: "" },
+    { id: 1, title: "Home", icon: [<HomeIcon/>, <HomeOutlineIcon />], link: "" },
     { id: 2, title: "Create", icon:[<PlusSquareIcon/>, <PlusSquareOutlineIcon />], link: "" },
     { id: 3, title: "My Profile", icon: [<PersonIcon  />, <PersonOutlineIcon/>], link: "" },
     { id: 4, title: "Messenger", icon: [<MessageIcon/>,<MessageOutlineIcon  />], link: "" },
