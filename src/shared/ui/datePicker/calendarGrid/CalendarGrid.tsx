@@ -25,7 +25,6 @@ interface CalendarGridProps {
  * - Подсветки текущей даты, выходных и выбранного диапазона
  */
 export const CalendarGrid = ({ selectedDate, onSelect, onSelectRange }: CalendarGridProps) => {
-  // Текущий отображаемый месяц (по умолчанию - текущая дата)
   const [currentMonth, setCurrentMonth] = useState(new Date())
 
   // Кастомные обработчики для работы с датами
@@ -127,12 +126,10 @@ export const CalendarGrid = ({ selectedDate, onSelect, onSelectRange }: Calendar
     return days
   }
 
-  // Переключение на предыдущий месяц
   const prevMonth = () => {
     setCurrentMonth(new Date(Date.UTC(currentMonth.getUTCFullYear(), currentMonth.getUTCMonth() - 1, 1)))
   }
 
-  // Переключение на следующий месяц
   const nextMonth = () => {
     setCurrentMonth(new Date(Date.UTC(currentMonth.getUTCFullYear(), currentMonth.getUTCMonth() + 1, 1)))
   }
