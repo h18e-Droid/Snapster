@@ -6,6 +6,7 @@ import { CalendarGrid } from "@/shared/ui/datePicker/calendarGrid/CalendarGrid"
 import { CalendarIcon } from "@/shared/assets/icons/components/CalendarIcon"
 import { CalendarOutlineIcon } from "@/shared/assets/icons/components/CalendarOutlineIcon"
 import clsx from "clsx"
+import {normalizeDate} from "@/shared/ui/datePicker/utils/dateUtils";
 
 /**
  * Режимы работы DatePicker:
@@ -29,26 +30,18 @@ type Props = {
  * Компонент DatePicker для выбора даты или диапазона дат.
  */
 export const DatePicker = ({ label, isDisabled, mode = "single", id = "datepicker-input" }: Props) => {
-  // Состояние выбранной даты (для режима "single")
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
-
-  // Состояние выбранного диапазона (для режима "range")
   const [selectedRange, setSelectedRange] = useState<{
     start: Date | null
     end: Date | null
   }>({ start: null, end: null })
-
-  // Флаг открытия/закрытия календаря
   const [isOpen, setIsOpen] = useState(false)
-
-  // Ссылка на DOM-элемент для обработки кликов вне компонента
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>('Error')
   const pickerRef = useRef<HTMLDivElement>(null)
 
-  // Состояние ошибки (можно вынести в пропсы при необходимости)
-  const error = false
-  const errorMessage = "Error"
+  const today = normalizeDate(new Date())
 
-  // Обработчик клика вне компонента (закрытие календаря)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (pickerRef.current && !pickerRef.current.contains(event.target as Node)) {
@@ -65,6 +58,12 @@ export const DatePicker = ({ label, isDisabled, mode = "single", id = "datepicke
    * @param date - Выбранная дата
    */
   const handleDateSelect = (date: Date) => {
+    if (+today > +date) {
+      setError(true)
+      setErrorMessage('Error')
+    } else {
+      setError(false)
+    }
     setSelectedDate(date)
     if (mode === "single") {
       setSelectedRange({ start: null, end: null }) // Сбрасываем диапазон
@@ -84,26 +83,17 @@ export const DatePicker = ({ label, isDisabled, mode = "single", id = "datepicke
     }
   }
 
-  // Динамические классы для стилизации
   const containerClass = clsx(styles.container, error && styles.error, isDisabled && styles.disabled)
 
   const customInputClass = clsx(styles.customInput, error && styles.error, isDisabled && styles.disabled)
 
   return (
-    <div
-      className={containerClass}
-      ref={pickerRef}
-      role="application"
-      aria-label="Выбор даты"
-    >
-      {/* Лейбл с явной связью через htmlFor */}
+    <div className={containerClass} ref={pickerRef} role="application" aria-label="Выбор даты">
       {label && (
         <label htmlFor={id} className={styles.label}>
           {label}
         </label>
       )}
-
-      {/* Обертка для поля ввода */}
       <div className={customInputClass}>
         <input
           id={id}
@@ -126,15 +116,8 @@ export const DatePicker = ({ label, isDisabled, mode = "single", id = "datepicke
         />
         {isOpen ? <CalendarIcon aria-hidden="true" /> : <CalendarOutlineIcon aria-hidden="true" />}
       </div>
-
-      {/* Всплывающий календарь */}
       {isOpen && (
-        <div
-          className={styles.calendar}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Календарь"
-        >
+        <div className={styles.calendar} role="dialog" aria-modal="true" aria-label="Календарь">
           <CalendarGrid
             selectedDate={selectedDate}
             onSelect={handleDateSelect}
@@ -142,13 +125,7 @@ export const DatePicker = ({ label, isDisabled, mode = "single", id = "datepicke
           />
         </div>
       )}
-
-      {/* Блок для отображения ошибок */}
-      <div
-        className={styles.errorContainer}
-        role="alert"
-        aria-live="assertive"
-      >
+      <div className={styles.errorContainer} role="alert" aria-live="assertive">
         {error && <span className={styles.errorMessage}>{errorMessage}</span>}
       </div>
     </div>

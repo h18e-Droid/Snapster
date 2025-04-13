@@ -16,9 +16,9 @@ export const useCalendarHandlers = (
   onSelectRange?: (start: Date, end: Date) => void,
 ) => {
   // Состояния для выделения диапазона
-  const [selectionStart, setSelectionStart] = useState<Date | null>(null) // Начало выделения
-  const [selectionEnd, setSelectionEnd] = useState<Date | null>(null) // Конец выделения
-  const [isSelecting, setIsSelecting] = useState(false) // Флаг процесса выделения
+  const [selectionStart, setSelectionStart] = useState<Date | null>(null)
+  const [selectionEnd, setSelectionEnd] = useState<Date | null>(null)
+  const [isSelecting, setIsSelecting] = useState(false)
 
   /**
    * Обработчик клика по дню предыдущего месяца
@@ -45,7 +45,7 @@ export const useCalendarHandlers = (
   const handleMouseDown = useCallback((date: Date) => {
     setIsSelecting(true)
     setSelectionStart(date)
-    setSelectionEnd(null) // Сбрасываем предыдущее выделение
+    setSelectionEnd(null)
   }, [])
 
   /**
@@ -79,7 +79,6 @@ export const useCalendarHandlers = (
     }
   }, [isSelecting, selectionStart, selectionEnd, onSelect, onSelectRange])
 
-  // Глобальный обработчик отпускания мыши (на случай, если отпустили вне компонента)
   useEffect(() => {
     const handleGlobalMouseUp = () => {
       if (isSelecting) {
