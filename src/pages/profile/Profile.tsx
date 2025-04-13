@@ -1,12 +1,7 @@
 "use client"
-import { Pagination } from "@/shared/ui/pagination"
 
 const Profile = () => {
-  return (
-    <div>
-      <Pagination totalSize={1232} onChange={() => {}} />
-    </div>
-  )
+  return <div>Profile</div>
 }
 
 export default Profile
