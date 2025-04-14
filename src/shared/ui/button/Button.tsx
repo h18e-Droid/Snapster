@@ -3,7 +3,7 @@ import styles from './Button.module.css'
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   onClick?: () => void,
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
   width?: string | number,
   variant: 'primary' | 'secondary' | 'outline' | 'textButton' | 'variantButton'
