@@ -35,7 +35,7 @@ const ForgotPassword = () => {
   const emailValue = watch("email")
 
   const onSubmit = (data: FormData) => {
-    console.log("Form submitted:", data)
+    console.log("Form submitted:", data )
   }
 
   return (
