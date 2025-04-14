@@ -31,8 +31,12 @@ export const Header = () => {
 
         {!isAuth && !isMobile && (
           <>
-            <Button width={100} height={36} className={styles.textButton} title="Sign in" />
-            <Button width={100} height={36} className={styles.containedButton} title="Sign out" />
+            <Button width={100} variant={"outline"}>
+              Sign in
+            </Button>
+            <Button width={100} variant={"primary"}>
+              Sign out
+            </Button>
           </>
         )}
 
