@@ -4,8 +4,8 @@ import { ReactNode } from "react"
 type Props = {
     active: boolean
     setActive: (val: boolean) => void
-    title: string
-    children: ReactNode
+    title?: string
+    children?: ReactNode
 }
 
 export const Modal = ({ active, setActive,title, children }: Props) => {

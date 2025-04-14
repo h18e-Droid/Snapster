@@ -10,7 +10,7 @@ import styles from "./Header.module.scss"
 
 export const Header = () => {
   const isMobile = useMobile(1000)
-  const isAuth = false
+  const isAuth = true
 
   return (
     <div className={styles.header}>
