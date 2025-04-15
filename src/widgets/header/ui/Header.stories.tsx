@@ -8,18 +8,25 @@ const meta: Meta<typeof Header> = {
   parameters: {
     layout: "fullscreen",
   },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: "5px 10px", background: "var(--color-dark-700)" }}>
+        <Story />
+      </div>
+    ),
+  ],
 }
 
 export default meta
 type Story = StoryObj<typeof Header>
 
-export const Default: Story = {
+export const AuthorizedDesktop: Story = {
   args: {
     isAuth: true,
   },
 }
 
-export const NotAuthorized: Story = {
+export const NotAuthorizedDesktop: Story = {
   args: {
     isAuth: false,
   },
