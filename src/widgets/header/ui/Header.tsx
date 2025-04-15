@@ -1,50 +1,20 @@
 "use client"
 import React from "react"
 import LangSwitcher from "@/features/langSwitcher/ui/LangSwitcher"
-import { Button } from "@/shared/ui/button"
-import { BellIcon, MoreHorizontalIcon } from "@/shared/assets/icons"
-import clsx from "clsx"
-import Badge from "@/shared/ui/badge/Badge"
-import { useMobile } from "@/shared/lib/media"
 import styles from "./Header.module.scss"
+import { HeaderButtons } from "@/entities/headerButtons"
 
-export const Header = () => {
-  const isMobile = useMobile(1000)
-  const isAuth = false
+type Props = {
+  isAuth: boolean
+}
 
+export const Header = ({ isAuth }: Props) => {
   return (
     <div className={styles.header}>
       <h2 className={styles.title}>Snapster</h2>
-      <nav
-        className={clsx(styles.navigationGroup, {
-          [styles.navigationGroupAuth]: isAuth,
-          [styles.navigationGroupMobileAuth]: isMobile,
-        })}
-      >
+      <nav className={styles.navigationWrapper}>
         <LangSwitcher />
-
-        {isAuth && !isMobile && (
-          <Badge badgeContent={3} max={10}>
-            <BellIcon />
-          </Badge>
-        )}
-
-        {!isAuth && !isMobile && (
-          <>
-            <Button width={100} variant={"outline"}>
-              Sign in
-            </Button>
-            <Button width={100} variant={"primary"}>
-              Sign out
-            </Button>
-          </>
-        )}
-
-        {isMobile && !isAuth && (
-          <button className={styles.moreButton}>
-            <MoreHorizontalIcon style={{ cursor: "pointer" }} />
-          </button>
-        )}
+        <HeaderButtons isAuth={isAuth} />
       </nav>
     </div>
   )

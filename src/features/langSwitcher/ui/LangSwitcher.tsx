@@ -29,7 +29,7 @@ const countries: Country[] = [
 ]
 const LangSwitcher = () => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0])
-  const isMobile = useMobile(1000)
+  const isMobile = useMobile(768)
   const isCustom = false
 
   return !isCustom ? (

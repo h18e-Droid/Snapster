@@ -1,12 +1,26 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { Header } from "./Header"
 
-const meta = {
-  title: "Example/Header",
+const meta: Meta<typeof Header> = {
+  title: "components/Header",
   component: Header,
-} satisfies Meta<typeof Header>
+  tags: ["autodocs"],
+  parameters: {
+    layout: "fullscreen",
+  },
+}
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof Header>
 
-export const Normal: Story = {}
+export const Default: Story = {
+  args: {
+    isAuth: true,
+  },
+}
+
+export const NotAuthorized: Story = {
+  args: {
+    isAuth: false,
+  },
+}
