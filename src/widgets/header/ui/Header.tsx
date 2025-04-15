@@ -1,8 +1,9 @@
 "use client"
 import React from "react"
-import LangSwitcher from "@/features/langSwitcher/ui/LangSwitcher"
+
 import styles from "./Header.module.scss"
 import { HeaderButtons } from "@/entities/headerButtons"
+import { LanguageSwitcher } from "@/features/langSwitcher"
 
 type Props = {
   isAuth: boolean
@@ -13,7 +14,7 @@ export const Header = ({ isAuth }: Props) => {
     <div className={styles.header}>
       <h2 className={styles.title}>Snapster</h2>
       <nav className={styles.navigationWrapper}>
-        <LangSwitcher />
+        <LanguageSwitcher />
         <HeaderButtons isAuth={isAuth} />
       </nav>
     </div>
