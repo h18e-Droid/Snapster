@@ -93,10 +93,10 @@ const SideBar = () => {
       {showLogoutModal && (
         <Modal title={"Log Out"} setActive={setShowLogoutModal} active={showLogoutModal}>
           <hr className={styles.line}/>
-          <p className={styles.moduleText}>Are you sure you want to quite?</p>
+          <p className={styles.moduleText}>Are you really want to log out of your account ___ email name ___?</p>
           <div className={styles.buttonContainerModule}>
-            <Button variant={"primary"} onClick={logOutModal}>Log Out</Button>
-            <Button variant={"primary"} onClick={closeModal}>Cancel</Button>
+            <Button variant={"primary"} onClick={logOutModal}>Yes</Button>
+            <Button variant={"primary"} onClick={closeModal}>No</Button>
           </div>
         </Modal>
       )}
