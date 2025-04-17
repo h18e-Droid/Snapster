@@ -2,10 +2,10 @@ import styles from "./Checkbox.module.css"
 import { useId } from "react"
 
 type Props = {
-  label?: string;
+  label?: React.ReactNode;
   checked: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 export const Checkbox = ({ label, checked, onChange, disabled }: Props) => {
