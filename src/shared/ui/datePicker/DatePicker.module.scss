@@ -1,75 +1,14 @@
-.container {
-  position: relative;
-  min-width: 250px;
-  &.disabled {
-    color: var(--color-light-900);
-  }
-}
-
-.customInput {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 6px;
-  cursor: pointer;
-
-  border: 1px solid var(--color-dark-300);
-  border-radius: 2px;
-  background-color: var(--color-dark-700);
-
-  &:hover {
-    background-color: var(--color-dark-500);
-  }
-
-  &:active {
-    background-color: var(--color-dark-500);
-  }
-
-  &.focus {
-    border: 1px solid var(--color-info-500);
-  }
-
-  &.error {
-    color: var(--color-danger-500);
-    border-color: var(--color-danger-500);
-  }
-
-  &.disabled {
-    cursor: unset;
-    background-color: var(--color-dark-700);
-  }
-}
-
-.input {
-  all: unset;
+.dataPicker {
+  font-family: Arial, sans-serif;
   font-size: 16px;
-  width: 100%;
-
+  color: #333;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
 
   &:focus {
-    outline: none;
-    border-color: #4a90e2;
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
-}
-
-.calendar {
-  position: absolute;
-  top: 78%;
-  left: 0;
-  background: var(--color-dark-500);
-  border: 1px solid var(--color-dark-300);
-  border-radius: 2px;
-  z-index: 100;
-  padding: 15px;
-  width: 300px;
-}
-
-.errorContainer {
-  position: relative;
-  height: 16px;
-}
-
-.errorMessage {
-  font-size: 12px;
-  color: var(--color-danger-500);
 }

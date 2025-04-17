@@ -1,10 +1,5 @@
 import type { Preview } from '@storybook/react'
 
-import '../src/shared/styles/_colors.scss'
-import '../src/shared/styles/_typography.scss'
-import "@/shared/styles/index.scss";
-
-
 const preview: Preview = {
   parameters: {
     controls: {
@@ -13,21 +8,7 @@ const preview: Preview = {
        date: /Date$/i,
       },
     },
-    viewport: {
-      viewports: {
-        mobile360: {
-          name: 'Mobile 360px',
-          styles: {
-            width: '360px',
-            height: 'auto',
-          },
-        },
-      },
-      viewport: 'mobile360',
-    },
   },
 };
-
-
 
 export default preview;

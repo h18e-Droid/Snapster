@@ -93,24 +93,3 @@
 
 }
 
-.moduleText {
-  text-align: center;
-  padding: 20px;
-  /* regular_text 16 */
-  color: rgb(255, 255, 255);
-  font-family: var(--font-family-secondary), sans-serif;
-  font-size: var(--font-size-m);
-  font-weight: var(--font-weight-regular);
-  line-height: var( --line-height-m);
-}
-
-.line {
-  border: none;
-  height: 1px;
-  background-color: var(--color-dark-100);
-}
-
-.buttonContainerModule {
-  display: flex;
-  gap: 2rem;
-}

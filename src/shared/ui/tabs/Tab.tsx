@@ -21,7 +21,7 @@ const color: Record<string, string> = {
   contrast: styles.contrast,
 }
 
-  const Tab = ({
+export const Tab = ({
                       contentClassName,
                       disabled,
                       tabs,
@@ -54,4 +54,3 @@ const color: Record<string, string> = {
   )
 }
 
-export default Tab

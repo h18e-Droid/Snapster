@@ -1,17 +1,52 @@
-$mobileBreakPoint : 768px;
-
 .header {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--color-dark-700);
 }
 
-.navigationWrapper {
+.navigationGroup {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 400px;
+  overflow: visible;
+
+}
+
+.navigationGroupAuth {
+  flex-direction: row-reverse;
+  width: 250px;
+}
+
+.navigationGroupMobileAuth {
+  width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.textButton {
+  width: 100px;
+  height: 36px;
+  color: var(--color-info-700);
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.containedButton {
+  width: 100px;
+  height: 36px;
+  color: var(--color-light-100);
+  background-color: var(--color-info-500);
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .title {
@@ -22,37 +57,9 @@ $mobileBreakPoint : 768px;
 .moreButton {
   width: 30px;
   height: 30px;
-  margin-left: 30px;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
   border: none;
-}
-
-.buttonsWrapper {
-  height: 36px;
-  width: 220px;
-  display: flex;
-  justify-content: space-between;
-  margin-left: 36px;
-}
-
-.badge {
-  order: -1;
-  display: block;
-  margin-right: 40px;
-}
-
-
-@media (max-width: $mobileBreakPoint) {
-  .buttonsWrapper {
-    display: none;
-  }
-  .badge {
-    display: none;
-  }
-  .moreButton{
-    display: flex;
-  }
 }
