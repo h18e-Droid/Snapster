@@ -8,6 +8,16 @@ type Props = {
   portionSize: number
 }
 
+type portionSizes = { portionSize: string }
+
+const portionSizes: portionSizes[] = [
+  { portionSize: "10" },
+  { portionSize: "20" },
+  { portionSize: "30" },
+  { portionSize: "50" },
+  { portionSize: "100" },
+]
+
 const PageSizeSelector = ({ setPortionSize, portionSize }: Props) => {
   return (
     <Select.Root
@@ -24,21 +34,11 @@ const PageSizeSelector = ({ setPortionSize, portionSize }: Props) => {
       <Select.Portal>
         <Select.Content side={"bottom"} position={"popper"} className={styles.content}>
           <Select.Viewport className={styles.viewport}>
-            <CustomSelectItem className={styles.item} value={"10"}>
-              10
-            </CustomSelectItem>
-            <CustomSelectItem className={styles.item} value={"20"}>
-              20
-            </CustomSelectItem>
-            <CustomSelectItem className={styles.item} value={"30"}>
-              30
-            </CustomSelectItem>
-            <CustomSelectItem className={styles.item} value={"50"}>
-              50
-            </CustomSelectItem>
-            <CustomSelectItem className={styles.item} value={"100"}>
-              100
-            </CustomSelectItem>
+            {portionSizes.map((el: portionSizes, index) => (
+              <CustomSelectItem className={styles.item} key={index} value={el.portionSize}>
+                {el.portionSize}
+              </CustomSelectItem>
+            ))}
           </Select.Viewport>
         </Select.Content>
       </Select.Portal>
