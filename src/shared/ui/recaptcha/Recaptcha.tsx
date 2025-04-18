@@ -29,7 +29,7 @@ export const Recaptcha = ({ onVerify }: RecaptchaProps) => {
         setTimeout(() => {
           setStatus("success")
           setErrorMessage("Verification expired. Please try again.")
-          onVerify?.(false)
+          onVerify?.(true)
         }, STATUS_TIMEOUTS.verifying),
       )
     } else if (status === "success") {
@@ -44,7 +44,7 @@ export const Recaptcha = ({ onVerify }: RecaptchaProps) => {
     return () => timers.forEach((timer) => clearTimeout(timer))
   }, [status])
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = () => {
     if (status === "idle" || status === "expired" || status === "error") {
       setStatus("verifying")
       setErrorMessage("")
