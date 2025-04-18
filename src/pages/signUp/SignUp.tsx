@@ -9,7 +9,7 @@ import Link from "next/link"
 import { Button } from "@/shared/ui/button"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Modal } from "@/shared/ui/cards/Modal"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react"
 import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 import CustomInput from "@/shared/ui/customInput/CustomInput"
 
@@ -196,8 +196,8 @@ const SignUp = () => {
                     placeholder="enter email"
                     width="330px"
                     errorText={errors.email?.message}
-                    onChange={(e) => {
-                      field.onChange(e)
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      field.onChange(e.target.value)
                       if (touchedFields.email) {
                         trigger("email")
                       }
@@ -229,8 +229,8 @@ const SignUp = () => {
                     placeholder="enter password"
                     width="330px"
                     errorText={errors.password?.message}
-                    onChange={(e) => {
-                      field.onChange(e)
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      field.onChange(e.target.value)
                       if (touchedFields.password) {
                         trigger("password")
                       }
@@ -254,8 +254,8 @@ const SignUp = () => {
                     placeholder="enter password again"
                     width="330px"
                     errorText={errors.confirmPassword?.message}
-                    onChange={(e) => {
-                      field.onChange(e)
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      field.onChange(e.target.value)
                       if (touchedFields.confirmPassword) {
                         trigger("confirmPassword")
                       }

@@ -19,17 +19,7 @@ type Props = {
   errorText?: string
 }
 
-const CustomInput = ({
-                              type,
-                              placeholder,
-                              value,
-                              onChange,
-                              onBlur,
-                              disabled,
-                              label,
-                              width,
-                              errorText,
-                            }: Props) => {
+const CustomInput = ({ type, placeholder, value, onChange, onBlur, disabled, label, width, errorText }: Props) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isSearchVisible, setIsSearchVisible] = useState(false)
   const [active, setActive] = useState(false)
@@ -38,7 +28,7 @@ const CustomInput = ({
     styles.input,
     disabled && styles.disabled,
     errorText && styles.errorInput,
-    active && styles.activeInput
+    active && styles.activeInput,
   )
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {

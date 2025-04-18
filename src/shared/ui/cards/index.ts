@@ -1,2 +1,2 @@
-export * from './Cards'
-export * from './Modal'
+export { Cards } from "./Cards"
+export * from "./Modal"

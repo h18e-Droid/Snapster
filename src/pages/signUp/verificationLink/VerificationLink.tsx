@@ -10,7 +10,7 @@ type Input = {
   email: string
 }
 
-export const VerificationLink = () => {
+const VerificationLink = () => {
   const {
     handleSubmit,
     watch,
@@ -79,3 +79,4 @@ export const VerificationLink = () => {
     </div>
   )
 }
+export default VerificationLink

@@ -2,13 +2,13 @@ import React, { ComponentPropsWithoutRef, CSSProperties } from "react"
 import styles from "./Button.module.css"
 import Link from "next/link"
 
-export type ButtonProps= ComponentPropsWithoutRef<'button'> & {
+export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   href?: string
-  onClick?: ()=> void
+  onClick?: () => void
   children?: React.ReactNode
   className?: string
-  width: string | number
-  variant?: 'primary' | 'secondary' | 'outline' | 'textButton' | 'variantButton'
+  width?: string | number
+  variant?: "primary" | "secondary" | "outline" | "textButton" | "variantButton"
 }
 
 export const color: Record<string, string> = {
@@ -19,9 +19,8 @@ export const color: Record<string, string> = {
   variantButton: styles.variantButton,
 }
 
-export const Button = ({href, width,variant,children, className, ...props}: ButtonProps) => {
-
-  const variantName = variant? color[variant] : styles.primary;
+export const Button = ({ href, width, variant, children, className, ...props }: ButtonProps) => {
+  const variantName = variant ? color[variant] : styles.primary
 
   const buttonStyle: CSSProperties = {
     width: width,
@@ -35,24 +34,19 @@ export const Button = ({href, width,variant,children, className, ...props}: Butt
   // }
   if (href) {
     return (
-      <Link
-        href={href}
-        className={`${variantName}` || className}
-        style={{ ...buttonStyle} }
-
-      >
+      <Link href={href} className={`${variantName}` || className} style={{ ...buttonStyle }}>
         {children}
       </Link>
     )
   }
 
-
   return (
-    <button type={props.type}
-            className={`${variantName} ${className ? className : ''}`}
-            style={{ ...buttonStyle }}
-            onClick={props.onClick}
-            {...props}
+    <button
+      type={props.type}
+      className={`${variantName} ${className ? className : ""}`}
+      style={{ ...buttonStyle }}
+      onClick={props.onClick}
+      {...props}
     >
       {children}
     </button>

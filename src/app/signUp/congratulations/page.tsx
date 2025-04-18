@@ -1,9 +1,7 @@
-import { Congratulations } from "@/pages/signUp/congatulations/Congratulations"
+import Congratulations from "@/pages/signUp/congatulations/Congratulations"
 
 const Page = () => {
-  return (
-    <Congratulations/>
-  )
+  return <Congratulations />
 }
 
 export default Page
