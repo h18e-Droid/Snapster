@@ -7,59 +7,17 @@ import { GoogleComIcon } from "@/shared/assets/icons/components/GoogleComIcon"
 import { Checkbox } from "@/shared/ui/сheckBoxGroup"
 import Link from "next/link"
 import { Button } from "@/shared/ui/button"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { Controller, SubmitHandler } from "react-hook-form"
 import { Modal } from "@/shared/ui/cards/Modal"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 import CustomInput from "@/shared/ui/customInput/CustomInput"
-
-type Inputs = {
-  text: string
-  email: string
-  password: string
-  confirmPassword: string
-  agree: boolean
-}
+import { Inputs } from "@/shared/lib/Schemas/loginSchema"
+import { AuthIconButton } from "@/shared/ui/authIconButton/AuthIconButton"
+import { useSignUpForm } from "@/features/auth/hooks/useSignUpForm"
 
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const {
-    handleSubmit,
-    control,
-    watch,
-    reset,
-    trigger,
-    formState: { errors, isValid, touchedFields },
-  } = useForm<Inputs>({
-    mode: "onBlur",
-    defaultValues: {
-      text: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      agree: false,
-    },
-  })
-  const watchedFields = watch(["text", "email", "password", "confirmPassword", "agree"])
-
-  const isFormFilled = useMemo(() => {
-    return watchedFields.every((field) => (typeof field === "string" ? field.trim() : field))
-  }, [watchedFields])
-
-  const isButtonDisabled = !isValid || !isFormFilled
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data)
-    setIsModalOpen(true)
-    reset()
-  }
-
-  const checkUsernameExists = useCallback(async (username: string) => {
-    const existingUsers = ["admin", "test", "user123"]
-    return existingUsers.includes(username)
-  }, [])
-
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden"
@@ -71,14 +29,32 @@ const SignUp = () => {
     }
   }, [isModalOpen])
 
-  const handleCloseModal = useCallback(() => {
-    setIsModalOpen(false)
-  }, [])
+  const {
+    control,
+    handleSubmit,
+    formState: { errors, touchedFields },
+    reset,
+    trigger,
+    watch,
+    setError,
+    clearErrors,
+    watchedFields,
+    checkUsernameExists,
+    isButtonDisabled,
+  } = useSignUpForm()
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data)
+    setIsModalOpen(true)
+    reset()
+  }
+
+  const handleCloseModal = useCallback(() => {setIsModalOpen(false)}, [])
 
   return (
     <>
       {isModalOpen && (
-        <Modal active={isModalOpen} setActive={setIsModalOpen}>
+        <Modal active={isModalOpen} setActive={setIsModalOpen} className={styles.modal}>
           <div className={styles.containerModal}>
             <div className={styles.boxModalHead}>
               <h1>Email sent</h1>
@@ -99,7 +75,7 @@ const SignUp = () => {
             </div>
             <div className={styles.boxModalBody}>
               <p>We have sent a link to confirm your email to {watchedFields[1]}</p>
-              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <div className={styles.boxModalButton}>
                 <Button width="96px" onClick={handleCloseModal}>
                   OK
                 </Button>
@@ -111,55 +87,14 @@ const SignUp = () => {
       <div className={styles.singUpBox}>
         <Cards title={"Sign Up"}>
           <div className={styles.containerIcon}>
-            <Button
-              width={"0px"}
-              onClick={() => {}}
-              style={{
-                background: "none",
-                border: "none",
-                padding: 0,
-                marginRight: "24px",
-                cursor: "pointer",
-                width: 0,
-              }}
-            >
-              <GoogleComIcon size={36} />
-            </Button>
-            <Button
-              width={"0px"}
-              onClick={() => {}}
-              style={{
-                background: "none",
-                border: "none",
-                padding: 0,
-                marginRight: "24px",
-                cursor: "pointer",
-                width: 0,
-              }}
-            >
-              <GitHubComIcon size={36} />
-            </Button>
+            <AuthIconButton icon={<GoogleComIcon size={36} />} />
+            <AuthIconButton icon={<GitHubComIcon size={36} />} />
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.container}>
               <Controller
                 name="text"
                 control={control}
-                rules={{
-                  required: "Username is required",
-                  maxLength: {
-                    value: 30,
-                    message: "Maximum number of characters is 30",
-                  },
-                  minLength: {
-                    value: 6,
-                    message: "Minimum number of characters is 6",
-                  },
-                  validate: async (value) => {
-                    const isTaken = await checkUsernameExists(value)
-                    return isTaken ? "User with this username is already registered" : true
-                  },
-                }}
                 render={({ field }) => (
                   <CustomInput
                     {...field}
@@ -170,24 +105,28 @@ const SignUp = () => {
                     errorText={errors.text?.message}
                     onChange={(e) => {
                       field.onChange(e)
-                      if (touchedFields.text) {
-                        trigger("text")
+                      clearErrors("text")
+                    }}
+                    onBlur={async () => {
+                      const value = field.value
+
+                      const zodValid = await trigger("text")
+                      if (!zodValid) return
+
+                      const isTaken = await checkUsernameExists(value)
+                      if (isTaken) {
+                        setError("text", {
+                          type: "manual",
+                          message: "User with this username is already registered",
+                        })
                       }
                     }}
                   />
                 )}
               />
-
               <Controller
                 name="email"
                 control={control}
-                rules={{
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "The email must match the format example@example.com",
-                  },
-                }}
                 render={({ field }) => (
                   <CustomInput
                     {...field}
@@ -205,22 +144,9 @@ const SignUp = () => {
                   />
                 )}
               />
-
               <Controller
                 name="password"
                 control={control}
-                rules={{
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Minimum number of characters is 6",
-                  },
-                  pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).+$/,
-                    message:
-                      "Password must contain a-z, A-Z,  ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~",
-                  },
-                }}
                 render={({ field }) => (
                   <CustomInput
                     {...field}
@@ -238,32 +164,35 @@ const SignUp = () => {
                   />
                 )}
               />
-
               <Controller
                 name="confirmPassword"
                 control={control}
-                rules={{
-                  required: "The passwords must match",
-                  validate: (value) => value === watch("password") || "The passwords must match",
-                }}
                 render={({ field }) => (
                   <CustomInput
                     {...field}
                     type="password"
                     label="Password confirmation"
-                    placeholder="enter password again"
+                    placeholder="Enter password again"
                     width="330px"
                     errorText={errors.confirmPassword?.message}
                     onChange={(e) => {
                       field.onChange(e)
-                      if (touchedFields.confirmPassword) {
-                        trigger("confirmPassword")
+                    }}
+                    onBlur={async () => {
+                      const isValid = await trigger("confirmPassword")
+                      if (!isValid) return
+                      const passwordValue = watch("password")
+                      const confirmPasswordValue = field.value
+                      if (passwordValue !== confirmPasswordValue) {
+                        setError("confirmPassword", {
+                          type: "manual",
+                          message: "The passwords must match",
+                        })
                       }
                     }}
                   />
                 )}
               />
-
               <Controller
                 name="agree"
                 control={control}
@@ -273,13 +202,13 @@ const SignUp = () => {
                     checked={field.value}
                     onChange={(e) => field.onChange(e.currentTarget.checked)}
                     label={
-                      <span style={{ fontSize: "12px", lineHeight: "16px" }}>
+                      <span className={styles.spanInfo}>
                         I agree to the{" "}
-                        <Link href="/termsOfService" style={{ color: "#1a73e8", textDecoration: "underline" }}>
+                        <Link href="/termsOfService" className={styles.linkInfo}>
                           Terms of Service
                         </Link>{" "}
                         and{" "}
-                        <Link href="/privacyPolicy" style={{ color: "#1a73e8", textDecoration: "underline" }}>
+                        <Link href="/privacyPolicy" className={styles.linkInfo}>
                           Privacy Policy
                         </Link>
                       </span>
@@ -287,13 +216,13 @@ const SignUp = () => {
                   />
                 )}
               />
-              {errors.agree && <span style={{ color: "red", fontSize: "12px" }}>{errors.agree.message}</span>}
+              {errors.agree && <span className={styles.spanError}>{errors.agree.message}</span>}
 
               <Button type="submit" width="330px" style={{ fontSize: "16px" }} disabled={isButtonDisabled}>
                 Sign Up
               </Button>
               <span>Do you have an account?</span>
-              <Link href="singIn" style={{ color: "#1a73e8", fontSize: "16px" }}>
+              <Link href="singIn" className={styles.linkLarge}>
                 Sign In
               </Link>
             </div>

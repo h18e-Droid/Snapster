@@ -5,8 +5,7 @@ import React from "react"
 export default function Home() {
   return (
     <div className={styles.page}>
-      <main>
-      </main>
+      <main></main>
       <footer></footer>
     </div>
   )

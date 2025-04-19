@@ -33,9 +33,7 @@ export const Button = ({href, width,variant,children, className, ...props}: Butt
     alignItems: "center",
     textAlign: "center",
   }
-  // if(props.onClick){
-  //   props.onClick()
-  // }
+
   if (href) {
     return (
       <Link

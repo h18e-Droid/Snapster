@@ -6,11 +6,12 @@ type Props = {
     setActive: (val: boolean) => void
     title?: string
     children?: ReactNode
+    className?: string
 }
 
-export const Modal = ({ active, setActive,title, children }: Props) => {
+export const Modal = ({ active, setActive,title, children, className = '' }: Props) => {
 
-    const StyleCards=active?"modal active" : "modal"
+    const StyleCards=active?`modal active ${className}` : "modal"
     const StyleContent=active ? "modal-content active" : "modal-content"
 
     return (

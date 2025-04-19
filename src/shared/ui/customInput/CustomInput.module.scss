@@ -59,20 +59,28 @@
     border-color: var(--color-info-500);
   }
 
-   &.errorInput {
-    outline: none;
-    border-color: var(--color-danger-500);
-    color: var(--color-light-100);
-  }
 
   &::placeholder {
     padding-left: 12px;
   }
-  &.activeInput{
+
+  &.activeInput {
     border-color: var(--color-light-100);
     background-color: var(--color-dark-700);
+
     &:hover {
       border-color: var(--color-light-100);
+      color: var(--color-light-100);
+    }
+  }
+
+  &.errorInput {
+    outline: none;
+    border-color: var(--color-danger-500);
+    color: var(--color-light-100);
+
+    &:hover {
+      border-color: var(--color-danger-500);
       color: var(--color-light-100);
     }
   }
