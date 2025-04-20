@@ -40,7 +40,13 @@ export const Button = ({ href, width, variant, children, className, ...props }: 
   }
 
   return (
-    <button type={props.type} className={`${variantName}` || className} style={{ ...buttonStyle }} {...props}>
+    <button
+      type={props.type}
+      className={`${variantName} ${className ? className : ""}`}
+      style={{ ...buttonStyle }}
+      onClick={props.onClick}
+      {...props}
+    >
       {props.title}
       {children}
     </button>

@@ -2,7 +2,7 @@ import styles from "./Congratulations.module.scss"
 import { Button } from "@/shared/ui/button"
 import { CongratulationsIcon } from "@/shared/assets/icons/components/CongratulationsIcon"
 
-export const Congratulations = () => {
+const Congratulations = () => {
   return (
     <div className={styles.container}>
       <div className={styles.boxText}>
@@ -18,3 +18,5 @@ export const Congratulations = () => {
     </div>
   )
 }
+
+export default Congratulations

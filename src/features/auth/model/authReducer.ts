@@ -1,10 +1,10 @@
-import {Dispatch} from "redux";
-import {LoginArgs} from "@/features/auth/api/authApi.types";
-import {authApi} from "@/features/auth/api/authApi";
-import {setAppStatusAC} from "@/features/app/appReducer";
-import {handleServerAppError} from "@/shared/lib/utils/handleServerAppError";
-import {handleServerNetworkError} from "@/shared/lib/utils/handleSeverNetworkError";
-import {ResultCode} from "@/shared/enums/enums";
+import { Dispatch } from "redux"
+import { LoginArgs } from "@/features/auth/api/authApi.types"
+import { authApi } from "@/features/auth/api/authApi"
+import { setAppStatusAC } from "@/features/app/appReducer"
+import { handleServerAppError } from "@/shared/lib/utils/handleServerAppError"
+import { handleServerNetworkError } from "@/shared/lib/utils/handleSeverNetworkError"
+import { ResultCode } from "@/shared/enums/enums"
 
 type InitialStateType = typeof initialState
 
@@ -33,10 +33,12 @@ const setIsLoggedInAC = (isLoggedIn: boolean) => {
 }
 
 export const loginTC = (data: LoginArgs) => (dispatch: Dispatch) => {
+  const { email, password } = data
+
   authApi
-    .login(data)
+    .login({ username: email, password })
     .then((res) => {
-      if (res.data.resultCode === ResultCode.Success) {
+      if (res.status === ResultCode.Success) {
         dispatch(setAppStatusAC("success"))
         dispatch(setIsLoggedInAC(true))
       } else {
@@ -51,13 +53,13 @@ export const loginTC = (data: LoginArgs) => (dispatch: Dispatch) => {
 export const logoutTC = () => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC("loading"))
   authApi
-    .logout()
+    .logout({ token: "123123" })
     .then((res) => {
-      if (res.data.resultCode === ResultCode.Success) {
+      if (res.status === ResultCode.Success) {
         dispatch(setAppStatusAC("success"))
         dispatch(setIsLoggedInAC(false))
       } else {
-        handleServerAppError(res.data, dispatch)
+        // handleServerAppError(res.data, dispatch)
       }
     })
     .catch((error) => {

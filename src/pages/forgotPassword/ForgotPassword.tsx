@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { ChangeEvent } from "react"
 import { Cards } from "@/shared/ui/cards"
 import { CustomInput } from "@/shared/ui/customInput"
 import { Button } from "@/shared/ui/button"
@@ -35,7 +35,7 @@ const ForgotPassword = () => {
   const emailValue = watch("email")
 
   const onSubmit = (data: FormData) => {
-    console.log("Form submitted:", data )
+    console.log("Form submitted:", data)
   }
 
   return (
@@ -48,7 +48,7 @@ const ForgotPassword = () => {
             type={"email"}
             label={"Email"}
             value={emailValue}
-            onChange={(value) => setValue("email", value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("email", e.target.value)}
             errorText={errors.email?.message}
           />
           <p className={styles.formHint}>Enter your email address and we will send you further instructions</p>
