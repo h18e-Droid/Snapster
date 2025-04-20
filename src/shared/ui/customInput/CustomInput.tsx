@@ -7,7 +7,7 @@ import { EyeOffIcon } from "@/shared/assets/icons/components/EyeOffIcon"
 import { SearchIcon } from "@/shared/assets/icons/components/SearchIcon"
 import clsx from "clsx"
 
-type Props = {
+export type CustomInputProps = {
   type: string
   placeholder: string
   value: string
@@ -19,7 +19,17 @@ type Props = {
   errorText?: string
 }
 
-const CustomInput = ({ type, placeholder, value, onChange, onBlur, disabled, label, width, errorText }: Props) => {
+const CustomInput = ({
+  type,
+  placeholder,
+  value,
+  onChange,
+  onBlur,
+  disabled,
+  label,
+  width,
+  errorText,
+}: CustomInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isSearchVisible, setIsSearchVisible] = useState(false)
   const [active, setActive] = useState(false)

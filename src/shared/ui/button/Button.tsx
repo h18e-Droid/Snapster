@@ -1,3 +1,5 @@
+"use client"
+
 import React, { ComponentPropsWithoutRef, CSSProperties } from "react"
 import styles from "./Button.module.css"
 import Link from "next/link"
@@ -11,7 +13,7 @@ export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   variant?: "primary" | "secondary" | "outline" | "textButton" | "variantButton"
 }
 
-export const color: Record<string, string> = {
+const color: Record<string, string> = {
   primary: styles.primary,
   secondary: styles.secondary,
   outline: styles.outline,
@@ -21,7 +23,6 @@ export const color: Record<string, string> = {
 
 export const Button = ({ href, width, variant, children, className, ...props }: ButtonProps) => {
   const variantName = variant ? color[variant] : styles.primary
-
   const buttonStyle: CSSProperties = {
     width: width,
     display: "flex",
@@ -29,9 +30,7 @@ export const Button = ({ href, width, variant, children, className, ...props }: 
     alignItems: "center",
     textAlign: "center",
   }
-  // if(props.onClick){
-  //   props.onClick()
-  // }
+
   if (href) {
     return (
       <Link href={href} className={`${variantName}` || className} style={{ ...buttonStyle }}>
@@ -48,6 +47,7 @@ export const Button = ({ href, width, variant, children, className, ...props }: 
       onClick={props.onClick}
       {...props}
     >
+      {props.title}
       {children}
     </button>
   )

@@ -57,7 +57,7 @@ const ForgotPassword = () => {
           </Button>
         </form>
         <div className={styles.linksContainer}>
-          <Link href="/singIn">Back to Sign In</Link>
+          <Link href="/signIn">Back to Sign In</Link>
           <Recaptcha onVerify={(isVerified) => setValue("recaptcha", isVerified)} />
         </div>
       </Cards>

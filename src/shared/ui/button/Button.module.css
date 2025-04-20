@@ -8,6 +8,7 @@
     font-size: var(--font-size-m);
     font-weight: var(--font-weight-semi-bold);
     padding: 6px 24px 6px 24px;
+    width: 100%;
 }
 
 .primary {
