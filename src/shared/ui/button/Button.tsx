@@ -4,13 +4,13 @@ import React, { ComponentPropsWithoutRef, CSSProperties } from "react"
 import styles from "./Button.module.css"
 import Link from "next/link"
 
-export type ButtonProps= ComponentPropsWithoutRef<'button'> & {
+export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   href?: string
-  onClick?: ()=> void
+  onClick?: () => void
   children?: React.ReactNode
   className?: string
-  width: string | number
-  variant?: 'primary' | 'secondary' | 'outline' | 'textButton' | 'variantButton'
+  width?: string | number
+  variant?: "primary" | "secondary" | "outline" | "textButton" | "variantButton"
 }
 
 const color: Record<string, string> = {
@@ -18,14 +18,11 @@ const color: Record<string, string> = {
   secondary: styles.secondary,
   outline: styles.outline,
   textButton: styles.textButton,
-  variantButton:  styles.variantButton,
-
+  variantButton: styles.variantButton,
 }
 
-
-export const Button = ({href, width,variant,children, className, ...props}: ButtonProps) => {
-
-  const variantName = variant? color[variant] : styles.primary;
+export const Button = ({ href, width, variant, children, className, ...props }: ButtonProps) => {
+  const variantName = variant ? color[variant] : styles.primary
   const buttonStyle: CSSProperties = {
     width: width,
     display: "flex",
@@ -36,27 +33,16 @@ export const Button = ({href, width,variant,children, className, ...props}: Butt
 
   if (href) {
     return (
-      <Link
-        href={href}
-        className={`${variantName}` || className}
-        style={{ ...buttonStyle} }
-
-      >
+      <Link href={href} className={`${variantName}` || className} style={{ ...buttonStyle }}>
         {children}
       </Link>
     )
   }
 
-
   return (
-    <button type={props.type}
-            className={`${variantName}` || className}
-            style={{ ...buttonStyle} }
-            {...props}
-    >
+    <button type={props.type} className={`${variantName}` || className} style={{ ...buttonStyle }} {...props}>
       {props.title}
       {children}
     </button>
   )
 }
-

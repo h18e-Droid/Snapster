@@ -20,9 +20,7 @@ export const useSignUpForm = () => {
   const watchedFields = methods.watch(["text", "email", "password", "confirmPassword", "agree"])
 
   const isFormFilled = useMemo(() => {
-    return watchedFields.every((field) =>
-      typeof field === "string" ? field.trim() : field
-    )
+    return watchedFields.every((field) => (typeof field === "string" ? field.trim() : field))
   }, [watchedFields])
 
   const checkUsernameExists = useCallback(async (username: string) => {

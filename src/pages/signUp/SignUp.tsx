@@ -8,13 +8,13 @@ import { Checkbox } from "@/shared/ui/сheckBoxGroup"
 import Link from "next/link"
 import { Button } from "@/shared/ui/button"
 import { Controller, SubmitHandler } from "react-hook-form"
-import { Modal } from "@/shared/ui/cards/Modal"
 import { useCallback, useEffect, useState } from "react"
 import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 import CustomInput from "@/shared/ui/customInput/CustomInput"
 import { Inputs } from "@/shared/lib/Schemas/loginSchema"
 import { AuthIconButton } from "@/shared/ui/authIconButton/AuthIconButton"
 import { useSignUpForm } from "@/features/auth/hooks/useSignUpForm"
+import { Modal } from "@/shared/ui/modal"
 
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -49,12 +49,14 @@ const SignUp = () => {
     reset()
   }
 
-  const handleCloseModal = useCallback(() => {setIsModalOpen(false)}, [])
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false)
+  }, [])
 
   return (
     <>
       {isModalOpen && (
-        <Modal active={isModalOpen} setActive={setIsModalOpen} className={styles.modal}>
+        <Modal active={isModalOpen} setActive={setIsModalOpen} className={styles.modalSignUp}>
           <div className={styles.containerModal}>
             <div className={styles.boxModalHead}>
               <h1>Email sent</h1>
@@ -222,7 +224,7 @@ const SignUp = () => {
                 Sign Up
               </Button>
               <span>Do you have an account?</span>
-              <Link href="singIn" className={styles.linkLarge}>
+              <Link href="/signIn" className={styles.linkLarge}>
                 Sign In
               </Link>
             </div>
