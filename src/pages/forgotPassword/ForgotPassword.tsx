@@ -1,6 +1,6 @@
 "use client"
 
-import React, { ChangeEvent } from "react"
+import React, { ChangeEvent, useState } from "react"
 import { Cards } from "@/shared/ui/cards"
 import { CustomInput } from "@/shared/ui/customInput"
 import { Button } from "@/shared/ui/button"
@@ -10,6 +10,7 @@ import styles from "./ForgotPassword.module.scss"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Modal } from "@/shared/ui/modal"
 
 const ForgotPasswordSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -33,6 +34,7 @@ const ForgotPassword = () => {
   })
 
   const emailValue = watch("email")
+  const [isShowModal, setIsShowModal] = useState<boolean>(false)
 
   const onSubmit = (data: FormData) => {
     console.log("Form submitted:", data)
@@ -52,7 +54,12 @@ const ForgotPassword = () => {
             errorText={errors.email?.message}
           />
           <p className={styles.formHint}>Enter your email address and we will send you further instructions</p>
-          <Button variant={"primary"} type={"submit"} disabled={isSubmitting}>
+          <Button
+            variant={"primary"}
+            type={"submit"}
+            disabled={!watch("recaptcha") || isSubmitting}
+            onClick={() => setIsShowModal(!isShowModal)}
+          >
             Send Link
           </Button>
         </form>
@@ -61,6 +68,22 @@ const ForgotPassword = () => {
           <Recaptcha onVerify={(isVerified) => setValue("recaptcha", isVerified)} />
         </div>
       </Cards>
+      {isShowModal && (
+        <Modal active={isShowModal} setActive={setIsShowModal} className={styles.modal}>
+          <div className={styles.rootModal}>
+            <div className={styles.titleContainer}>
+              <h2>Email sent</h2>
+              <Button className={styles.closeModal} onClick={() => setIsShowModal(!isShowModal)}>
+                x
+              </Button>
+            </div>
+            <div>We have sent a link to confirm your email to epam@epam.com</div>
+            <Button variant={"primary"} onClick={() => setIsShowModal(!isShowModal)}>
+              Ok
+            </Button>
+          </div>
+        </Modal>
+      )}
     </div>
   )
 }
