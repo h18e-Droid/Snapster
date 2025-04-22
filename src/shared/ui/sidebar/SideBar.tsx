@@ -28,14 +28,14 @@ type TypeItem = {
 
 const SideBar = () => {
   const items = [
-    { id: 1, title: "Home", icon: [<HomeIcon />, <HomeOutlineIcon />], link: "" },
-    { id: 2, title: "Create", icon: [<PlusSquareIcon />, <PlusSquareOutlineIcon />], link: "" },
-    { id: 3, title: "My Profile", icon: [<PersonIcon />, <PersonOutlineIcon />], link: "" },
-    { id: 4, title: "Messenger", icon: [<MessageIcon />, <MessageOutlineIcon />], link: "" },
-    { id: 5, title: "Search", icon: [<SearchIcon />, <SearchIcon />], link: "" },
-    { id: 6, title: "Statistics", icon: [<TrendingUpIcon />, <TrendingUpIcon />], link: "" },
-    { id: 7, title: "Favorites", icon: [<BookmarkIcon />, <BookmarkOutlineIcon />], link: "" },
-    { id: 8, title: "Log Out", icon: [<LogoutIcon />, <LogoutIcon />], link: "" }
+    { id: 1, title: "Home", icon: [<HomeIcon key="filled" />, <HomeOutlineIcon key="outline" />], link: "" },
+    { id: 2, title: "Create", icon: [<PlusSquareIcon key="filled" />, <PlusSquareOutlineIcon key="outline" />], link: "" },
+    { id: 3, title: "My Profile", icon: [<PersonIcon key="filled" />, <PersonOutlineIcon key="outline" />], link: "" },
+    { id: 4, title: "Messenger", icon: [<MessageIcon key="filled" />, <MessageOutlineIcon key="outline" />], link: "" },
+    { id: 5, title: "Search", icon: [<SearchIcon key="filled" />, <SearchIcon key="outline" />], link: "" },
+    { id: 6, title: "Statistics", icon: [<TrendingUpIcon key="filled" />, <TrendingUpIcon key="outline" />], link: "" },
+    { id: 7, title: "Favorites", icon: [<BookmarkIcon key="filled" />, <BookmarkOutlineIcon key="outline" />], link: "" },
+    { id: 8, title: "Log Out", icon: [<LogoutIcon key="filled" />, <LogoutIcon key="outline" />], link: "" }
   ]
 
   const [isActive, setIsActive] = useState<Record<string | number, boolean>>({})
@@ -70,7 +70,7 @@ const SideBar = () => {
           {items.map((item: TypeItem) => (
             <div key={item.id}
                  className={item.id === 6 ? styles.itemStatistic : item.id === 7 ? styles.itemFavorite : styles.item}>
-              <li className={styles.listItem}>
+              <li className={styles.listItem} key={item.id}>
                 <a href={item.link} className={styles.listItem}
                    onMouseDown={() => handleMouseDown(item.id)}
                    onMouseUp={() => handleMouseUp(item.id)}

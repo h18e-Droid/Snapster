@@ -1,36 +1,24 @@
-import React, { ComponentPropsWithoutRef, CSSProperties } from "react"
-import styles from './Button.module.css'
+import React, { ComponentPropsWithoutRef } from "react"
+import styles from './Button.module.scss'
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   onClick?: () => void,
   children: React.ReactNode
   className?: string
-  width?: string | number,
-  variant: 'primary' | 'secondary' | 'outline' | 'textButton' | 'variantButton'
+  variant?: 'primary' | 'secondary' | 'outline' | 'textButton' | 'variantButton'
 }
 
-export const color: Record<string, string> = {
-  primary: styles.primary,
-  secondary: styles.secondary,
-  outline: styles.outline,
-  textButton: styles.textButton,
-  variantButton: styles.variantButton,
-}
 
-export const Button = ({ width, variant, children, className, ...props }: ButtonProps) => {
-  const variantName = variant ? color[variant] : styles.primary;
 
-  const buttonStyle: CSSProperties = {
-    width: width,
-  }
+export const Button = ({ variant, children, className, ...props }: ButtonProps) => {
+  const classNames = [
+    styles.button,
+    variant ? styles[variant] : '',
+    className,
+  ].filter(Boolean).join(' ')
 
   return (
-    <button type={props.type}
-            className={`${variantName} ${className ? className : ''}`}
-            style={{ ...buttonStyle }}
-            onClick={props.onClick}
-            {...props}
-    >
+    <button className={classNames} {...props}>
       {children}
     </button>
   )
