@@ -35,7 +35,7 @@ export const Button = ({ href, variant, children, className, ...props }: ButtonP
       <Link href={href} className={`${variantName}` || classNames}>
         {children}
       </Link>
-    )
+     )
   }
 
   return (
