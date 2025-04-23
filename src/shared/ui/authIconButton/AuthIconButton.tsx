@@ -8,7 +8,6 @@ type Props = {
 export const AuthIconButton = ({ onClick, icon }: Props) => (
   <Button
     onClick={onClick}
-    width={0}
     style={{
       background: "none",
       border: "none",

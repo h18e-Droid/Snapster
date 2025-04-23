@@ -2,7 +2,7 @@
 "use client"
 
 import React, { ComponentPropsWithoutRef } from "react"
-import styles from "./Button.module.css"
+import styles from "./Button.module.scss"
 import Link from "next/link"
 
 export type ButtonProps = ComponentPropsWithoutRef<"button"> & {

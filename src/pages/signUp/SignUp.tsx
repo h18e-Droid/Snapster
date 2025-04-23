@@ -61,7 +61,6 @@ const SignUp = () => {
             <div className={styles.boxModalHead}>
               <h1>Email sent</h1>
               <Button
-                width={"0px"}
                 onClick={handleCloseModal}
                 style={{
                   background: "none",
@@ -78,7 +77,7 @@ const SignUp = () => {
             <div className={styles.boxModalBody}>
               <p>We have sent a link to confirm your email to {watchedFields[1]}</p>
               <div className={styles.boxModalButton}>
-                <Button width="96px" onClick={handleCloseModal}>
+                <Button onClick={handleCloseModal}>
                   OK
                 </Button>
               </div>
@@ -220,7 +219,7 @@ const SignUp = () => {
               />
               {errors.agree && <span className={styles.spanError}>{errors.agree.message}</span>}
 
-              <Button type="submit" width="330px" style={{ fontSize: "16px" }} disabled={isButtonDisabled}>
+              <Button type="submit" style={{ fontSize: "16px" }} disabled={isButtonDisabled}>
                 Sign Up
               </Button>
               <span>Do you have an account?</span>
