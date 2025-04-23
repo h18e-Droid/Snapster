@@ -68,7 +68,7 @@ const VerificationLink = () => {
               />
             )}
           />
-          <Button type="submit" width={"229px"} onClick={() => {}} disabled={isButtonDisabled}>
+          <Button type="submit" onClick={() => {}} disabled={isButtonDisabled}>
             Resend verification link
           </Button>
         </div>
