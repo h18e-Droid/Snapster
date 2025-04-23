@@ -13,13 +13,7 @@ export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   variant?: "primary" | "secondary" | "outline" | "textButton" | "variantButton"
 }
 
-const color: Record<string, string> = {
-  primary: styles.primary,
-  secondary: styles.secondary,
-  outline: styles.outline,
-  textButton: styles.textButton,
-  variantButton: styles.variantButton,
-}
+
 
 export const Button = ({ href, variant, children, className, ...props }: ButtonProps) => {
   const classNames = [
