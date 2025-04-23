@@ -6,12 +6,13 @@
 .inputContainer {
   width: 100%;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .label {
   font-size: 14px;
   color: var(--color-dark-300);
-  margin-bottom: 5px;
 }
 
 .placeholderContainer {
@@ -41,11 +42,12 @@
 
 .input {
   width: 100%;
-  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
   border: 1px solid var(--color-dark-300);
   border-radius: 2px;
   font-size: 1rem;
-  background-color: var(--color-dark-900);
+  background-color: var(--color-dark-500);
+  transition: border-color 0.3s, color 0.3s;
 
   &:hover {
     border-color: var(--color-light-1000);
@@ -57,18 +59,30 @@
     border-color: var(--color-info-500);
   }
 
-   &.errorInput {
-    outline: none;
-    border-color: var(--color-danger-500);
-    color: var(--color-light-100);
-  }
 
   &::placeholder {
     padding-left: 12px;
   }
-  &.activeInput{
+
+  &.activeInput {
     border-color: var(--color-light-100);
-    background-color: var(--color-dark-700);
+    background-color: var(--color-dark-300);
+
+    &:hover {
+      border-color: var(--color-light-100);
+      color: var(--color-light-100);
+    }
+  }
+
+  &.errorInput {
+    outline: none;
+    border-color: var(--color-danger-500);
+    color: var(--color-light-100);
+
+    &:hover {
+      border-color: var(--color-danger-500);
+      color: var(--color-light-100);
+    }
   }
 }
 
@@ -84,6 +98,7 @@
   transform: translateY(-50%);
   cursor: pointer;
   color: var(--color-light-100);
+  z-index: 2;
 }
 
 .disabled {

@@ -6,12 +6,12 @@ import clsx from "clsx"
 
 type Props = {
   totalSize: number
+  currentPage: number
   onChange: (currentPage: number, portionSize: number) => void
   className?: string
 }
 
-export const Pagination = ({ totalSize, onChange, className }: Props) => {
-  const [currentPage, setCurrentPage] = useState(1)
+export const Pagination = ({ totalSize, onChange, currentPage, className }: Props) => {
   const [portionSize, setPortionSize] = useState<number>(10)
 
   const setPortionSizeHandler = (value: number) => {
@@ -20,8 +20,7 @@ export const Pagination = ({ totalSize, onChange, className }: Props) => {
   }
 
   const setCurrentPageHandler = (page: number) => {
-    setCurrentPage(page)
-    onChange(currentPage, portionSize)
+    onChange(page, portionSize)
   }
 
   const totalPages = Math.ceil(totalSize / portionSize)

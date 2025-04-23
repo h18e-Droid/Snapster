@@ -2,10 +2,11 @@ import { configureStore, ThunkDispatch, UnknownAction } from "@reduxjs/toolkit"
 import { authReducer } from "@/features/auth/model/authReducer"
 import { appReducer } from "@/features/app/appReducer"
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export const store = configureStore({
   reducer: {
-    auth: authReducer,
-    app: appReducer,
+    auth: authReducer as any,
+    app: appReducer as any,
   },
 })
 

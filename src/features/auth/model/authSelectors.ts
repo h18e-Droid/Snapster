@@ -1,3 +1,4 @@
-import {RootState} from "@/app/store";
+import { RootState } from "@/app/store"
 
-export const selectLoggedIn = (state: RootState) => state.auth?.isLoggedIn
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export const selectLoggedIn = (state: RootState) => (state.auth as any).isLoggedIn
