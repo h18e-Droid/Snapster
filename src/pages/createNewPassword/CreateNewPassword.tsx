@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import styles from "./CreateNewPassword.module.scss"
 import { Cards } from "@/shared/ui/cards"
-import { CustomInput } from "@/shared/ui/customInput"
+import { Input } from "shared/ui/input"
 import { Button } from "@/shared/ui/button"
 import { z } from "zod"
 import { useRouter } from "next/navigation"
@@ -60,7 +60,7 @@ const CreateNewPassword = () => {
     <div className={styles.root}>
       <Cards title={"Create New Password"}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
-          <CustomInput
+          <Input
             {...register("password")}
             placeholder={"New Password"}
             type={"password"}
@@ -69,7 +69,7 @@ const CreateNewPassword = () => {
             onChange={(e: ChangeEvent<HTMLInputElement>) => setValue("password", e.target.value)}
             errorText={errors.password?.message}
           />
-          <CustomInput
+          <Input
             {...register("passwordConfirm")}
             placeholder={"Password Confirmation"}
             type={"password"}

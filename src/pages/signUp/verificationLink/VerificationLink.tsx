@@ -3,7 +3,7 @@
 import styles from "@/pages/signUp/verificationLink/VerificationLink.module.scss"
 import { Button } from "@/shared/ui/button"
 import { VerificationLinkIcon } from "@/shared/assets/icons/components/VerificationLinkIcon"
-import CustomInput from "@/shared/ui/customInput/CustomInput"
+import Input from "@/shared/ui/input/Input"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 
 type Input = {
@@ -52,7 +52,7 @@ const VerificationLink = () => {
               },
             }}
             render={({ field }) => (
-              <CustomInput
+              <Input
                 {...field}
                 type="email"
                 label="Email"
@@ -68,7 +68,7 @@ const VerificationLink = () => {
               />
             )}
           />
-          <Button type="submit" width={"229px"} onClick={() => {}} disabled={isButtonDisabled}>
+          <Button type="submit" onClick={() => {}} disabled={isButtonDisabled} className={styles.buttonSend}>
             Resend verification link
           </Button>
         </div>
