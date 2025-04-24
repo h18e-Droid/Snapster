@@ -1,0 +1,63 @@
+$mobileBreakPoint : 768px;
+
+.moreButton {
+  width: 30px;
+  height: 30px;
+  margin-left: 30px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+
+
+.buttonsWrapper {
+  height: 36px;
+  width: 224px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 36px;
+}
+
+.boxButtonLogIn {
+  width: 100px;
+}
+
+.boxButtonSignUp {
+  width: 100px;
+  background-color: var(--color-info-500);
+  color: var(--color-light-100);
+}
+
+.badge {
+  order: -1;
+  display: block;
+  margin-right: 40px;
+}
+
+
+.moreButton {
+  width: 30px;
+  height: 30px;
+  margin-left: 30px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+
+
+@media (max-width: $mobileBreakPoint) {
+  .buttonsWrapper {
+    display: none;
+  }
+  .badge {
+    display: none;
+  }
+  .moreButton {
+    display: flex;
+  }
+}

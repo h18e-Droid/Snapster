@@ -1,4 +1,4 @@
-import styles from "@/widgets/header/ui/Header.module.scss"
+import styles from "./HeaderButtons.module.scss"
 import Badge from "@/shared/ui/badge/Badge"
 import { BellIcon, MoreHorizontalIcon } from "@/shared/assets/icons"
 import { Button } from "@/shared/ui/button"

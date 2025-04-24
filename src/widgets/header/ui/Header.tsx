@@ -1,6 +1,5 @@
 "use client"
 import React from "react"
-
 import styles from "./Header.module.scss"
 import { HeaderButtons } from "@/entities/headerButtons"
 import { LanguageSwitcher } from "@/features/langSwitcher"

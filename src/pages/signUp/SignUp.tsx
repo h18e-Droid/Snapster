@@ -19,14 +19,14 @@ import { Modal } from "@/shared/ui/modal"
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   useEffect(() => {
-    if (isModalOpen) {
+    /*if (isModalOpen) {
       document.body.style.overflow = "hidden"
     } else {
       document.body.style.overflow = "auto"
     }
     return () => {
       document.body.style.overflow = "auto"
-    }
+    }*/
   }, [isModalOpen])
 
   const {

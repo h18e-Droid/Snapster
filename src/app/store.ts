@@ -1,15 +1,16 @@
-import { configureStore, ThunkDispatch, UnknownAction } from "@reduxjs/toolkit"
-import { authReducer } from "@/features/auth/model/authReducer"
-import { appReducer } from "@/features/app/appReducer"
+import { configureStore } from "@reduxjs/toolkit"
+import { authReducer } from "@/features/auth"
+import { userReducer } from "@/entities/user"
+import { appReducer } from "@/features/app"
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 export const store = configureStore({
   reducer: {
-    auth: authReducer as any,
-    app: appReducer as any,
+    auth: authReducer,
+    user: userReducer,
+    app: appReducer,
   },
 })
 
 export type RootState = ReturnType<typeof store.getState>
 
-export type AppDispatch = ThunkDispatch<RootState, unknown, UnknownAction>
+export type AppDispatch = typeof store.dispatch

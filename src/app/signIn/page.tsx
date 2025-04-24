@@ -1,5 +1,4 @@
-import SignIn from "@/pages/singIn/SignIn"
-
+import { SignIn } from "@/pages/signIn/ui/SignIn"
 
 const Page = () => {
   return <SignIn />
