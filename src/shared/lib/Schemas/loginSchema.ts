@@ -14,7 +14,7 @@ export const loginSchema = z.object({
     .nonempty("Password is required")
     .min(6, "Minimum number of characters is 6")
     .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).+$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])\S+$/,
       "Password must contain a-z, A-Z, and special characters"
     ),
   confirmPassword: z.string().nonempty("Password confirmation is required"),

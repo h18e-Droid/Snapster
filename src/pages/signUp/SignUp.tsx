@@ -10,7 +10,7 @@ import { Button } from "@/shared/ui/button"
 import { Controller, SubmitHandler } from "react-hook-form"
 import { useCallback, useEffect, useState } from "react"
 import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
-import CustomInput from "@/shared/ui/customInput/CustomInput"
+import Input from "@/shared/ui/input/Input"
 import { Inputs } from "@/shared/lib/Schemas/loginSchema"
 import { AuthIconButton } from "@/shared/ui/authIconButton/AuthIconButton"
 import { useSignUpForm } from "@/features/auth/hooks/useSignUpForm"
@@ -61,7 +61,6 @@ const SignUp = () => {
             <div className={styles.boxModalHead}>
               <h1>Email sent</h1>
               <Button
-                width={"0px"}
                 onClick={handleCloseModal}
                 style={{
                   background: "none",
@@ -78,7 +77,7 @@ const SignUp = () => {
             <div className={styles.boxModalBody}>
               <p>We have sent a link to confirm your email to {watchedFields[1]}</p>
               <div className={styles.boxModalButton}>
-                <Button width="96px" onClick={handleCloseModal}>
+                <Button onClick={handleCloseModal}>
                   OK
                 </Button>
               </div>
@@ -98,7 +97,7 @@ const SignUp = () => {
                 name="text"
                 control={control}
                 render={({ field }) => (
-                  <CustomInput
+                  <Input
                     {...field}
                     type="text"
                     label="User name"
@@ -130,7 +129,7 @@ const SignUp = () => {
                 name="email"
                 control={control}
                 render={({ field }) => (
-                  <CustomInput
+                  <Input
                     {...field}
                     type="email"
                     label="Email"
@@ -150,13 +149,14 @@ const SignUp = () => {
                 name="password"
                 control={control}
                 render={({ field }) => (
-                  <CustomInput
+                  <Input
                     {...field}
                     type="password"
                     label="Password"
                     placeholder="enter password"
                     width="330px"
                     errorText={errors.password?.message}
+                    onKeyDown={(e) => e.key === " " && e.preventDefault()}
                     onChange={(e) => {
                       field.onChange(e)
                       if (touchedFields.password) {
@@ -170,7 +170,7 @@ const SignUp = () => {
                 name="confirmPassword"
                 control={control}
                 render={({ field }) => (
-                  <CustomInput
+                  <Input
                     {...field}
                     type="password"
                     label="Password confirmation"
@@ -180,6 +180,7 @@ const SignUp = () => {
                     onChange={(e) => {
                       field.onChange(e)
                     }}
+                    onKeyDown={(e) => e.key === " " && e.preventDefault()}
                     onBlur={async () => {
                       const isValid = await trigger("confirmPassword")
                       if (!isValid) return
@@ -219,11 +220,10 @@ const SignUp = () => {
                 )}
               />
               {errors.agree && <span className={styles.spanError}>{errors.agree.message}</span>}
-
-              <Button type="submit" width="330px" style={{ fontSize: "16px" }} disabled={isButtonDisabled}>
+              <Button type="submit" disabled={isButtonDisabled} className={styles.buttonSingUp}>
                 Sign Up
               </Button>
-              <span>Do you have an account?</span>
+              <span className={styles.spanTextAboutAccount}>Do you have an account?</span>
               <Link href="/signIn" className={styles.linkLarge}>
                 Sign In
               </Link>

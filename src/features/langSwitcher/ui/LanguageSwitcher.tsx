@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { FlagRussiaIcon, FlagUnitedKingdomIcon } from "@/shared/assets/icons"
-import { CustomSelect } from "@/shared/ui/customSelect"
+import { Select } from "shared/ui/select"
 
 const languages = [
   { id: "1", title: "Russian", iconSVG: <FlagRussiaIcon /> },
@@ -15,7 +15,7 @@ export const LanguageSwitcher = () => {
 
   return (
     <>
-      <CustomSelect options={languages} onChange={onChangeHandler} width={"163px"} />
+      <Select options={languages} onChange={onChangeHandler} width={"163px"} />
     </>
   )
 }

@@ -13,7 +13,7 @@ export const HeaderButtons = ({ isAuth }: Props) => {
     return (
       <>
         <div className={styles.badge}>
-          <Badge badgeContent={10} max={10}>
+          <Badge badgeContent={3} max={10}>
             <BellIcon />
           </Badge>
         </div>
@@ -23,11 +23,15 @@ export const HeaderButtons = ({ isAuth }: Props) => {
       </>
     )
   }
-  //TODO: buttons width 100px
+
   return (
     <div className={styles.buttonsWrapper}>
-      <Button variant={"textButton"}>Sign In</Button>
-      <Button variant={"primary"}>Sign up</Button>
+      <div className={styles.boxButtonLogIn}>
+        <Button variant={"textButton"}>Log In</Button>
+      </div>
+      <div className={styles.boxButtonSingUp}>
+        <Button variant={"primary"}>Sign up</Button>
+      </div>
     </div>
   )
 }

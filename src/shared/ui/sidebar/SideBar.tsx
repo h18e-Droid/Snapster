@@ -15,7 +15,6 @@ import { PersonOutlineIcon } from "@/shared/assets/icons/components/PersonOutlin
 import { MessageIcon } from "@/shared/assets/icons/components/MessageIcon"
 import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 import { Button } from "@/shared/ui/button"
-
 import { useRouter } from "next/navigation"
 import { Modal } from "@/shared/ui/modal"
 

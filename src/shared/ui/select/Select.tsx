@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "./CustomSelect.module.scss"
+import styles from "./Select.module.scss"
 import React, { useEffect, useRef, useState } from "react"
 import { ArrowDownIcon } from "@/shared/assets/icons/components/ArrowDownIcon"
 import clsx from "clsx"
@@ -13,7 +13,7 @@ type CustomSelectProps = {
   disabled?: boolean
 }
 
-export const CustomSelect = ({ options, onChange, label, width, disabled }: CustomSelectProps) => {
+export const Select = ({ options, onChange, label, width, disabled }: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedValue, setSelectedValue] = useState<string>(options[0].id)
   const selectRef = useRef<HTMLDivElement>(null)

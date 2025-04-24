@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, useState } from "react"
 import { Cards } from "@/shared/ui/cards"
-import { CustomInput } from "@/shared/ui/customInput"
+import { Input } from "shared/ui/input"
 import { Button } from "@/shared/ui/button"
 import Link from "next/link"
 import { Recaptcha } from "@/shared/ui/recaptcha/Recaptcha"
@@ -10,7 +10,7 @@ import styles from "./ForgotPassword.module.scss"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Modal } from "@/shared/ui/modal"
+import { EmailSentModal } from "@/shared/ui/emailSentModal/EmailSentModal"
 
 const ForgotPasswordSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -44,7 +44,7 @@ const ForgotPassword = () => {
     <div className={styles.root}>
       <Cards title={"ForgotPassword"}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
-          <CustomInput
+          <Input
             {...register("email")}
             placeholder={"Epam@epam.com"}
             type={"email"}
@@ -68,22 +68,7 @@ const ForgotPassword = () => {
           <Recaptcha onVerify={(isVerified) => setValue("recaptcha", isVerified)} />
         </div>
       </Cards>
-      {isShowModal && (
-        <Modal active={isShowModal} setActive={setIsShowModal} className={styles.modal}>
-          <div className={styles.rootModal}>
-            <div className={styles.titleContainer}>
-              <h2>Email sent</h2>
-              <Button className={styles.closeModal} onClick={() => setIsShowModal(!isShowModal)}>
-                x
-              </Button>
-            </div>
-            <div>We have sent a link to confirm your email to epam@epam.com</div>
-            <Button variant={"primary"} onClick={() => setIsShowModal(!isShowModal)}>
-              Ok
-            </Button>
-          </div>
-        </Modal>
-      )}
+      <EmailSentModal isOpen={isShowModal} onClose={() => setIsShowModal(false)} email={"epam@epam.com"} />
     </div>
   )
 }
