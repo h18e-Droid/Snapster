@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { fn } from "@storybook/test"
-import { CustomSelect } from "@/shared/ui/customSelect/CustomSelect"
+import { Select } from "@/shared/ui/select/Select"
 import { FlagRussiaIcon, FlagUnitedKingdomIcon } from "@/shared/assets/icons"
 
 
 const meta = {
   title: "Example/CustomSelect",
-  component: CustomSelect,
+  component: Select,
   parameters: {
     layout: "centered",
   },
@@ -15,7 +15,7 @@ const meta = {
     onChange: fn(),
     disabled: false,
   },
-} satisfies Meta<typeof CustomSelect>
+} satisfies Meta<typeof Select>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -1,4 +1,4 @@
-$mobileBreakPoint : 768px;
+$mobileBreakPoint: 768px;
 
 .header {
   height: 100%;
@@ -15,6 +15,7 @@ $mobileBreakPoint : 768px;
 }
 
 .title {
+  font-family: var(--font-family-secondary), serif;
   font-size: 26px;
   line-height: 36px;
 }
@@ -32,10 +33,21 @@ $mobileBreakPoint : 768px;
 
 .buttonsWrapper {
   height: 36px;
-  width: 220px;
+  width: 224px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   margin-left: 36px;
+}
+
+.boxButtonLogIn {
+  width: 100px;
+}
+
+.boxButtonSignUp {
+  width: 100px;
+  background-color: var(--color-info-500);
+  color: var(--color-light-100);
 }
 
 .badge {
@@ -52,7 +64,7 @@ $mobileBreakPoint : 768px;
   .badge {
     display: none;
   }
-  .moreButton{
+  .moreButton {
     display: flex;
   }
 }

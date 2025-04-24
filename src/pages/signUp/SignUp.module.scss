@@ -71,6 +71,7 @@
 .linkLarge {
   @extend .linkInfo;
   font-size: 16px;
+  color: var(--color-info-500);
 }
 
 .spanInfo {
@@ -86,4 +87,14 @@
 .boxModalButton {
   display: flex;
   justify-content: flex-end;
+}
+
+.buttonSingUp {
+  width: 330px;
+  font-size: 16px;
+  background-color: var(--color-info-500);
+}
+
+.spanTextAboutAccount {
+  color: var(--color-light-100);
 }

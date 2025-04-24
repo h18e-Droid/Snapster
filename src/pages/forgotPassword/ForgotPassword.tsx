@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, useState } from "react"
 import { Cards } from "@/shared/ui/cards"
-import { CustomInput } from "@/shared/ui/customInput"
+import { Input } from "shared/ui/input"
 import { Button } from "@/shared/ui/button"
 import Link from "next/link"
 import { Recaptcha } from "@/shared/ui/recaptcha/Recaptcha"
@@ -44,7 +44,7 @@ const ForgotPassword = () => {
     <div className={styles.root}>
       <Cards title={"ForgotPassword"}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
-          <CustomInput
+          <Input
             {...register("email")}
             placeholder={"Epam@epam.com"}
             type={"email"}

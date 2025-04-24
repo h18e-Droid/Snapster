@@ -10,7 +10,7 @@ const Congratulations = () => {
         <p>Your email has been confirmed</p>
       </div>
       <div className={styles.boxBtnIcon}>
-        <Button href={"/signIn"}>
+        <Button href={"signIn"} className={styles.buttonSignIn}>
           Sign in
         </Button>
         <CongratulationsIcon size={432} />

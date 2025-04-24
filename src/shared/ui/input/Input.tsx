@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "./CustomInput.module.scss"
+import styles from "./Input.module.scss"
 import React, { useState } from "react"
 import { EyeIcon } from "@/shared/assets/icons/components/EyeIcon"
 import { EyeOffIcon } from "@/shared/assets/icons/components/EyeOffIcon"
@@ -17,9 +17,10 @@ export type CustomInputProps = {
   label?: string
   width?: string
   errorText?: string
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
-const CustomInput = ({
+const Input = ({
   type,
   placeholder,
   value,
@@ -28,6 +29,7 @@ const CustomInput = ({
   disabled,
   label,
   width,
+  onKeyDown,
   errorText,
 }: CustomInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
@@ -73,6 +75,7 @@ const CustomInput = ({
             setActive(true)
             setIsSearchVisible(true)
           }}
+          onKeyDown={onKeyDown}
         />
         {type === "password" && (
           <span className={clsx(styles.eyeIcon, disabled && styles.disabled)} onClick={togglePasswordVisibility}>
@@ -85,4 +88,4 @@ const CustomInput = ({
   )
 }
 
-export default React.memo(CustomInput)
+export default React.memo(Input)
