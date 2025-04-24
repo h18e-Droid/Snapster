@@ -1,0 +1,43 @@
+$mobileBreakPoint : 768px;
+
+.moreButton {
+  width: 30px;
+  height: 30px;
+  margin-left: 30px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+
+.buttonsWrapper {
+  height: 36px;
+  width: 220px;
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  margin-left: 36px;
+  >button {
+    min-width: 110px;
+  }
+}
+
+.badge {
+  order: -1;
+  display: block;
+  margin-right: 40px;
+}
+
+
+@media (max-width: $mobileBreakPoint) {
+  .buttonsWrapper {
+    display: none;
+  }
+  .badge {
+    display: none;
+  }
+  .moreButton{
+    display: flex;
+  }
+}

@@ -17,42 +17,5 @@ $mobileBreakPoint : 768px;
 .title {
   font-size: 26px;
   line-height: 36px;
-}
-
-.moreButton {
-  width: 30px;
-  height: 30px;
-  margin-left: 30px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-}
-
-.buttonsWrapper {
-  height: 36px;
-  width: 220px;
-  display: flex;
-  justify-content: space-between;
-  margin-left: 36px;
-}
-
-.badge {
-  order: -1;
-  display: block;
-  margin-right: 40px;
-}
-
-
-@media (max-width: $mobileBreakPoint) {
-  .buttonsWrapper {
-    display: none;
-  }
-  .badge {
-    display: none;
-  }
-  .moreButton{
-    display: flex;
-  }
+  font-family: var(--font-family-secondary), serif;
 }

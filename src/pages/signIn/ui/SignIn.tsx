@@ -1,15 +1,11 @@
 "use client"
-import { selectLoggedIn } from "@/features/auth/model/authSelectors"
-import { useSelector } from "react-redux"
 import { Cards } from "@/shared/ui/cards"
 import { GoogleComIcon } from "@/shared/assets/icons/components/GoogleComIcon"
 import { GitHubComIcon } from "@/shared/assets/icons/components/GitHubComIcon"
 import styles from "./SignIn.module.scss"
-import { SignInForm } from "@/features/auth/signIn"
+import { SignInForm } from "./signInForm/SignInForm"
 
 export const SignIn = () => {
-  const isAuth = useSelector(selectLoggedIn)
-  console.log(isAuth)
   return (
     <div className={styles.signInWrapper}>
       <Cards title={"Sign In"} className={styles.card}>

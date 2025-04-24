@@ -5,7 +5,7 @@ import { CustomSelect } from "@/shared/ui/customSelect"
 
 const languages = [
   { id: "1", title: "Russian", iconSVG: <FlagRussiaIcon /> },
-  { id: "2", title: "England", iconSVG: <FlagUnitedKingdomIcon /> },
+  { id: "2", title: "English", iconSVG: <FlagUnitedKingdomIcon /> },
 ]
 
 export const LanguageSwitcher = () => {

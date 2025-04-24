@@ -2,16 +2,14 @@ import React, { ReactNode } from "react"
 import { Header } from "@/widgets/header"
 import styles from "./ContainerLayout.module.scss"
 import { Navbar } from "@/widgets/navbar"
-import { useSelector } from "react-redux"
-import { selectLoggedIn } from "@/features/auth/model/authSelectors"
+import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 
 type ContainerLayoutProps = {
   children: ReactNode
 }
 
 const ContainerLayout = ({ children }: ContainerLayoutProps) => {
-  const isAuth = useSelector(selectLoggedIn)
-
+  const isAuth = useAppSelector((state) => state.user.isAuth)
   return (
     <div className={styles.containerWrapper}>
       <header className={styles.headerWrapper}>

@@ -3,37 +3,40 @@ import { Controller, useForm } from "react-hook-form"
 import { Button } from "@/shared/ui/button"
 import styles from "./SignInForm.module.scss"
 import { CustomInput } from "@/shared/ui/customInput"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 import Link from "next/link"
+import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
+import { authThunks } from "@/features/auth"
+import { useAppSelector } from "@/shared/lib/state/useAppSelector"
+import { useRouter } from "next/navigation"
+import { useFormConfig } from "@/pages/signIn/model/schema"
 
 type FormValues = {
   email: string
   password: string
 }
 
-const signInSchema = z.object({
-  email: z.string().nonempty("Email is required").email("Invalid email address"),
-  password: z.string().nonempty("Password is required"),
-})
-
 export const SignInForm = () => {
   const {
     handleSubmit,
     control,
     reset,
+    clearErrors,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(signInSchema),
-    mode: "onBlur",
-  })
-
-  //The email or password are incorrect. Try again please
+  } = useForm<FormValues>(useFormConfig)
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.user.user)
+  const router = useRouter()
 
   const onSubmit = (values: FormValues) => {
-    console.log(values)
+    dispatch(authThunks.signIn(values))
     reset()
   }
+
+  useEffect(() => {
+    if (user) {
+      router.push("/")
+    }
+  }, [user])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
@@ -44,8 +47,12 @@ export const SignInForm = () => {
         render={({ field }) => (
           <CustomInput
             {...field}
+            onChange={(e) => {
+              clearErrors("email")
+              field.onChange(e)
+            }}
             errorText={errors?.email?.message}
-            placeholder={"Your email"}
+            placeholder={"example@example.com"}
             type={"email"}
             label={"email"}
           />
@@ -58,8 +65,12 @@ export const SignInForm = () => {
         render={({ field }) => (
           <CustomInput
             {...field}
+            onChange={(e) => {
+              clearErrors("password")
+              field.onChange(e)
+            }}
             errorText={errors?.password?.message}
-            placeholder={"Your password"}
+            placeholder={"Password"}
             type={"password"}
             label={"password"}
           />
