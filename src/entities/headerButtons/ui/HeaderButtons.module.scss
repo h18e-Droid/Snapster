@@ -11,22 +11,42 @@ $mobileBreakPoint : 768px;
   border: none;
 }
 
+
 .buttonsWrapper {
   height: 36px;
-  width: 220px;
+  width: 224px;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  gap: 25px;
   margin-left: 36px;
-  >button {
-    min-width: 110px;
-  }
+}
+
+.boxButtonLogIn {
+  width: 100px;
+}
+
+.boxButtonSignUp {
+  width: 100px;
+  background-color: var(--color-info-500);
+  color: var(--color-light-100);
 }
 
 .badge {
   order: -1;
   display: block;
   margin-right: 40px;
+}
+
+
+.moreButton {
+  width: 30px;
+  height: 30px;
+  margin-left: 30px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
 }
 
 
@@ -37,7 +57,7 @@ $mobileBreakPoint : 768px;
   .badge {
     display: none;
   }
-  .moreButton{
+  .moreButton {
     display: flex;
   }
 }

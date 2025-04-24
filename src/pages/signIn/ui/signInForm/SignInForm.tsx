@@ -2,13 +2,13 @@ import React, { useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Button } from "@/shared/ui/button"
 import styles from "./SignInForm.module.scss"
-import { CustomInput } from "@/shared/ui/customInput"
 import Link from "next/link"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
 import { authThunks } from "@/features/auth"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { useRouter } from "next/navigation"
 import { useFormConfig } from "@/pages/signIn/model/schema"
+import { Input } from "@/shared/ui/input"
 
 type FormValues = {
   email: string
@@ -45,7 +45,7 @@ export const SignInForm = () => {
         defaultValue={""}
         control={control}
         render={({ field }) => (
-          <CustomInput
+          <Input
             {...field}
             onChange={(e) => {
               clearErrors("email")
@@ -63,7 +63,7 @@ export const SignInForm = () => {
         control={control}
         defaultValue={""}
         render={({ field }) => (
-          <CustomInput
+          <Input
             {...field}
             onChange={(e) => {
               clearErrors("password")
@@ -83,7 +83,12 @@ export const SignInForm = () => {
       </div>
 
       <div className={styles.buttonsWrapper}>
-        <Button type="submit" variant={"primary"} className={styles.button}>
+        <Button
+          type="submit"
+          variant={"primary"}
+          disabled={!!errors.email?.message || !!errors.password?.message}
+          className={styles.button}
+        >
           Sign In
         </Button>
         <span>Don’t have an account?</span>

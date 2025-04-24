@@ -43,6 +43,7 @@ $mobileBreakPoint : 768px;
   cursor: pointer;
   @media (max-width: $mobileBreakPoint) {
     height: 48px;
+    width: 100%;
   }
 }
 
