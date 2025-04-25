@@ -1,5 +1,5 @@
 "use client"
-import TermsOfService from "@/pages/termsOfService/TermsOfService"
+import TermsOfService from "@/views/termsOfService/TermsOfService"
 
 const Page = () => {
   return <TermsOfService />

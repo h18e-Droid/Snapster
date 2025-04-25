@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
-import { userActions } from "@/entities/user"
-import { authStatus, InitialState } from "@/features/auth/lib/types/types"
+import { authStatus, InitialState, signInPayload } from "@/features/auth/lib/types/types"
+import axios from "axios"
 
 const initialState: InitialState = {
-  isLoggedIn: true,
-  error: "string",
+  isAuth: false,
+  error: "",
   status: "idle" as authStatus,
 }
 
@@ -17,27 +17,36 @@ const slice = createSlice({
     setStatus: (state, action: PayloadAction<{ status: authStatus }>) => {
       state.status = action.payload.status
     },
+    setIsAuth: (state, action: PayloadAction<{ isAuth: boolean }>) => {
+      state.isAuth = action.payload.isAuth
+    },
+    setError: (state, action: PayloadAction<{ error: string }>) => {
+      state.error = action.payload.error
+    },
   },
 })
 
-export const signIn = createAppAsyncThunk<void, { email: string; password: string }>(
-  "signIn",
-  async (arg, thunkAPI) => {
-    const { dispatch, rejectWithValue } = thunkAPI
-    try {
-      dispatch(slice.actions.setStatus({ status: "loading" }))
-      const res = await authApi.signIn(arg)
-      if (res.resultCode === 200) {
-        dispatch(userActions.setUser(res.data))
-      } else {
-        dispatch(authActions.setStatus({ status: "fail" }))
-      }
-    } catch (error) {
-      rejectWithValue(error)
+//буду переделивать rejectWithValue и return value пока что так
+export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/signIn`, async (arg, thunkAPI) => {
+  const { dispatch } = thunkAPI
+  try {
+    dispatch(slice.actions.setStatus({ status: "loading" }))
+    const res = await authApi.signIn(arg)
+    localStorage.setItem("accessToken", res.data.accessToken)
+    dispatch(slice.actions.setIsAuth({ isAuth: true }))
+    dispatch(authActions.setStatus({ status: "success" }))
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      dispatch(slice.actions.setStatus({ status: "failed" }))
+      dispatch(slice.actions.setError({ error: error.response?.data.errorsMessages[0].message }))
+    } else {
+      dispatch(slice.actions.setError({ error: "An unknown error occurred" }))
     }
-  },
-)
+  } finally {
+    dispatch(authActions.setStatus({ status: "idle" }))
+  }
+})
 
 export const authReducer = slice.reducer
-const authActions = slice.actions
+export const authActions = slice.actions
 export const authThunks = { signIn }
