@@ -5,6 +5,8 @@ $mobileBreakPoint : 768px;
 .containerWrapper {
   width: 100%;
   min-height: 100%;
+  background-color: var(--color-dark-700);
+  color: var(--color-light-100);
 }
 
 .headerWrapper {

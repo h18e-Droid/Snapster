@@ -1,8 +1,9 @@
-import styles from "@/widgets/header/ui/Header.module.scss"
+import styles from "./HeaderButtons.module.scss"
 import Badge from "@/shared/ui/badge/Badge"
 import { BellIcon, MoreHorizontalIcon } from "@/shared/assets/icons"
 import { Button } from "@/shared/ui/button"
 import React from "react"
+import Link from "next/link"
 
 type Props = {
   isAuth: boolean
@@ -26,8 +27,16 @@ export const HeaderButtons = ({ isAuth }: Props) => {
 
   return (
     <div className={styles.buttonsWrapper}>
-      <Button variant={"textButton"}>Log In</Button>
-      <Button variant={"primary"}>Sign up</Button>
+      <div className={styles.boxButtonLogIn}>
+        <Button variant={"textButton"}>
+          <Link href={"/signIn"}>Sign In</Link>
+        </Button>
+      </div>
+      <div className={styles.boxButtonSingUp}>
+        <Button variant={"primary"}>
+          <Link href={"/signUp"}>Sign up</Link>
+        </Button>
+      </div>
     </div>
   )
 }

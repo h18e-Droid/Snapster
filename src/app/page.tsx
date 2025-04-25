@@ -1,12 +1,6 @@
-// import styles from "./page.module.css"
+"use client"
 import React from "react"
 
 export default function Home() {
-  //
-  return (
-    <div>
-      <main></main>
-      <footer></footer>
-    </div>
-  )
+  return <div>Home Page</div>
 }
