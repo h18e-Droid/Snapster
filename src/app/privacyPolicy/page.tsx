@@ -1,5 +1,5 @@
 "use client"
-import PrivacyPolicy from "@/pages/privacyPolicy/PrivacyPolicy"
+import PrivacyPolicy from "@/views/privacyPolicy/PrivacyPolicy"
 
 const Page = () => {
   return <PrivacyPolicy />

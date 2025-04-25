@@ -1,4 +1,4 @@
-import CreateNewPassword from "@/pages/createNewPassword/CreateNewPassword"
+import CreateNewPassword from "@/views/createNewPassword/CreateNewPassword"
 
 const Page = () => {
   return <CreateNewPassword />

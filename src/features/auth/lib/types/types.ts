@@ -1,18 +1,12 @@
-export type authStatus = "idle" | "success" | "fail" | "loading"
+export type authStatus = "idle" | "success" | "failed" | "loading"
 
 export type InitialState = {
   status: authStatus
-  isLoggedIn: boolean
+  isAuth: boolean
   error: string
 }
 
-export type user = {
-  id: string
-  username: string
-  token: string
-}
-
-export type credentials = {
+export type signInPayload = {
   email: string
   password: string
 }

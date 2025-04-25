@@ -1,4 +1,4 @@
-import PasswordRecovery from "@/pages/passwordRecovery/PasswordRecovery"
+import PasswordRecovery from "@/views/passwordRecovery/PasswordRecovery"
 
 const Page = () => {
   return <PasswordRecovery />

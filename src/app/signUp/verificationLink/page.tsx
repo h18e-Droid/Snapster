@@ -1,4 +1,4 @@
-import VerificationLink from "@/pages/signUp/verificationLink/VerificationLink"
+import VerificationLink from "@/views/signUp/verificationLink/VerificationLink"
 
 const Page = () => {
   return <VerificationLink />

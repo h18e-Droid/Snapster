@@ -1,4 +1,4 @@
-import Congratulations from "@/pages/signUp/congatulations/Congratulations"
+import Congratulations from "@/views/signUp/congatulations/Congratulations"
 
 const Page = () => {
   return <Congratulations />
