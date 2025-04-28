@@ -15,9 +15,9 @@ export type CustomInputProps = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
   disabled?: boolean
   label?: string
-  width?: string
   errorText?: string
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
+  className?: string
 }
 
 const Input = ({
@@ -28,9 +28,9 @@ const Input = ({
   onBlur,
   disabled,
   label,
-  width,
   onKeyDown,
   errorText,
+  className,
 }: CustomInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isSearchVisible, setIsSearchVisible] = useState(false)
@@ -56,7 +56,7 @@ const Input = ({
   return (
     <div className={styles.inputBox}>
       {label && <label className={styles.label}>{label}</label>}
-      <div className={clsx(styles.inputContainer, disabled && styles.disabled)} style={{ width }}>
+      <div className={clsx(styles.inputContainer, className, disabled && styles.disabled)}>
         {type === "search" && !isSearchVisible && !value && (
           <div className={styles.placeholderContainer}>
             <SearchIcon className={clsx(styles.icon, disabled && styles.iconDisabled)} />

@@ -22,7 +22,12 @@ $mobileBreakPoint : 768px;
 }
 
 .boxButtonLogIn {
+  display: flex;
+  justify-content: center;
   width: 105px;
+  border: none;
+  color: #2f68cc;
+  text-align: center;
 }
 
 .boxButtonSignUp {
