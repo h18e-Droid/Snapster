@@ -14,24 +14,31 @@ $mobileBreakPoint : 768px;
 
 .buttonsWrapper {
   height: 36px;
-  width: 224px;
+  width: 238px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 36px;
+  gap: 24px;
 }
 
 .boxButtonLogIn {
   display: flex;
   justify-content: center;
-  width: 105px;
+  width: 107px;
   border: none;
-  color: #2f68cc;
+  color: var(--color-info-700);
   text-align: center;
+
+  &:hover {
+    color: var(--color-info-300);
+  }
 }
 
 .boxButtonSignUp {
-  width: 100px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 107px;
   background-color: var(--color-info-500);
   color: var(--color-light-100);
 }
