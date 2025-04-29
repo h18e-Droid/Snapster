@@ -16,6 +16,7 @@ export const Header = ({ isAuth }: Props) => {
         <LanguageSwitcher />
         <HeaderButtons isAuth={isAuth} />
       </nav>
+
     </div>
   )
 }
