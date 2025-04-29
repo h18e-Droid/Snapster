@@ -26,7 +26,7 @@ $mobileBreakPoint : 768px;
 }
 
 .contentWrapper {
-  width: 328px;
+  width: 330px;
   min-height: 418px;
   @media (max-width: $mobileBreakPoint) {
     width: 100%;
@@ -50,8 +50,19 @@ $mobileBreakPoint : 768px;
 .oAuthIcon{
   cursor: pointer;
   color: white;
+  height: 36px;
 }
 
 .signInForm{
+  margin-top: 24px;
   height: 100%;
+}
+
+.buttonCloseIcon {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 24px;
+  cursor: pointer;
+  width: 0;
 }

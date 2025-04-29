@@ -1,9 +1,9 @@
-
 "use client"
 
-import React, { ComponentPropsWithoutRef } from "react"
 import styles from "./Button.module.scss"
+import React, { ComponentPropsWithoutRef } from "react"
 import Link from "next/link"
+import clsx from "clsx"
 
 export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
   href?: string
@@ -16,12 +16,12 @@ export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
 
 
 export const Button = ({ href, variant, children, className, ...props }: ButtonProps) => {
-  const classNames = [
-    styles.button,
-    variant ? styles[variant] : '',
-    className,
-  ].filter(Boolean).join(' ')
 
+  const classNames = clsx(
+    styles.button,
+    variant && styles[variant],
+    className,
+  );
 
   if (href) {
     return (

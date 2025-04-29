@@ -14,10 +14,39 @@
 .container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+.boxInputs {
+  display: flex;
+  flex-direction: column;
   gap: 24px;
   width: 100%;
   align-items: center;
 }
+
+.submissionBlock {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.signUpFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.authSwitch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  margin-top: 18px;
+}
+
 
 .modalSignUp {
   z-index: 9999;
@@ -72,6 +101,9 @@
   @extend .linkInfo;
   font-size: 16px;
   color: var(--color-info-500);
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 24px;
 }
 
 .spanInfo {
@@ -98,3 +130,8 @@
 .spanTextAboutAccount {
   color: var(--color-light-100);
 }
+
+.input {
+  width: 330px;
+}
+
