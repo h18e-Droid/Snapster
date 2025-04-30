@@ -2,10 +2,13 @@ import { useForm } from "react-hook-form"
 import { loginSchema, Inputs } from "@/shared/lib/Schemas/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useCallback, useMemo } from "react"
-import { isValid } from "zod"
 
 export const useSignUpForm = () => {
-  const methods = useForm<Inputs>({
+  const {
+    watch,
+    formState: { isValid, isDirty, errors, touchedFields },
+    ...methods
+  } = useForm<Inputs>({
     mode: "onBlur",
     defaultValues: {
       text: "",
@@ -15,9 +18,9 @@ export const useSignUpForm = () => {
       agree: false,
     },
     resolver: zodResolver(loginSchema),
-  })
+  });
 
-  const watchedFields = methods.watch(["text", "email", "password", "confirmPassword", "agree"])
+  const watchedFields = watch(["text", "email", "password", "confirmPassword", "agree"])
 
   const isFormFilled = useMemo(() => {
     return watchedFields.every((field) => (typeof field === "string" ? field.trim() : field))
@@ -30,7 +33,9 @@ export const useSignUpForm = () => {
     return existingUsers.includes(username)
   }, [])
 
-  const isButtonDisabled = !isValid || !isFormFilled
+  const isButtonDisabled = !isValid || !isFormFilled || !isDirty
 
-  return { ...methods, watchedFields, isFormFilled, checkUsernameExists, isButtonDisabled }
+  return { ...methods, 
+    watchedFields, isFormFilled,
+    checkUsernameExists, isButtonDisabled, formState: {errors, touchedFields }, watch }
 }
