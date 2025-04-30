@@ -27,6 +27,7 @@
     "react-hook-form": "^7.54.2",
     "react-redux": "^9.2.0",
     "redux": "^5.0.1",
+    "vercel": "^41.7.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
