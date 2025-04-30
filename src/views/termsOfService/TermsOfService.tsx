@@ -3,12 +3,13 @@
 import Link from "next/link"
 import styles from "@/views/privacyPolicy/PrivacyPolicy.module.scss"
 import { ArrowLeftIcon } from "@/shared/assets/icons/components/ArrowLeftIcon"
+import { appRoutes } from "@/shared/lib/enums/routes"
 
 const TermsOfService = () => {
   return (
     <div className={styles.container}>
       <div className={styles.containerLink}>
-        <Link href={"/signUp"} className={styles.link}>
+        <Link href={appRoutes.signUp} className={styles.link}>
           <ArrowLeftIcon />
           Back to Sign Up
         </Link>

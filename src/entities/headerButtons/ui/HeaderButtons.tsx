@@ -3,6 +3,7 @@ import Badge from "@/shared/ui/badge/Badge"
 import { BellIcon, MoreHorizontalIcon } from "@/shared/assets/icons"
 import { Button } from "@/shared/ui/button"
 import React from "react"
+import { appRoutes } from "@/shared/lib/enums/routes"
 
 type Props = {
   isAuth: boolean
@@ -26,10 +27,10 @@ export const HeaderButtons = ({ isAuth }: Props) => {
 
   return (
     <div className={styles.buttonsWrapper}>
-      <Button href={"/signIn"} className={styles.boxButtonLogIn}>
+      <Button href={appRoutes.signIn} className={styles.boxButtonLogIn}>
         Sign In
       </Button>
-      <Button href={"/signUp"} variant={"primary"} className={styles.boxButtonSignUp}>
+      <Button href={appRoutes.signUp} variant={"primary"} className={styles.boxButtonSignUp}>
         Sign up
       </Button>
     </div>

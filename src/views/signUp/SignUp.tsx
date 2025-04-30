@@ -15,6 +15,7 @@ import { Inputs } from "@/shared/lib/Schemas/loginSchema"
 import { AuthIconButton } from "@/shared/ui/authIconButton/AuthIconButton"
 import { useSignUpForm } from "@/features/auth/hooks/useSignUpForm"
 import { Modal } from "@/shared/ui/modal"
+import { appRoutes } from "@/shared/lib/enums/routes"
 
 const SignUp = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -214,11 +215,11 @@ const SignUp = () => {
                         label={
                           <span className={styles.spanInfo}>
                             I agree to the{" "}
-                            <Link href="/termsOfService" className={styles.linkInfo}>
+                            <Link href={appRoutes.termsOfService} className={styles.linkInfo}>
                               Terms of Service
                             </Link>{" "}
                             and{" "}
-                            <Link href="/privacyPolicy" className={styles.linkInfo}>
+                            <Link href={appRoutes.privacyPolicy} className={styles.linkInfo}>
                               Privacy Policy
                             </Link>
                           </span>
@@ -233,7 +234,7 @@ const SignUp = () => {
                 </div>
                 <div className={styles.authSwitch}>
                   <span className={styles.spanTextAboutAccount}>Do you have an account?</span>
-                  <Link href="/signIn" className={styles.linkLarge}>
+                  <Link href={appRoutes.signIn} className={styles.linkLarge}>
                     Sign In
                   </Link>
                 </div>

@@ -8,6 +8,7 @@ import { authActions, authThunks } from "@/features/auth"
 import { useFormConfig } from "@/views/signIn/model/schema"
 import { Input } from "@/shared/ui/input"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
+import { appRoutes } from "@/shared/lib/enums/routes"
 
 type FormValues = {
   email: string
@@ -84,7 +85,7 @@ export const SignInForm = () => {
         )}
       />
       <div className={styles.forgotPassword}>
-        <Link href={"/forgotPassword"} passHref>
+        <Link href={appRoutes.forgotPassword} passHref>
           <span>Forgot Password</span>
         </Link>
       </div>
@@ -99,7 +100,7 @@ export const SignInForm = () => {
           Sign In
         </Button>
         <span>Don’t have an account?</span>
-        <Link href={"/signUp"} passHref>
+        <Link href={appRoutes.signUp} passHref>
           <Button variant={"textButton"} className={styles.button}>
             Sign Up
           </Button>
