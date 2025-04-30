@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { SignInForm } from "@/views/signIn/ui/signInForm/SignInForm"
 import { Loader } from "@/shared/ui/loader"
+import { appRoutes } from "@/shared/lib/enums/routes"
 
 export const SignIn = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth)
@@ -16,7 +17,7 @@ export const SignIn = () => {
 
   useEffect(() => {
     if (isAuth) {
-      return router.push("/")
+      return router.push(appRoutes.home)
     }
   }, [isAuth])
 

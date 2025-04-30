@@ -1,5 +1,4 @@
 "use client"
-
 import React, { ChangeEvent } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -9,6 +8,7 @@ import { Input } from "shared/ui/input"
 import { Button } from "@/shared/ui/button"
 import { z } from "zod"
 import { useRouter } from "next/navigation"
+import { appRoutes } from "@/shared/lib/enums/routes"
 
 const CreateNewPasswordSchema = z
   .object({
@@ -50,7 +50,7 @@ const CreateNewPassword = () => {
     try {
       console.log("Form data:", data)
       // Перенаправление с push (добавляет в историю)
-      router.push("/signIn")
+      router.push(appRoutes.signIn)
     } catch (error) {
       console.error("Error:", error)
     }
