@@ -5,10 +5,12 @@
 }
 
 .containerIcon {
+  max-width: 330px;
+  width: 100%;
   display: flex;
   gap: 60px;
-  margin-left: 99px;
-  margin-top: 13px;
+  margin-top: 12px;
+  justify-content: center;
 }
 
 .container {

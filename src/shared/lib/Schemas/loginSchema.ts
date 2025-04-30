@@ -7,7 +7,8 @@ export const loginSchema = z
       .trim()
       .nonempty("Username is required")
       .min(6, "Minimum number of characters is 6")
-      .max(30, "Maximum number of characters is 30"),
+      .max(30, "Maximum number of characters is 30")
+      .regex(/^(?=\S+$)[a-zA-Z0-9_-]+$/, "you can't use a space"),
     email: z
       .string()
       .nonempty("Email is required")
