@@ -32,7 +32,8 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
   try {
     dispatch(slice.actions.setStatus({ status: "loading" }))
     const res = await authApi.signIn(arg)
-    localStorage.setItem("accessToken", res.data.accessToken)
+    /*localStorage.setItem("accessToken", res.data.accessToken)*/
+    document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
     dispatch(slice.actions.setIsAuth({ isAuth: true }))
     dispatch(authActions.setStatus({ status: "success" }))
   } catch (error) {
@@ -42,8 +43,6 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
     } else {
       dispatch(slice.actions.setError({ error: "An unknown error occurred" }))
     }
-  } finally {
-    dispatch(authActions.setStatus({ status: "idle" }))
   }
 })
 

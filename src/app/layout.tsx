@@ -1,13 +1,10 @@
-"use client"
-
 import React from "react"
-import ContainerLayout from "@/app/containerLayout/ContainerLayout"
 import "@/shared/styles/_colors.scss"
 import "@/shared/styles/_typography.scss"
 import "./globals.css"
-import { Provider } from "react-redux"
-import { store } from "@/app/store"
 import { Inter, Roboto } from "next/font/google"
+import { cookies } from "next/headers"
+import { ContainerProvider } from "@/app/container/ContainerProvider"
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -27,12 +24,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const store = cookies()
+  const isAuth = React.use(store).has("refreshTokenCustom")
   return (
     <html lang="en" className={`${inter.className} ${roboto.className}`}>
       <body>
-        <Provider store={store}>
-          <ContainerLayout>{children}</ContainerLayout>
-        </Provider>
+        <ContainerProvider isAuth={isAuth}>{children}</ContainerProvider>
       </body>
     </html>
   )

@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Button } from "@/shared/ui/button"
@@ -9,11 +10,8 @@ import { useFormConfig } from "@/views/signIn/model/schema"
 import { Input } from "@/shared/ui/input"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { appRoutes } from "@/shared/lib/enums/routes"
-
-type FormValues = {
-  email: string
-  password: string
-}
+import { useRouter } from "next/navigation"
+import { FormValues } from "@/views/signIn/lib/types"
 
 export const SignInForm = () => {
   const {
@@ -26,7 +24,8 @@ export const SignInForm = () => {
   } = useForm<FormValues>(useFormConfig)
   const dispatch = useAppDispatch()
   const error = useAppSelector((state) => state.auth.error)
-  const status = useAppSelector((state) => state.auth.status)
+  const isAuth = useAppSelector((state) => state.auth.isAuth)
+  const router = useRouter()
 
   const onSubmit = (values: FormValues) => {
     dispatch(authThunks.signIn(values))
@@ -40,72 +39,76 @@ export const SignInForm = () => {
   }
 
   useEffect(() => {
-    if (status === "success") {
+    if (isAuth) {
       reset()
+      router.push(appRoutes.home)
+      return
     }
-  }, [status])
+  }, [isAuth])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
-      <Controller
-        name={"email"}
-        defaultValue={""}
-        control={control}
-        render={({ field }) => (
-          <Input
-            {...field}
-            onChange={(e) => {
-              clearErrors("email")
-              field.onChange(e)
-            }}
-            errorText={errors?.email?.message}
-            placeholder={"example@example.com"}
-            type={"email"}
-            label={"email"}
-          />
-        )}
-      />
-      <Controller
-        name={"password"}
-        control={control}
-        defaultValue={""}
-        render={({ field }) => (
-          <Input
-            {...field}
-            onChange={(e) => {
-              clearErrors("password")
-              field.onChange(e)
-              resetError()
-            }}
-            errorText={error ? error : errors?.password?.message}
-            placeholder={"Password"}
-            type={"password"}
-            label={"password"}
-          />
-        )}
-      />
-      <div className={styles.forgotPassword}>
-        <Link href={appRoutes.forgotPassword} passHref>
-          <span>Forgot Password</span>
-        </Link>
-      </div>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+        <Controller
+          name={"email"}
+          defaultValue={""}
+          control={control}
+          render={({ field }) => (
+            <Input
+              {...field}
+              onChange={(e) => {
+                clearErrors("email")
+                field.onChange(e)
+              }}
+              errorText={errors?.email?.message}
+              placeholder={"example@example.com"}
+              type={"email"}
+              label={"email"}
+            />
+          )}
+        />
+        <Controller
+          name={"password"}
+          control={control}
+          defaultValue={""}
+          render={({ field }) => (
+            <Input
+              {...field}
+              onChange={(e) => {
+                clearErrors("password")
+                field.onChange(e)
+                resetError()
+              }}
+              errorText={error ? error : errors?.password?.message}
+              placeholder={"Password"}
+              type={"password"}
+              label={"password"}
+            />
+          )}
+        />
+        <div className={styles.forgotPassword}>
+          <Link href={appRoutes.forgotPassword} passHref>
+            <span>Forgot Password</span>
+          </Link>
+        </div>
 
-      <div className={styles.buttonsWrapper}>
-        <Button
-          type="submit"
-          variant={"primary"}
-          disabled={!!errors.email?.message || !!errors.password?.message}
-          className={styles.button}
-        >
-          Sign In
-        </Button>
-        <span>Don’t have an account?</span>
-        <Link href={appRoutes.signUp} passHref>
-          <Button variant={"textButton"} className={styles.button}>
-            Sign Up
+        <div className={styles.buttonsWrapper}>
+          <Button
+            type="submit"
+            variant={"primary"}
+            disabled={!!errors.email?.message || !!errors.password?.message}
+            className={styles.button}
+          >
+            Sign In
           </Button>
-        </Link>
-      </div>
-    </form>
+          <span>Don’t have an account?</span>
+          <Link href={appRoutes.signUp} passHref>
+            <Button variant={"textButton"} className={styles.button}>
+              Sign Up
+            </Button>
+          </Link>
+        </div>
+      </form>
+    </>
   )
 }
