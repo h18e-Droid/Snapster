@@ -43,7 +43,7 @@ const ForgotPassword = () => {
 
   return (
     <div className={styles.root}>
-      <Cards title={"ForgotPassword"}>
+      <Cards title={"Forgot Password"}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
           <Input
             {...register("email")}
