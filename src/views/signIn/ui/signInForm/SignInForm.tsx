@@ -61,7 +61,7 @@ export const SignInForm = () => {
             errorText={errors?.email?.message}
             placeholder={"example@example.com"}
             type={"email"}
-            label={"email"}
+            label={"Email"}
           />
         )}
       />
@@ -80,7 +80,7 @@ export const SignInForm = () => {
             errorText={error ? error : errors?.password?.message}
             placeholder={"Password"}
             type={"password"}
-            label={"password"}
+            label={"Password"}
           />
         )}
       />
