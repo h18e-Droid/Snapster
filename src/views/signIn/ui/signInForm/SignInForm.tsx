@@ -12,6 +12,7 @@ import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { appRoutes } from "@/shared/lib/enums/routes"
 import { useRouter } from "next/navigation"
 import { FormValues } from "@/views/signIn/lib/types"
+import { Router } from "next/router"
 
 export const SignInForm = () => {
   const {
@@ -41,7 +42,7 @@ export const SignInForm = () => {
   useEffect(() => {
     if (isAuth) {
       reset()
-      router.push(appRoutes.home)
+      router.replace(appRoutes.home)
       return
     }
   }, [isAuth])
@@ -102,11 +103,9 @@ export const SignInForm = () => {
             Sign In
           </Button>
           <span>Don’t have an account?</span>
-          <Link href={appRoutes.signUp} passHref>
-            <Button variant={"textButton"} className={styles.button}>
-              Sign Up
-            </Button>
-          </Link>
+          <Button href={appRoutes.signUp} variant={"textButton"} className={styles.button}>
+            Sign Up
+          </Button>
         </div>
       </form>
     </>

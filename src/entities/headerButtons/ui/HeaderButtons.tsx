@@ -27,7 +27,7 @@ export const HeaderButtons = ({ isAuth }: Props) => {
 
   return (
     <div className={styles.buttonsWrapper}>
-      <Button href={appRoutes.signIn} className={styles.boxButtonLogIn}>
+      <Button href={appRoutes.signIn} variant={"textButton"} className={styles.boxButtonLogIn}>
         Sign In
       </Button>
       <Button href={appRoutes.signUp} variant={"primary"} className={styles.boxButtonSignUp}>

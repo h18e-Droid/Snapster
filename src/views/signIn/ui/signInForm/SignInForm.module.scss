@@ -40,11 +40,15 @@ $mobileBreakPoint : 768px;
 .button{
   font-weight: var(--font-weight-semi-bold);
   font-size: var(--line-height-s);
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
+
+  text-align: center;
   width: 100%;
   @media (max-width: $mobileBreakPoint) {
     height: 48px;
   }
+
 }
 
 .spanText{

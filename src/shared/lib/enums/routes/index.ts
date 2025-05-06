@@ -8,4 +8,5 @@ export enum appRoutes {
   signIn = "/signIn",
   signUp = "/signUp",
   termsOfService = "/termsOfService",
+  notFound = "/*",
 }
