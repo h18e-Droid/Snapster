@@ -9,26 +9,23 @@ import Link from "next/link"
 import { Button } from "@/shared/ui/button"
 import { Controller, SubmitHandler } from "react-hook-form"
 import { useCallback, useEffect, useState } from "react"
-import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 import Input from "@/shared/ui/input/Input"
 import { Inputs } from "@/shared/lib/Schemas/loginSchema"
 import { AuthIconButton } from "@/shared/ui/authIconButton/AuthIconButton"
 import { useSignUpForm } from "@/features/auth/hooks/useSignUpForm"
-import { Modal } from "@/shared/ui/modal"
 import { appRoutes } from "@/shared/lib/enums/routes"
+import { authActions, signUp } from "@/features/auth/model/slice"
+import { AppDispatch, RootState } from "@/app/store"
+import { useDispatch, useSelector } from "react-redux"
+import { SignUpSuccessModal } from "@/shared/ui/signUpSuccessModal/SignUpSuccessModal"
+import { useModal } from "@/features/auth/hooks/useModal"
 
 const SignUp = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "auto"
-    }
-    return () => {
-      document.body.style.overflow = "auto"
-    }
-  }, [isModalOpen])
+  const { isOpen: isModalOpen, open: openModal, close: closeModal } = useModal();
+  const [email, setEmail] = useState<string>("")
+
+  const status = useSelector<RootState, string>((state) => state.auth.status)
+  const dispatch = useDispatch<AppDispatch>()
 
   const colorIcon = "var(--color-light-100)"
 
@@ -38,57 +35,31 @@ const SignUp = () => {
     formState: { errors, touchedFields },
     reset,
     trigger,
-    watch,
-    setError,
     clearErrors,
-    watchedFields,
-    checkUsernameExists,
     isButtonDisabled,
   } = useSignUpForm()
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data)
-    setIsModalOpen(true)
-    reset()
-  }
+  const onSubmit: SubmitHandler<Inputs> = useCallback((data) => {
+    const user = {
+      userName: data.userName,
+      email: data.email,
+      password: data.password,
+    }
+    setEmail(data.email)
+    dispatch(authActions.setFieldErrors([]))
+    dispatch(signUp(user))
+  }, [dispatch])
 
-  const handleCloseModal = useCallback(() => {
-    setIsModalOpen(false)
-  }, [])
+  useEffect(() => {
+    if (status === "success") {
+      openModal()
+      reset()
+    }
+  }, [status, reset, openModal])
 
   return (
     <>
-      {isModalOpen && (
-        <Modal active={isModalOpen} setActive={setIsModalOpen} className={styles.modalSignUp}>
-          <div className={styles.containerModal}>
-            <div className={styles.boxModalHead}>
-              <h1>Email sent</h1>
-              <Button
-                onClick={handleCloseModal}
-                style={{
-                  background: "none",
-                  border: "none",
-                  padding: 0,
-                  marginRight: "24px",
-                  cursor: "pointer",
-                  width: 0,
-                  color: "var(--color-light-100)",
-                }}
-              >
-                <CloseIcon />
-              </Button>
-            </div>
-            <div className={styles.boxModalBody}>
-              <p>We have sent a link to confirm your email to {watchedFields[1]}</p>
-              <div className={styles.boxModalButton}>
-                <Button onClick={handleCloseModal} variant={"primary"}>
-                  OK
-                </Button>
-              </div>
-            </div>
-          </div>
-        </Modal>
-      )}
+      <SignUpSuccessModal isOpen={isModalOpen} onClose={closeModal} email={email} />
       <div className={styles.singUpBox}>
         <Cards title={"Sign Up"}>
           <div className={styles.containerIcon}>
@@ -99,33 +70,19 @@ const SignUp = () => {
             <div className={styles.container}>
               <div className={styles.boxInputs}>
                 <Controller
-                  name="text"
+                  name="userName"
                   control={control}
                   render={({ field }) => (
                     <Input
                       {...field}
                       type="text"
-                      label="User name"
+                      label="Username"
                       placeholder="enter user name"
                       className={styles.input}
-                      errorText={errors.text?.message}
+                      errorText={errors.userName?.message}
                       onChange={(e) => {
                         field.onChange(e)
-                        clearErrors("text")
-                      }}
-                      onBlur={async () => {
-                        const value = field.value
-
-                        const zodValid = await trigger("text")
-                        if (!zodValid) return
-
-                        const isTaken = await checkUsernameExists(value)
-                        if (isTaken) {
-                          setError("text", {
-                            type: "manual",
-                            message: "User with this username is already registered",
-                          })
-                        }
+                        clearErrors("userName")
                       }}
                     />
                   )}
@@ -180,24 +137,15 @@ const SignUp = () => {
                       className={styles.input}
                       type="password"
                       label="Password confirmation"
-                      placeholder="Enter password again"
+                      placeholder="enter password again"
                       errorText={errors.confirmPassword?.message}
                       onChange={(e) => {
                         field.onChange(e)
-                      }}
-                      onKeyDown={(e) => e.key === " " && e.preventDefault()}
-                      onBlur={async () => {
-                        const isValid = await trigger("confirmPassword")
-                        if (!isValid) return
-                        const passwordValue = watch("password")
-                        const confirmPasswordValue = field.value
-                        if (passwordValue !== confirmPasswordValue) {
-                          setError("confirmPassword", {
-                            type: "manual",
-                            message: "The passwords must match",
-                          })
+                        if (touchedFields.password) {
+                          trigger("confirmPassword")
                         }
                       }}
+                      onKeyDown={(e) => e.key === " " && e.preventDefault()}
                     />
                   )}
                 />
