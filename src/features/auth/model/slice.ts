@@ -51,7 +51,7 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
   const { dispatch } = thunkAPI
   try {
     dispatch(slice.actions.setStatus({ status: "loading" }))
-    const res = await authApi.signIn(arg)
+    await authApi.signIn(arg)
     /*localStorage.setItem("accessToken", res.data.accessToken)*/
     document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
     dispatch(slice.actions.setIsAuth({ isAuth: true }))
