@@ -12,7 +12,6 @@ import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { appRoutes } from "@/shared/lib/enums/routes"
 import { useRouter } from "next/navigation"
 import { FormValues } from "@/views/signIn/lib/types"
-import { Router } from "next/router"
 
 export const SignInForm = () => {
   const {

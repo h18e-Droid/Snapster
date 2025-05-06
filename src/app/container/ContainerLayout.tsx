@@ -6,6 +6,8 @@ import { Navbar } from "@/widgets/navbar"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
 import { authActions } from "@/features/auth"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
+import { usePathname } from "next/navigation"
+import { appRoutes } from "@/shared/lib/enums/routes"
 
 type ContainerLayoutProps = {
   children: ReactNode
@@ -16,6 +18,10 @@ const ContainerLayout = ({ children, isServerAuth }: ContainerLayoutProps) => {
   const dispatch = useAppDispatch()
   const isClientAuth = useAppSelector((state) => state.auth.isAuth)
   const isAuthenticated = isServerAuth || isClientAuth
+  const pathname = usePathname()
+
+  const isNotFoundPage = Object.values(appRoutes).includes(pathname as appRoutes)
+  console.log(pathname, isNotFoundPage)
 
   useEffect(() => {
     dispatch(authActions.setIsAuth({ isAuth: isServerAuth }))
@@ -27,7 +33,7 @@ const ContainerLayout = ({ children, isServerAuth }: ContainerLayoutProps) => {
         <Header isAuth={isAuthenticated} />
       </header>
       <div className={styles.container}>
-        {isAuthenticated && (
+        {isAuthenticated && isNotFoundPage && (
           <nav className={styles.navbarWrapper}>
             <Navbar />
           </nav>
