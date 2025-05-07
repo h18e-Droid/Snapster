@@ -1,4 +1,4 @@
-$mobileBreakPoint : 768px;
+@import "@/shared/styles/breakpoints";
 
 .formWrapper{
   height: 100%;
@@ -42,7 +42,7 @@ $mobileBreakPoint : 768px;
   font-size: var(--line-height-s);
   display: flex;
   justify-content: center;
-
+  align-items: center;
   text-align: center;
   width: 100%;
   @media (max-width: $mobileBreakPoint) {

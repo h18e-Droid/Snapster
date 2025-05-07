@@ -9,8 +9,8 @@ import { authActions, authThunks } from "@/features/auth"
 import { useFormConfig } from "@/views/signIn/model/schema"
 import { Input } from "@/shared/ui/input"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
-import { appRoutes } from "@/shared/lib/enums/routes"
-import { useRouter } from "next/navigation"
+import { appRoutes } from "@/shared/lib/routes"
+import { useRouter, useSearchParams } from "next/navigation"
 import { FormValues } from "@/views/signIn/lib/types"
 
 export const SignInForm = () => {
@@ -26,6 +26,7 @@ export const SignInForm = () => {
   const error = useAppSelector((state) => state.auth.error)
   const isAuth = useAppSelector((state) => state.auth.isAuth)
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const onSubmit = (values: FormValues) => {
     dispatch(authThunks.signIn(values))
@@ -41,7 +42,9 @@ export const SignInForm = () => {
   useEffect(() => {
     if (isAuth) {
       reset()
-      router.replace(appRoutes.home)
+      const callbackUrl = searchParams.get("callbackUrl") || "/"
+      router.replace(callbackUrl)
+      router.refresh()
       return
     }
   }, [isAuth])
@@ -51,7 +54,7 @@ export const SignInForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
         <Controller
           name={"email"}
-          defaultValue={""}
+          defaultValue={"pendlyshakilly@gmail.com"}
           control={control}
           render={({ field }) => (
             <Input
@@ -70,7 +73,7 @@ export const SignInForm = () => {
         <Controller
           name={"password"}
           control={control}
-          defaultValue={""}
+          defaultValue={"Qwerty_123"}
           render={({ field }) => (
             <Input
               {...field}
@@ -87,7 +90,7 @@ export const SignInForm = () => {
           )}
         />
         <div className={styles.forgotPassword}>
-          <Link href={appRoutes.forgotPassword} passHref>
+          <Link href={appRoutes.public.forgotPassword} passHref>
             <span>Forgot Password</span>
           </Link>
         </div>
@@ -102,7 +105,7 @@ export const SignInForm = () => {
             Sign In
           </Button>
           <span>Don’t have an account?</span>
-          <Button href={appRoutes.signUp} variant={"textButton"} className={styles.button}>
+          <Button href={appRoutes.public.signUp} variant={"textButton"} className={styles.button}>
             Sign Up
           </Button>
         </div>

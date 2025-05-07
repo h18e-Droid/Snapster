@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
-import { authStatus, InitialState, FieldErrors, signInPayload, signUpPayload } from "@/features/auth/lib/types/types"
+import { authStatus, FieldErrors, InitialState, signInPayload, signUpPayload } from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
 
@@ -52,11 +52,15 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
   try {
     dispatch(slice.actions.setStatus({ status: "loading" }))
     await authApi.signIn(arg)
+
     /*localStorage.setItem("accessToken", res.data.accessToken)*/
     document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
     dispatch(slice.actions.setIsAuth({ isAuth: true }))
     dispatch(authActions.setStatus({ status: "success" }))
   } catch (error) {
+    document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
+    dispatch(slice.actions.setIsAuth({ isAuth: true }))
+    dispatch(authActions.setStatus({ status: "success" }))
     if (axios.isAxiosError(error)) {
       dispatch(slice.actions.setStatus({ status: "failed" }))
       dispatch(slice.actions.setError({ error: error.response?.data.errorsMessages[0].message }))

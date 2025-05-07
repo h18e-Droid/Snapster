@@ -1,7 +1,7 @@
 "use client"
 
 const Profile = () => {
-  console.log("profile after sigIn")
+  console.log("profile")
   return <div>Profile</div>
 }
 

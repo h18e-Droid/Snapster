@@ -1,6 +1,6 @@
 :root {
   --background: #fff;
-  --foreground: #171717;
+  --foreground: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -47,6 +47,12 @@ a {
   }
 }
 
+
+.contentWrapper{
+  height: 100%;
+  padding-top: 60px;
+  color: var(--color-light-100);
+}
 
 
 

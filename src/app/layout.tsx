@@ -4,7 +4,8 @@ import "@/shared/styles/_typography.scss"
 import "./globals.css"
 import { Inter, Roboto } from "next/font/google"
 import { cookies } from "next/headers"
-import { ContainerProvider } from "@/app/container/ContainerProvider"
+import { Providers } from "./Providers"
+import { Header } from "@/widgets/header"
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -24,12 +25,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const store = cookies()
-  const isAuth = React.use(store).has("refreshTokenCustom")
+  const cookiesResponse = cookies()
+  const isAuth = React.use(cookiesResponse).has("refreshTokenCustom")
+  console.log("cookiesResponse::", isAuth)
+
   return (
     <html lang="en" className={`${inter.className} ${roboto.className}`}>
       <body>
-        <ContainerProvider isAuth={isAuth}>{children}</ContainerProvider>
+        <Providers>
+          <Header isAuth={isAuth} />
+          <div className="contentWrapper">{children}</div>
+        </Providers>
       </body>
     </html>
   )

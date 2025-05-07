@@ -1,10 +1,10 @@
 "use client"
 import React from "react"
 import styles from "./Header.module.scss"
-import { HeaderButtons } from "@/entities/headerButtons"
+import { HeaderButtons } from "./headersButtons/HeaderButtons"
 import { LanguageSwitcher } from "@/features/langSwitcher"
 import Link from "next/link"
-import { appRoutes } from "@/shared/lib/enums/routes"
+import { appRoutes } from "@/shared/lib/routes"
 
 type Props = {
   isAuth: boolean
@@ -12,16 +12,18 @@ type Props = {
 
 export const Header = ({ isAuth }: Props) => {
   return (
-    <div className={styles.header}>
-      <h2 className={styles.title}>
-        <Link href={isAuth ? appRoutes.home : appRoutes.signIn} passHref>
-          Snapster
-        </Link>
-      </h2>
-      <nav className={styles.navigationWrapper}>
-        <LanguageSwitcher />
-        <HeaderButtons isAuth={isAuth} />
-      </nav>
-    </div>
+    <header className={styles.headerWrapper}>
+      <div className={styles.header}>
+        <h2 className={styles.title}>
+          <Link href={isAuth ? appRoutes.public.home : appRoutes.public.signIn} passHref>
+            Snapster
+          </Link>
+        </h2>
+        <nav className={styles.navigationWrapper}>
+          <LanguageSwitcher />
+          <HeaderButtons isAuth={isAuth} />
+        </nav>
+      </div>
+    </header>
   )
 }
