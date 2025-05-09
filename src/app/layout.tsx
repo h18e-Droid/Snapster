@@ -20,6 +20,12 @@ const roboto = Roboto({
   variable: "--font-roboto",
 })
 
+export const metadata = {
+  title: "My App",
+  description: "...",
+  viewport: "width=device-width, initial-scale=1, viewport-fit=cover", // ✅ додай сюди
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{

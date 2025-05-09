@@ -42,7 +42,7 @@ export const SignInForm = () => {
   useEffect(() => {
     if (isAuth) {
       reset()
-      const callbackUrl = searchParams.get("callbackUrl") || "/"
+      const callbackUrl = searchParams.get("callbackUrl") || appRoutes.private.feed
       router.replace(callbackUrl)
       router.refresh()
       return

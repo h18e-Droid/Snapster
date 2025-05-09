@@ -1,6 +1,7 @@
 export const appRoutes = {
   private: {
     profile: "/profile",
+    feed: "/feed",
   },
   public: {
     home: "/",

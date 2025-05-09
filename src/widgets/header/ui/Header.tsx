@@ -15,7 +15,7 @@ export const Header = ({ isAuth }: Props) => {
     <header className={styles.headerWrapper}>
       <div className={styles.header}>
         <h2 className={styles.title}>
-          <Link href={isAuth ? appRoutes.public.home : appRoutes.public.signIn} passHref>
+          <Link href={isAuth ? appRoutes.private.feed : appRoutes.public.signIn} passHref>
             Snapster
           </Link>
         </h2>

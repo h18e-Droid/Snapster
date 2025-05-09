@@ -58,9 +58,6 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
     dispatch(slice.actions.setIsAuth({ isAuth: true }))
     dispatch(authActions.setStatus({ status: "success" }))
   } catch (error) {
-    document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
-    dispatch(slice.actions.setIsAuth({ isAuth: true }))
-    dispatch(authActions.setStatus({ status: "success" }))
     if (axios.isAxiosError(error)) {
       dispatch(slice.actions.setStatus({ status: "failed" }))
       dispatch(slice.actions.setError({ error: error.response?.data.errorsMessages[0].message }))
