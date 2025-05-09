@@ -5,13 +5,21 @@
 }
 
 .containerIcon {
+  max-width: 330px;
+  width: 100%;
   display: flex;
   gap: 60px;
-  margin-left: 99px;
-  margin-top: 13px;
+  margin-top: 12px;
+  justify-content: center;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.boxInputs {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -19,46 +27,26 @@
   align-items: center;
 }
 
-.modalSignUp {
-  z-index: 9999;
-  background-color: var(--color-dark-700);
-}
-
-.containerModal {
-  margin: 0;
-  padding: 0;
+.submissionBlock {
   display: flex;
   flex-direction: column;
-}
-
-.boxModalHead {
-  display: flex;
-  justify-content: space-between;
+  margin-top: 12px;
   align-items: center;
-  border-bottom: 1px solid var(--color-dark-100);
-  padding: 12px 24px 11px 24px;
-
-  h1 {
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    color: var(--color-light-100);
-  }
 }
 
-.boxModalBody {
+.signUpFooter {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  padding: 30px 24px 36px 24px;
+  gap: 12px;
+  align-items: center;
+}
 
-  p {
-    color: var(--color-light-100);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px
-  }
+.authSwitch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  margin-top: 18px;
 }
 
 .linkInfo {
@@ -72,6 +60,10 @@
   @extend .linkInfo;
   font-size: 16px;
   color: var(--color-info-500);
+  padding-top: 6px;
+  padding-bottom: 6px;
+  line-height: 24px;
+  text-decoration: none;
 }
 
 .spanInfo {
@@ -84,10 +76,6 @@
   font-size: 12px;
 }
 
-.boxModalButton {
-  display: flex;
-  justify-content: flex-end;
-}
 
 .buttonSingUp {
   width: 330px;
@@ -98,3 +86,8 @@
 .spanTextAboutAccount {
   color: var(--color-light-100);
 }
+
+.input {
+  width: 330px;
+}
+

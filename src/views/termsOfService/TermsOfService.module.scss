@@ -8,6 +8,7 @@
 
 .containerLink {
   width: 142px;
+  color: var(--color-light-100);
 }
 
 .containerText {
@@ -23,15 +24,20 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  color: var(--color-light-100);
 
   &h2 {
     font-size: 20px;
   }
 
   .textParagraph {
+    width: 958px;
+    text-align: center;
+    align-self: stretch;
+    min-height: 936px;
     font-size: 14px;
     line-height: 24px;
-    text-indent: 1.5em;
+
   }
 }
 

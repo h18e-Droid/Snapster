@@ -4,7 +4,6 @@
 }
 
 .inputContainer {
-  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
@@ -60,7 +59,6 @@
     border-color: var(--color-info-500);
   }
 
-
   &::placeholder {
     padding-left: 12px;
   }
@@ -68,11 +66,7 @@
   &.activeInput {
     border-color: var(--color-light-100);
     background-color: var(--color-dark-300);
-
-    &:hover {
-      border-color: var(--color-light-100);
-      color: var(--color-light-100);
-    }
+    color: var(--color-light-100);
   }
 
   &.errorInput {

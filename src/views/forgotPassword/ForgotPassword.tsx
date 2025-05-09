@@ -11,6 +11,7 @@ import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { EmailSentModal } from "@/shared/ui/emailSentModal/EmailSentModal"
+import { appRoutes } from "@/shared/lib/routes"
 
 const ForgotPasswordSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -42,7 +43,7 @@ const ForgotPassword = () => {
 
   return (
     <div className={styles.root}>
-      <Cards title={"ForgotPassword"}>
+      <Cards title={"Forgot Password"}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
           <Input
             {...register("email")}
@@ -64,7 +65,7 @@ const ForgotPassword = () => {
           </Button>
         </form>
         <div className={styles.linksContainer}>
-          <Link href="/signIn">Back to Sign In</Link>
+          <Link href={appRoutes.public.signIn}>Back to Sign In</Link>
           <Recaptcha onVerify={(isVerified) => setValue("recaptcha", isVerified)} />
         </div>
       </Cards>

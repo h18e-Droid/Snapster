@@ -1,8 +1,7 @@
-$mobileBreakPoint : 768px;
+@import "@/shared/styles/breakpoints";
 
 .signInWrapper {
   width: 100%;
-  height: calc(100% - 60px);
   display: flex;
   align-items: center;
   margin-bottom: 60px;
@@ -23,10 +22,13 @@ $mobileBreakPoint : 768px;
     }
     box-shadow: none;
   }
+  > div {
+    min-height: 504px;
+  }
 }
 
 .contentWrapper {
-  width: 328px;
+  width: 330px;
   min-height: 418px;
   @media (max-width: $mobileBreakPoint) {
     width: 100%;
@@ -50,8 +52,20 @@ $mobileBreakPoint : 768px;
 .oAuthIcon{
   cursor: pointer;
   color: white;
+  height: 36px;
+  width: 36px;
 }
 
 .signInForm{
+  margin-top: 24px;
   height: 100%;
+}
+
+.buttonCloseIcon {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 24px;
+  cursor: pointer;
+  width: 0;
 }

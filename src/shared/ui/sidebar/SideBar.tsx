@@ -17,7 +17,7 @@ import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 import { Button } from "@/shared/ui/button"
 import { useRouter } from "next/navigation"
 import { Modal } from "@/shared/ui/modal"
-
+import { appRoutes } from "@/shared/lib/routes"
 
 type TypeItem = {
   id: number | string
@@ -29,13 +29,23 @@ type TypeItem = {
 const SideBar = () => {
   const items = [
     { id: 1, title: "Home", icon: [<HomeIcon key="filled" />, <HomeOutlineIcon key="outline" />], link: "" },
-    { id: 2, title: "Create", icon: [<PlusSquareIcon key="filled" />, <PlusSquareOutlineIcon key="outline" />], link: "" },
+    {
+      id: 2,
+      title: "Create",
+      icon: [<PlusSquareIcon key="filled" />, <PlusSquareOutlineIcon key="outline" />],
+      link: "",
+    },
     { id: 3, title: "My Profile", icon: [<PersonIcon key="filled" />, <PersonOutlineIcon key="outline" />], link: "" },
     { id: 4, title: "Messenger", icon: [<MessageIcon key="filled" />, <MessageOutlineIcon key="outline" />], link: "" },
     { id: 5, title: "Search", icon: [<SearchIcon key="filled" />, <SearchIcon key="outline" />], link: "" },
     { id: 6, title: "Statistics", icon: [<TrendingUpIcon key="filled" />, <TrendingUpIcon key="outline" />], link: "" },
-    { id: 7, title: "Favorites", icon: [<BookmarkIcon key="filled" />, <BookmarkOutlineIcon key="outline" />], link: "" },
-    { id: 8, title: "Log Out", icon: [<LogoutIcon key="filled" />, <LogoutIcon key="outline" />], link: "" }
+    {
+      id: 7,
+      title: "Favorites",
+      icon: [<BookmarkIcon key="filled" />, <BookmarkOutlineIcon key="outline" />],
+      link: "",
+    },
+    { id: 8, title: "Log Out", icon: [<LogoutIcon key="filled" />, <LogoutIcon key="outline" />], link: "" },
   ]
 
   const [isActive, setIsActive] = useState<Record<string | number, boolean>>({})
@@ -45,7 +55,6 @@ const SideBar = () => {
   const handleMouseDown = (id: number | string) => {
     setIsActive((prev) => ({ ...prev, [id]: true }))
   }
-
 
   const logOutHandler = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -59,30 +68,31 @@ const SideBar = () => {
 
   const logOutModal = () => {
     setShowLogoutModal(false)
-    router.push('/signIn')
+    router.push(appRoutes.public.signIn)
   }
-
 
   return (
     <>
       <nav className={styles.wrapper}>
         <ul className={styles.listContainer}>
           {items.map((item: TypeItem) => (
-            <div key={item.id}
-                 className={item.id === 6 ? styles.itemStatistic : item.id === 7 ? styles.itemFavorite : styles.item}>
+            <div
+              key={item.id}
+              className={item.id === 6 ? styles.itemStatistic : item.id === 7 ? styles.itemFavorite : styles.item}
+            >
               <li className={styles.listItem} key={item.id}>
-                <a href={item.link} className={styles.listItem}
-                   onMouseDown={() => handleMouseDown(item.id)}
-                   onMouseUp={() => handleMouseUp(item.id)}
-                   onClick={item.id === 8 ? logOutHandler : undefined}
+                <a
+                  href={item.link}
+                  className={styles.listItem}
+                  onMouseDown={() => handleMouseDown(item.id)}
+                  onMouseUp={() => handleMouseUp(item.id)}
+                  onClick={item.id === 8 ? logOutHandler : undefined}
                 >
-                  {isActive[item.id] ?
-                    <span className={styles.itemIcon}>
-                    {item.icon[0]}
-                  </span>
-                    :
-                    <span className={styles.itemIcon}
-                    >{item.icon[1]}</span>}
+                  {isActive[item.id] ? (
+                    <span className={styles.itemIcon}>{item.icon[0]}</span>
+                  ) : (
+                    <span className={styles.itemIcon}>{item.icon[1]}</span>
+                  )}
                   <span className={styles.titleIcon}>{item.title}</span>
                 </a>
               </li>
@@ -92,11 +102,15 @@ const SideBar = () => {
       </nav>
       {showLogoutModal && (
         <Modal title={"Log Out"} setActive={setShowLogoutModal} active={showLogoutModal}>
-          <hr className={styles.line}/>
+          <hr className={styles.line} />
           <p className={styles.moduleText}>Are you really want to log out of your account ___ email name ___?</p>
           <div className={styles.buttonContainerModule}>
-            <Button variant={"primary"} onClick={logOutModal}>Yes</Button>
-            <Button variant={"primary"} onClick={closeModal}>No</Button>
+            <Button variant={"primary"} onClick={logOutModal}>
+              Yes
+            </Button>
+            <Button variant={"primary"} onClick={closeModal}>
+              No
+            </Button>
           </div>
         </Modal>
       )}

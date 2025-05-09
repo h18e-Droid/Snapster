@@ -3,12 +3,13 @@
 import styles from "./PrivacyPolicy.module.scss"
 import Link from "next/link"
 import { ArrowLeftIcon } from "@/shared/assets/icons/components/ArrowLeftIcon"
+import { appRoutes } from "@/shared/lib/routes"
 
 const PrivacyPolicy = () => {
   return (
     <div className={styles.container}>
       <div className={styles.containerLink}>
-        <Link href={"/signUp"} className={styles.link}>
+        <Link href={appRoutes.public.signUp} className={styles.link}>
           <ArrowLeftIcon />
           Back to Sign Up
         </Link>

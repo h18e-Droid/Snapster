@@ -6,7 +6,7 @@
     font-size: var(--font-size-m);
     font-weight: var(--font-weight-semi-bold);
     padding: 6px 24px;
-
+    cursor: pointer;
     &.primary {
         background-color: var(--color-info-500);
         color: var(--color-light-100);
@@ -92,9 +92,9 @@
             color: var(--color-info-100);
         }
 
-        &:focus {
+        &:focus-visible {
             color: var(--color-info-500);
-            border: 2px solid var(--color-info-700);
+            outline: 2px solid var(--color-info-700);
         }
 
         &:disabled {

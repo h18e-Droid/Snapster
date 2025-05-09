@@ -1,0 +1,15 @@
+{
+  "github": {
+    "enabled": true,
+    "autoAlias": true,
+    "silent": true
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_ENV": "production"
+    }
+  },
+  "branches": {
+    "production": "dev"
+  }
+}

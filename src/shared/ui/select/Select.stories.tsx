@@ -5,7 +5,7 @@ import { FlagRussiaIcon, FlagUnitedKingdomIcon } from "@/shared/assets/icons"
 
 
 const meta = {
-  title: "Example/CustomSelect",
+  title: "Example/Select",
   component: Select,
   parameters: {
     layout: "centered",

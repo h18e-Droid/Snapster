@@ -57,7 +57,6 @@ const VerificationLink = () => {
                 type="email"
                 label="Email"
                 placeholder="enter email"
-                width="229px"
                 errorText={errors.email?.message}
                 onChange={(e) => {
                   field.onChange(e)
