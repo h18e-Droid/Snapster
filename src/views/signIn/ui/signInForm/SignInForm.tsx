@@ -54,7 +54,7 @@ export const SignInForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
         <Controller
           name={"email"}
-          defaultValue={"pendlyshakilly@gmail.com"}
+          defaultValue={""}
           control={control}
           render={({ field }) => (
             <Input
@@ -73,7 +73,7 @@ export const SignInForm = () => {
         <Controller
           name={"password"}
           control={control}
-          defaultValue={"Qwerty_123"}
+          defaultValue={""}
           render={({ field }) => (
             <Input
               {...field}
