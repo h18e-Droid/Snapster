@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
-import { authStatus, InitialState, FieldErrors, signInPayload, signUpPayload } from "@/features/auth/lib/types/types"
+import { authStatus, FieldErrors, InitialState, signInPayload, signUpPayload } from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
 
@@ -51,8 +51,10 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
   const { dispatch } = thunkAPI
   try {
     dispatch(slice.actions.setStatus({ status: "loading" }))
-    const res = await authApi.signIn(arg)
-    localStorage.setItem("accessToken", res.data.accessToken)
+    await authApi.signIn(arg)
+
+    /*localStorage.setItem("accessToken", res.data.accessToken)*/
+    document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
     dispatch(slice.actions.setIsAuth({ isAuth: true }))
     dispatch(authActions.setStatus({ status: "success" }))
   } catch (error) {
@@ -62,8 +64,6 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
     } else {
       dispatch(slice.actions.setError({ error: "An unknown error occurred" }))
     }
-  } finally {
-    dispatch(authActions.setStatus({ status: "idle" }))
   }
 })
 

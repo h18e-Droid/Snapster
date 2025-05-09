@@ -17,7 +17,7 @@ import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 import { Button } from "@/shared/ui/button"
 import { useRouter } from "next/navigation"
 import { Modal } from "@/shared/ui/modal"
-import { appRoutes } from "@/shared/lib/enums/routes"
+import { appRoutes } from "@/shared/lib/routes"
 
 type TypeItem = {
   id: number | string
@@ -68,7 +68,7 @@ const SideBar = () => {
 
   const logOutModal = () => {
     setShowLogoutModal(false)
-    router.push(appRoutes.signIn)
+    router.push(appRoutes.public.signIn)
   }
 
   return (

@@ -5,7 +5,7 @@ import { RecaptchaLogoIcon } from "@/shared/assets/icons/components/RecaptchaLog
 import { CheckmarkOutlineIcon } from "@/shared/assets/icons/components/CheckmarkOutlineIcon"
 import clsx from "clsx"
 import Link from "next/link"
-import { appRoutes } from "@/shared/lib/enums/routes"
+import { appRoutes } from "@/shared/lib/routes"
 
 export type RecaptchaStatus = "idle" | "verifying" | "success" | "expired" | "error"
 
@@ -91,7 +91,8 @@ export const Recaptcha = ({ onVerify }: RecaptchaProps) => {
         <div className={styles.recaptchaSection}>
           <RecaptchaLogoIcon size={50} aria-hidden="true" />
           <span id="recaptcha-description" className={styles.recaptchaDescription}>
-            <Link href={appRoutes.privacyPolicy}>FPrivacy</Link> - <Link href={appRoutes.termsOfService}>Terms</Link>
+            <Link href={appRoutes.public.privacyPolicy}>FPrivacy</Link> -{" "}
+            <Link href={appRoutes.public.termsOfService}>Terms</Link>
           </span>
         </div>
       </div>
