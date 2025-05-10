@@ -5,33 +5,44 @@ import { Button } from "@/shared/ui/button"
 import { VerificationLinkIcon } from "@/shared/assets/icons/components/VerificationLinkIcon"
 import Input from "@/shared/ui/input/Input"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
-
-type Input = {
-  email: string
-}
+import { zodResolver } from "@hookform/resolvers/zod"
+import { EmailInputs, emailSchema } from "@/shared/lib/Schemas/emailSchema"
+import { authActions, verificationEmail } from "@/features/auth/model/slice"
+import { AppDispatch, RootState } from "@/app/store"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
 
 const VerificationLink = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const messageError = useSelector<RootState, string>((state) => state.auth.error)
   const {
     handleSubmit,
     watch,
     control,
     trigger,
-    formState: { errors, touchedFields },
-  } = useForm<Input>({
+    setError,
+    formState: { errors, touchedFields, isValid },
+  } = useForm<EmailInputs>({
     mode: "onBlur",
     defaultValues: {
       email: "",
     },
+    resolver: zodResolver(emailSchema),
   })
-  const onSubmit: SubmitHandler<Input> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<EmailInputs> = (data) => {
+    dispatch(verificationEmail({ email: data.email }))
+    dispatch(authActions.setError({ error: "" }))
   }
 
+  useEffect(() => {
+    setError("email", {
+      type: "manual",
+      message: messageError,
+    })
+  }, [messageError, dispatch])
+
   const { email } = watch()
-
-  const isFormFilled = email?.trim()
-
-  const isButtonDisabled = !isFormFilled
+  const isButtonDisabled = !email?.trim() || !isValid
 
   return (
     <div className={styles.container}>
@@ -44,13 +55,6 @@ const VerificationLink = () => {
           <Controller
             name="email"
             control={control}
-            rules={{
-              required: "Email is required",
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "The email must match the format example@example.com",
-              },
-            }}
             render={({ field }) => (
               <Input
                 {...field}
@@ -67,7 +71,7 @@ const VerificationLink = () => {
               />
             )}
           />
-          <Button type="submit" onClick={() => {}} disabled={isButtonDisabled} className={styles.buttonSend}>
+          <Button type="submit" disabled={isButtonDisabled} className={styles.buttonSend}>
             Resend verification link
           </Button>
         </div>

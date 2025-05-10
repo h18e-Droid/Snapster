@@ -1,5 +1,10 @@
 import { axiosInstance } from "@/shared/api/axiosInstance"
-import { signInPayload, signUpPayload } from "@/features/auth/lib/types/types"
+import {
+  confirmRegistrationPayload,
+  signInPayload,
+  signUpPayload,
+  verificationEmailPayload,
+} from "@/features/auth/lib/types/types"
 
 export const authApi = {
   signIn: async (payload: signInPayload) => {
@@ -7,5 +12,11 @@ export const authApi = {
   },
   signUp: async (payload: signUpPayload) => {
     return axiosInstance.post("/api/v1/auth/registration", payload)
-  }
+  },
+  confirmRegistration: async (payload: confirmRegistrationPayload) => {
+    return axiosInstance.post("/api/v1/auth/registration-confirmation", payload)
+  },
+  verificationEmail: async (payload: verificationEmailPayload) => {
+    return axiosInstance.post("/api/v1/auth/registration-email-resending", payload)
+  },
 }

@@ -5,6 +5,7 @@ export type InitialState = {
   isAuth: boolean
   error: string
   fieldErrors: FieldErrors
+  loader: boolean
 }
 
 export type signInPayload = {
@@ -16,6 +17,14 @@ export type signUpPayload = {
   userName: string
   email: string
   password: string
+}
+
+export type confirmRegistrationPayload = {
+  code: string
+}
+
+export type verificationEmailPayload = {
+  email: string
 }
 
 export type FieldError = {
