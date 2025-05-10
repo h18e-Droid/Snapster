@@ -1,4 +1,4 @@
-$mobileBreakPoint : 768px;
+@import "@/shared/styles/breakpoints";
 
 .formWrapper{
   height: 100%;
@@ -16,7 +16,7 @@ $mobileBreakPoint : 768px;
 
 .forgotPassword{
   display: flex;
-  justify-content: end;
+  justify-items: end;
   padding: 10px 0;
   cursor: auto;
   color: var(--color-light-900);
@@ -40,11 +40,15 @@ $mobileBreakPoint : 768px;
 .button{
   font-weight: var(--font-weight-semi-bold);
   font-size: var(--line-height-s);
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   width: 100%;
   @media (max-width: $mobileBreakPoint) {
     height: 48px;
   }
+
 }
 
 .spanText{

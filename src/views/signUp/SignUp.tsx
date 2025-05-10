@@ -13,7 +13,7 @@ import Input from "@/shared/ui/input/Input"
 import { Inputs } from "@/shared/lib/Schemas/loginSchema"
 import { AuthIconButton } from "@/shared/ui/authIconButton/AuthIconButton"
 import { useSignUpForm } from "@/features/auth/hooks/useSignUpForm"
-import { appRoutes } from "@/shared/lib/enums/routes"
+import { appRoutes } from "@/shared/lib/routes"
 import { authActions, signUp } from "@/features/auth/model/slice"
 import { AppDispatch, RootState } from "@/app/store"
 import { useDispatch, useSelector } from "react-redux"
@@ -166,11 +166,11 @@ const SignUp = () => {
                         label={
                           <span className={styles.spanInfo}>
                             I agree to the{" "}
-                            <Link href={appRoutes.termsOfService} className={styles.linkInfo}>
+                            <Link href={appRoutes.public.termsOfService} className={styles.linkInfo}>
                               Terms of Service
                             </Link>{" "}
                             and{" "}
-                            <Link href={appRoutes.privacyPolicy} className={styles.linkInfo}>
+                            <Link href={appRoutes.public.privacyPolicy} className={styles.linkInfo}>
                               Privacy Policy
                             </Link>
                           </span>
@@ -185,7 +185,7 @@ const SignUp = () => {
                 </div>
                 <div className={styles.authSwitch}>
                   <span className={styles.spanTextAboutAccount}>Do you have an account?</span>
-                  <Link href={appRoutes.signIn} className={styles.linkLarge}>
+                  <Link href={appRoutes.public.signIn} className={styles.linkLarge}>
                     Sign In
                   </Link>
                 </div>

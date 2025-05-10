@@ -1,4 +1,4 @@
-$mobileBreakPoint : 768px;
+@import "@/shared/styles/breakpoints";
 
 .signInWrapper {
   width: 100%;
@@ -23,7 +23,6 @@ $mobileBreakPoint : 768px;
     box-shadow: none;
   }
   > div {
-    width: 378px;
     min-height: 504px;
   }
 }

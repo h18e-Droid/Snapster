@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
+    "mobile": "next dev -H 0.0.0.0",
     "build": "next build",
     "build:production": "npm run build",
     "start": "next start",
@@ -67,7 +68,7 @@
     "stylelint-config-standard": "^37.0.0",
     "stylelint-order": "^6.0.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.27.0"
   },
   "eslintConfig": {

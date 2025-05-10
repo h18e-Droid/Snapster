@@ -1,15 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
-import {
-  authStatus,
-  InitialState,
-  FieldErrors,
-  signInPayload,
-  signUpPayload,
-  confirmRegistrationPayload,
-  verificationEmailPayload,
-} from "@/features/auth/lib/types/types"
+import { authStatus, FieldErrors, InitialState, signInPayload, signUpPayload, confirmRegistrationPayload, verificationEmailPayload, } from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
 
@@ -107,8 +99,6 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
     } else {
       dispatch(slice.actions.setError({ error: "An unknown error occurred" }))
     }
-  } finally {
-    dispatch(authActions.setStatus({ status: "idle" }))
   }
 })
 
