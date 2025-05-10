@@ -21,7 +21,7 @@ import { SignUpSuccessModal } from "@/shared/ui/signUpSuccessModal/SignUpSuccess
 import { useModal } from "@/features/auth/hooks/useModal"
 
 const SignUp = () => {
-  const { isOpen: isModalOpen, open: openModal, close: closeModal } = useModal();
+  const { isOpen: isModalOpen, open: openModal, close: closeModal } = useModal()
   const [email, setEmail] = useState<string>("")
 
   const status = useSelector<RootState, string>((state) => state.auth.status)
@@ -39,16 +39,19 @@ const SignUp = () => {
     isButtonDisabled,
   } = useSignUpForm()
 
-  const onSubmit: SubmitHandler<Inputs> = useCallback((data) => {
-    const user = {
-      userName: data.userName,
-      email: data.email,
-      password: data.password,
-    }
-    setEmail(data.email)
-    dispatch(authActions.setFieldErrors([]))
-    dispatch(signUp(user))
-  }, [dispatch])
+  const onSubmit: SubmitHandler<Inputs> = useCallback(
+    (data) => {
+      const user = {
+        userName: data.userName,
+        email: data.email,
+        password: data.password,
+      }
+      setEmail(data.email)
+      dispatch(authActions.setFieldErrors([]))
+      dispatch(signUp(user))
+    },
+    [dispatch],
+  )
 
   useEffect(() => {
     if (status === "success") {

@@ -1,7 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
-import { authStatus, InitialState, FieldErrors, signInPayload, signUpPayload } from "@/features/auth/lib/types/types"
+import {
+  authStatus,
+  InitialState,
+  FieldErrors,
+  signInPayload,
+  signUpPayload,
+  confirmRegistrationPayload,
+  verificationEmailPayload,
+} from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
 
@@ -10,6 +18,7 @@ const initialState: InitialState = {
   error: "",
   status: "idle" as authStatus,
   fieldErrors: [],
+  loader: false,
 }
 
 const slice = createSlice({
@@ -28,23 +37,59 @@ const slice = createSlice({
     setFieldErrors: (state, action: PayloadAction<FieldErrors>) => {
       state.fieldErrors = action.payload
     },
+    setLoader: (state, action: PayloadAction<boolean>) => {
+      state.loader = action.payload
+    },
   },
 })
 
 export const signUp = createAppAsyncThunk<void, signUpPayload>(`${slice.name}/signUp`, async (arg, thunkAPI) => {
   const { dispatch } = thunkAPI
   try {
-    dispatch(authActions.setFieldErrors([]))
+    dispatch(slice.actions.setFieldErrors([]))
     await authApi.signUp(arg)
-    dispatch(authActions.setStatus({ status: "success" }))
+    dispatch(slice.actions.setStatus({ status: "success" }))
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const fieldErrors: FieldErrors = error.response?.data.errorsMessages.map((el: FieldError) => el)
-      dispatch(authActions.setFieldErrors(fieldErrors))
+      dispatch(slice.actions.setFieldErrors(fieldErrors))
       dispatch(slice.actions.setStatus({ status: "failed" }))
     }
   }
 })
+
+export const confirmRegistration = createAppAsyncThunk<void, confirmRegistrationPayload>(
+  `${slice.name}/confirmRegistration`,
+  async (arg, thunkAPI) => {
+    const { dispatch } = thunkAPI
+    try {
+      const res = await authApi.confirmRegistration(arg)
+      if (res) {
+        dispatch(slice.actions.setStatus({ status: "success" }))
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        dispatch(slice.actions.setStatus({ status: "failed" }))
+      }
+    } finally {
+      dispatch(slice.actions.setLoader(true))
+    }
+  },
+)
+
+export const verificationEmail = createAppAsyncThunk<void, verificationEmailPayload>(
+  `${slice.name}/verificationEmail`,
+  async (arg, thunkAPI) => {
+    const { dispatch } = thunkAPI
+    try {
+      await authApi.verificationEmail(arg)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        dispatch(slice.actions.setError({ error: error.response?.data.errorsMessages[0].message }))
+      }
+    }
+  },
+)
 
 //буду переделивать rejectWithValue и return value пока что так
 export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/signIn`, async (arg, thunkAPI) => {

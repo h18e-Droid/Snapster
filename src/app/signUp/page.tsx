@@ -1,7 +1,12 @@
-import SignUp from "@/views/signUp/SignUp"
+import { Suspense } from "react"
+import SignUpPageContent from "@/app/signUp/signUpPageContent/SignUpPageContent"
 
 const Page = () => {
-  return <SignUp />
+  return (
+    <Suspense>
+      <SignUpPageContent />
+    </Suspense>
+  )
 }
 
 export default Page
