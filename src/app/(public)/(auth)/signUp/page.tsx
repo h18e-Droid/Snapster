@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import SignUpPageContent from "@/app/signUp/signUpPageContent/SignUpPageContent"
+import SignUpPageContent from "@/views/signUp/signUpPageContent/SignUpPageContent"
 
 const Page = () => {
   return (
