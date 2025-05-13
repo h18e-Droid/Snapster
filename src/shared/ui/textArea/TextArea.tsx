@@ -1,14 +1,15 @@
 import React, { ComponentPropsWithoutRef, CSSProperties } from "react"
-import styles from "./TextArea.module.css"
+import styles from "./TextArea.module.scss"
 
 type TextAreaProps = ComponentPropsWithoutRef<"textarea"> & {
   width?: string | number,
   height?: string | number,
   error?: boolean,
+  title?:string
 }
 
 
- export const TextArea = ({ width, height, error, ...props }: TextAreaProps) => {
+ export const TextArea = ({ title,width, height, error, ...props }: TextAreaProps) => {
 
 
   const textAreaStyle: CSSProperties = {
@@ -18,6 +19,7 @@ type TextAreaProps = ComponentPropsWithoutRef<"textarea"> & {
 
   return (
     <div className={styles.container}>
+      <p className={styles.title}>{title}</p>
     <textarea
       className={error? styles.error :`${styles.default} ${props.className}`}
       style={{ ...textAreaStyle }}
