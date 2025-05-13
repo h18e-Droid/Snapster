@@ -58,3 +58,9 @@
     resize: none;
     transition: border-color 0.5s ease, color 0.5s ease;
 }
+
+.title {
+    color: var(--color-light-900);
+    font-size: var(--font-size-s);
+    line-height: var(--line-height-m);
+}
