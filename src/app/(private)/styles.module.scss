@@ -21,6 +21,8 @@
 
 
 .content{
+  max-width: $containerDesktopMaxWidth;
+  margin: 0 auto;
   padding-top: 24px;
   width: 100%;
   min-height: calc(100% - 60px);

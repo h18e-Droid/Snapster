@@ -33,7 +33,7 @@ export const items = [
     id: 3,
     title: "My Profile",
     icon: [<PersonIcon key="filled" />, <PersonOutlineIcon key="outline" />],
-    link: appRoutes.private.profile,
+    link: appRoutes.public.profile,
   },
   { id: 4, title: "Messenger", icon: [<MessageIcon key="filled" />, <MessageOutlineIcon key="outline" />], link: "" },
   { id: 5, title: "Search", icon: [<SearchIcon key="filled" />, <SearchIcon key="outline" />], link: "" },

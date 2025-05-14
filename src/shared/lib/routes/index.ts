@@ -1,10 +1,10 @@
 export const appRoutes = {
   private: {
-    profile: "/profile",
     feed: "/feed",
   },
   public: {
     home: "/",
+    profile: "/profile",
     createNewPassword: "/createNewPassword",
     forgotPassword: "/forgotPassword",
     passwordRecovery: "/passwordRecovery",

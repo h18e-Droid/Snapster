@@ -1,14 +1,6 @@
-"use client"
 import React from "react"
-import Link from "next/link"
-import { appRoutes } from "@/shared/lib/routes"
+import HomePage from "@/views/homePage/ui/HomePage"
 
 export default function Home() {
-  return (
-    <div>
-      Home Page
-      <div>_______</div>
-      <Link href={appRoutes.private.profile}>profile</Link>
-    </div>
-  )
+  return <HomePage />
 }

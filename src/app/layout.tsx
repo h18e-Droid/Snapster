@@ -20,12 +20,6 @@ const roboto = Roboto({
   variable: "--font-roboto",
 })
 
-export const metadata = {
-  title: "My App",
-  description: "...",
-  viewport: "width=device-width, initial-scale=1, viewport-fit=cover", // ✅ додай сюди
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +27,6 @@ export default function RootLayout({
 }>) {
   const cookiesResponse = cookies()
   const isAuth = React.use(cookiesResponse).has("refreshTokenCustom")
-  console.log("cookiesResponse::", isAuth)
 
   return (
     <html lang="en" className={`${inter.className} ${roboto.className}`}>

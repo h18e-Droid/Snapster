@@ -1,7 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
-import { authStatus, FieldErrors, InitialState, signInPayload, signUpPayload, confirmRegistrationPayload, verificationEmailPayload, } from "@/features/auth/lib/types/types"
+import {
+  authStatus,
+  FieldErrors,
+  InitialState,
+  signInPayload,
+  signUpPayload,
+  confirmRegistrationPayload,
+  verificationEmailPayload,
+} from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
 
@@ -92,6 +100,7 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
     localStorage.setItem("accessToken", res.data.accessToken)
     dispatch(slice.actions.setIsAuth({ isAuth: true }))
     dispatch(authActions.setStatus({ status: "success" }))
+    document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
   } catch (error) {
     if (axios.isAxiosError(error)) {
       dispatch(slice.actions.setStatus({ status: "failed" }))

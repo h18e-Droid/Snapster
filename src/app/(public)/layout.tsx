@@ -6,6 +6,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  console.log("public")
   return <div className={styles.wrapper}>{children}</div>
 }
