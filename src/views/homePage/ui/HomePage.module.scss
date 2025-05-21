@@ -1,4 +1,4 @@
-.homeWrapper{
+.homeWrapper {
 
 }
 
@@ -28,6 +28,7 @@
   display: flex;
   height: 100%;
   align-items: center;
+
   > span {
     font-weight: 700;
     font-size: 18px;
@@ -36,6 +37,7 @@
     height: 24px;
 
   }
+
   hr {
     width: 1px;
     height: 30px;
@@ -51,12 +53,12 @@
 }
 
 
-.postsPils{
+.postsList {
   width: 100%;
   height: 391px;
   margin-top: 40px;
-  background-color: var(--color-dark-300);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 12px;
 }
+

@@ -3,7 +3,8 @@ import styles from "./Profile.module.scss"
 import image from "@/public/avatar.svg"
 import { BlockIcon } from "@/shared/assets/icons"
 import Image from "next/image"
-import { ReactNode } from "react"
+import { ReactNode, useEffect, useLayoutEffect, useMemo, useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
 
 const posts = [
   { id: "3", url: "https://images.pexels.com/photos/189349/pexels-photo-189349.jpeg", alt: "Міський вечір" },
@@ -23,6 +24,42 @@ const posts = [
 ]
 
 const Profile = ({ userId, children }: { children?: ReactNode; userId: string }) => {
+  const isMe = userId === "2test"
+  const router = useRouter()
+
+  const onCLickHandler = (postId: string) => {
+    router.push(`/${userId}/${postId}`, { scroll: false })
+  }
+
+  const memoizedPosts = useMemo(() => {
+    return (
+      <>
+        {posts.length > 0 ? (
+          <div className={styles.postsList}>
+            {posts.map((el) => (
+              <div key={el.id}>
+                <img
+                  onClick={() => onCLickHandler(el.id)}
+                  src={el.url}
+                  alt={el.alt + el.id}
+                  className={styles.postImage}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <>
+            <span className={styles.divider} />
+            <div className={styles.emptyPosts}>
+              <BlockIcon size={45} />
+              <h2>No Posts Yet</h2>
+            </div>
+          </>
+        )}
+      </>
+    )
+  }, [posts])
+
   return (
     <div className={styles.profile}>
       <div className={styles.head}>
@@ -30,7 +67,7 @@ const Profile = ({ userId, children }: { children?: ReactNode; userId: string })
         <div className={styles.profileInfo}>
           <div className={styles.navWrapper}>
             <h1>{userId}</h1>
-            <>{children}</>
+            <>{isMe ? <button>isMe</button> : children}</>
           </div>
           <div className={styles.profileStats}>
             <div className={styles.statsItem}>
@@ -53,23 +90,7 @@ const Profile = ({ userId, children }: { children?: ReactNode; userId: string })
           </span>
         </div>
       </div>
-      {posts.length > 0 ? (
-        <div className={styles.postsList}>
-          {posts.map((el) => (
-            <div key={el.id}>
-              <img src={el.url} alt={el.alt + el.id} className={styles.postImage} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <>
-          <span className={styles.divider} />
-          <div className={styles.emptyPosts}>
-            <BlockIcon size={45} />
-            <h2>No Posts Yet</h2>
-          </div>
-        </>
-      )}
+      {memoizedPosts}
     </div>
   )
 }

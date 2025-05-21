@@ -11,5 +11,5 @@ export default function Layout({
   const cookiesResponse = cookies()
   const isAuth = React.use(cookiesResponse).has("refreshTokenCustom")
 
-  return isAuth ? <PrivateLayout>{children}</PrivateLayout> : <PublicLayout>{children}</PublicLayout>
+  return <>{isAuth ? <PrivateLayout>{children}</PrivateLayout> : <PublicLayout>{children}</PublicLayout>}</>
 }

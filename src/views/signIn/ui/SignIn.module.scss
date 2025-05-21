@@ -1,4 +1,4 @@
-@import "@/shared/styles/breakpoints";
+@use "@/shared/styles/breakpoints" as *;
 
 .signInWrapper {
   width: 100%;

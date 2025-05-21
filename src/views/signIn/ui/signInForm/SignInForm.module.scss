@@ -1,4 +1,4 @@
-@import "@/shared/styles/breakpoints";
+@use "@/shared/styles/breakpoints" as *;
 
 .formWrapper{
   height: 100%;

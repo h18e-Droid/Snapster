@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react"
+import React, { useEffect, useLayoutEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { Button } from "@/shared/ui/button"
 import styles from "./SignInForm.module.scss"
@@ -39,7 +39,7 @@ export const SignInForm = () => {
     }
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isAuth) {
       reset()
       const callbackUrl = searchParams.get("callbackUrl") || appRoutes.private.feed
