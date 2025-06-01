@@ -1,7 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
-import { authStatus, FieldErrors, InitialState, signInPayload, signUpPayload, confirmRegistrationPayload, verificationEmailPayload, } from "@/features/auth/lib/types/types"
+import {
+  authStatus,
+  FieldErrors,
+  InitialState,
+  signInPayload,
+  signUpPayload,
+  confirmRegistrationPayload,
+  verificationEmailPayload,
+  forgotPasswordPayload,
+  emailRegisteredType,
+} from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
 
@@ -11,6 +21,7 @@ const initialState: InitialState = {
   status: "idle" as authStatus,
   fieldErrors: [],
   loader: false,
+  emailRegistered: "idle" as emailRegisteredType,
 }
 
 const slice = createSlice({
@@ -23,7 +34,7 @@ const slice = createSlice({
     setIsAuth: (state, action: PayloadAction<{ isAuth: boolean }>) => {
       state.isAuth = action.payload.isAuth
     },
-    setError: (state, action: PayloadAction<{ error: string }>) => {
+    setAuthError: (state, action: PayloadAction<{ error: string }>) => {
       state.error = action.payload.error
     },
     setFieldErrors: (state, action: PayloadAction<FieldErrors>) => {
@@ -32,20 +43,23 @@ const slice = createSlice({
     setLoader: (state, action: PayloadAction<boolean>) => {
       state.loader = action.payload
     },
+    setIsEmailRegistered(state, action: PayloadAction<{ emailRegistered: "idle" | "registered" | "not_registered" }>) {
+      state.emailRegistered = action.payload.emailRegistered
+    },
   },
 })
 
 export const signUp = createAppAsyncThunk<void, signUpPayload>(`${slice.name}/signUp`, async (arg, thunkAPI) => {
   const { dispatch } = thunkAPI
   try {
-    dispatch(slice.actions.setFieldErrors([]))
+    dispatch(setFieldErrors([]))
     await authApi.signUp(arg)
-    dispatch(slice.actions.setStatus({ status: "success" }))
+    dispatch(setStatus({ status: "success" }))
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const fieldErrors: FieldErrors = error.response?.data.errorsMessages.map((el: FieldError) => el)
-      dispatch(slice.actions.setFieldErrors(fieldErrors))
-      dispatch(slice.actions.setStatus({ status: "failed" }))
+      dispatch(setFieldErrors(fieldErrors))
+      dispatch(setStatus({ status: "failed" }))
     }
   }
 })
@@ -57,14 +71,14 @@ export const confirmRegistration = createAppAsyncThunk<void, confirmRegistration
     try {
       const res = await authApi.confirmRegistration(arg)
       if (res) {
-        dispatch(slice.actions.setStatus({ status: "success" }))
+        dispatch(setStatus({ status: "success" }))
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        dispatch(slice.actions.setStatus({ status: "failed" }))
+        dispatch(setStatus({ status: "failed" }))
       }
     } finally {
-      dispatch(slice.actions.setLoader(true))
+      dispatch(setLoader(true))
     }
   },
 )
@@ -77,7 +91,7 @@ export const verificationEmail = createAppAsyncThunk<void, verificationEmailPayl
       await authApi.verificationEmail(arg)
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        dispatch(slice.actions.setError({ error: error.response?.data.errorsMessages[0].message }))
+        dispatch(setAuthError({ error: error.response?.data.errorsMessages[0].message }))
       }
     }
   },
@@ -87,21 +101,52 @@ export const verificationEmail = createAppAsyncThunk<void, verificationEmailPayl
 export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/signIn`, async (arg, thunkAPI) => {
   const { dispatch } = thunkAPI
   try {
-    dispatch(slice.actions.setStatus({ status: "loading" }))
+    dispatch(setStatus({ status: "loading" }))
     const res = await authApi.signIn(arg)
     localStorage.setItem("accessToken", res.data.accessToken)
-    dispatch(slice.actions.setIsAuth({ isAuth: true }))
-    dispatch(authActions.setStatus({ status: "success" }))
+    dispatch(setIsAuth({ isAuth: true }))
+    dispatch(setStatus({ status: "success" }))
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      dispatch(slice.actions.setStatus({ status: "failed" }))
-      dispatch(slice.actions.setError({ error: error.response?.data.errorsMessages[0].message }))
+      dispatch(setStatus({ status: "failed" }))
+      dispatch(setAuthError({ error: error.response?.data.errorsMessages[0].message }))
     } else {
-      dispatch(slice.actions.setError({ error: "An unknown error occurred" }))
+      dispatch(setAuthError({ error: "An unknown error occurred" }))
     }
   }
 })
 
+export const forgotPassword = createAppAsyncThunk<void, forgotPasswordPayload>(
+  `${slice.name}/forgotPassword`,
+  async (arg, thunkAPI) => {
+    const { dispatch } = thunkAPI
+    try {
+      dispatch(setIsEmailRegistered({ emailRegistered: "idle" }))
+      const result = await authApi.forgotPassword(arg)
+
+      if (result.status === 204) {
+        dispatch(setIsEmailRegistered({ emailRegistered: "registered" }))
+        console.log("555")
+      }
+      console.log(result.status)
+    } catch (error) {
+      console.log(error)
+      if (axios.isAxiosError(error)) {
+        dispatch(setAuthError({ error: error.response?.data.errorsMessages[0].message }))
+        dispatch(setIsEmailRegistered({ emailRegistered: "not_registered" }))
+      }
+    }
+  },
+)
+
 export const authReducer = slice.reducer
-export const authActions = slice.actions
+export const {
+  setStatus,
+  setAuthError,
+  setFieldErrors,
+  setLoader,
+  setIsAuth,
+  setIsEmailRegistered,
+} = slice.actions
+// export const authActions = slice.actions
 export const authThunks = { signIn }

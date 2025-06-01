@@ -5,13 +5,14 @@ import { Button } from "@/shared/ui/button"
 import styles from "./SignInForm.module.scss"
 import Link from "next/link"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
-import { authActions, authThunks } from "@/features/auth"
+import { authThunks } from "@/features/auth"
 import { useFormConfig } from "@/views/signIn/model/schema"
 import { Input } from "@/shared/ui/input"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { appRoutes } from "@/shared/lib/routes"
 import { useRouter, useSearchParams } from "next/navigation"
 import { FormValues } from "@/views/signIn/lib/types"
+import { setAuthError } from "@/features/auth/model/slice"
 
 export const SignInForm = () => {
   const {
@@ -35,7 +36,7 @@ export const SignInForm = () => {
 
   const resetError = () => {
     if (error.trim() !== "") {
-      dispatch(authActions.setError({ error: "" }))
+      dispatch(setAuthError({ error: "" }))
     }
   }
 
