@@ -1,0 +1,47 @@
+.profileBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profileActionBox {
+  display: flex;
+  gap: 40px;
+}
+
+.userInfo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  span {
+    min-width: 258px;
+    width: 100%;
+  }
+}
+
+.inputSearch {
+  max-width: 596px;
+  width: 100%;
+  background-color: var(--color-dark-300);
+  input{
+    background-color: var(--color-dark-300);
+  }
+}
+
+.img {
+  border-radius: 50%;
+}
+
+.actionButtons {
+  max-width: 250px;
+  width: 100%;
+  display: flex;
+  gap: 47px;
+  justify-content: flex-end;
+
+  Button {
+    width: 117px;
+  }
+}
+
