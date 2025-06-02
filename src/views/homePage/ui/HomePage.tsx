@@ -1,10 +1,10 @@
 import React from "react"
 import styles from "./HomePage.module.scss"
-import { user, usersPosts } from "@/views/homePage/lib/posts"
 import Post from "@/views/homePage/ui/post/Post"
+import { usersPosts } from "@/views/homePage/lib/posts"
 
-const HomePage = () => {
-  const digits = String(234).padStart(6, "0")
+const HomePage = ({ users }: { users: unknown[] }) => {
+  const digits = String(users.length).padStart(6, "0")
 
   return (
     <div className={styles.homeWrapper}>
@@ -20,7 +20,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className={styles.postsList}>
-        {usersPosts.map((el: user, index) => (
+        {usersPosts.slice(0, 4).map((el: unknown, index) => (
           <Post key={index} user={el} />
         ))}
       </div>

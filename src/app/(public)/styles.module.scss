@@ -2,6 +2,7 @@
 
 .wrapper {
   padding-top: 30px;
+  padding-bottom: 70px;
   width: $containerDesktopWidth;
   max-width: $containerDesktopMaxWidth;
   margin: 0 auto;
@@ -12,7 +13,7 @@
     padding: 10px calc((100% - $containerMobileWidth) / 2);
     height: calc(100vh - 60px);
     display: flex;
-    align-items: center;
+    align-items: start;
   }
 }
 

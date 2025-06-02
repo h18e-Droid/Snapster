@@ -3,9 +3,9 @@ import "@/shared/styles/_colors.scss"
 import "@/shared/styles/_typography.scss"
 import "./globals.css"
 import { Inter, Roboto } from "next/font/google"
-import { cookies } from "next/headers"
 import { Providers } from "./Providers"
 import { Header } from "@/widgets/header"
+import { isUserAuthenticated } from "@/shared/lib/state/isUserAuthenticated"
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -25,8 +25,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const cookiesResponse = cookies()
-  const isAuth = React.use(cookiesResponse).has("refreshTokenCustom")
+  const isAuth = isUserAuthenticated()
 
   return (
     <html lang="en" className={`${inter.className} ${roboto.className}`}>

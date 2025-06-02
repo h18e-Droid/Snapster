@@ -1,6 +1,6 @@
 export type user = {
   id: string
-  username: string
+  /*username: string*/
 }
 
 export type initialStateType = {

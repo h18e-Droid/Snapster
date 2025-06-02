@@ -19,4 +19,7 @@ export const authApi = {
   verificationEmail: async (payload: verificationEmailPayload) => {
     return axiosInstance.post("/api/v1/auth/registration-email-resending", payload)
   },
+  me: async () => {
+    return axiosInstance.get("/api/v1/auth/jwt-test")
+  },
 }

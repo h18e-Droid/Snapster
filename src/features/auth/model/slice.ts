@@ -3,11 +3,11 @@ import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
 import {
   authStatus,
+  confirmRegistrationPayload,
   FieldErrors,
   InitialState,
   signInPayload,
   signUpPayload,
-  confirmRegistrationPayload,
   verificationEmailPayload,
 } from "@/features/auth/lib/types/types"
 import axios from "axios"
@@ -98,9 +98,10 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
     dispatch(slice.actions.setStatus({ status: "loading" }))
     const res = await authApi.signIn(arg)
     localStorage.setItem("accessToken", res.data.accessToken)
+    await dispatch(authMe())
+    document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
     dispatch(slice.actions.setIsAuth({ isAuth: true }))
     dispatch(authActions.setStatus({ status: "success" }))
-    document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
   } catch (error) {
     if (axios.isAxiosError(error)) {
       dispatch(slice.actions.setStatus({ status: "failed" }))
@@ -111,6 +112,18 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
   }
 })
 
+export const authMe = createAppAsyncThunk<void, void>(`${slice.name}/fetchMe`, async (_, thunkAPI) => {
+  const { dispatch } = thunkAPI
+  try {
+    const res = await authApi.me()
+    localStorage.setItem("currentUserId", res.data.userId)
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      dispatch(slice.actions.setError({ error: "Failed to fetch user data" }))
+    }
+  }
+})
+
 export const authReducer = slice.reducer
 export const authActions = slice.actions
-export const authThunks = { signIn }
+export const authThunks = { signIn, authMe }

@@ -1,49 +1,87 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styles from "./Post.module.scss"
-import { user } from "@/views/homePage/lib/posts"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import { PersonIcon } from "@/shared/assets/icons"
 
-const Post = ({ user }: { user: user }) => {
+const Post = ({ user }: { user: any }) => {
   const [expanded, setExpanded] = useState(false)
+  const [isClamped, setIsClamped] = useState(false)
   const router = useRouter()
-  const isLong = user.desc.length > 100
-  const displayedText = expanded || !isLong ? user.desc : user.desc.slice(0, 95) + "..."
 
-  const redirectToProfile = () => {
-    router.push(`/${user.userName}`)
+  const postTextRef = useRef<HTMLParagraphElement>(null)
+  const postRef = useRef<HTMLDivElement | null>(null)
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (postRef.current && !postRef.current.contains(event.target as Node)) {
+      setExpanded(false)
+    }
   }
 
+  useEffect(() => {
+    const checkIsLong = () => {
+      const el = postTextRef.current
+      if (el) {
+        const isOverflowing = el.scrollHeight > el.clientHeight
+        setIsClamped(isOverflowing)
+      }
+    }
+    checkIsLong()
+    window.addEventListener("resize", checkIsLong)
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      window.removeEventListener("resize", checkIsLong)
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
+  const redirectToProfile = () => {
+    router.push(`/${user.id}`, { scroll: true })
+  }
+
+  //должно быть сначала user.id а потом post.id
   const redirectToPost = () => {
-    router.push(`/${user.userName}/${user.posts[0].id}`)
+    router.push(`/${user.id}/${user.id}`)
   }
 
   return (
-    <div className={styles.postWrapper}>
-      <Image src={user.posts[0].photos[0]} alt={user.userName} className={styles.postImage} onClick={redirectToPost} />
+    <div className={styles.wrapper}>
+      <div style={{ minHeight: "40%" }}>
+        <img
+          src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9h1WL3OXQRn1X4Kyg9fR4EUEbXf91EZJDhA&s"}
+          alt={user.userName}
+          className={styles.postImage}
+          onClick={redirectToPost}
+        />
+      </div>
+      <div style={{ minHeight: "134px" }}>
+        <div className={`${styles.postInfo} ${expanded ? styles.expanded : ""}`} ref={postRef}>
+          <div className={styles.avatar}>
+            {user.avatar ? (
+              <Image
+                src={user.avatar}
+                alt={user.userName}
+                width={36}
+                height={36}
+                style={{ borderRadius: "50%" }}
+                onClick={redirectToProfile}
+              />
+            ) : (
+              <div className={styles.icon}>
+                <PersonIcon size={30} />
+              </div>
+            )}
+            <h3 onClick={redirectToProfile}>{user.userName}</h3>
+          </div>
+          <span ref={postTextRef} className={`${styles.postText} ${expanded ? styles.expandedText : ""}`}>
+            {user.bio}
+          </span>
 
-      <div className={`${styles.post} ${expanded ? styles.expanded : styles.collapsed}`}>
-        <div className={styles.avatar}>
-          <Image
-            src={user.avatar}
-            alt={user.userName}
-            width={36}
-            height={36}
-            style={{ borderRadius: "50%" }}
-            onClick={redirectToProfile}
-          />
-          <h3 onClick={redirectToProfile}>{user.userName}</h3>
+          <span className={styles.toggleButton} onClick={() => setExpanded(!expanded)}>
+            {isClamped && (expanded ? "hide" : "more")}
+          </span>
         </div>
-
-        <span className={styles.postText}>
-          {displayedText}
-          {isLong && (
-            <span className={styles.toggleButton} onClick={() => setExpanded(!expanded)}>
-              {expanded ? "Hide" : "Show more"}
-            </span>
-          )}
-        </span>
       </div>
     </div>
   )

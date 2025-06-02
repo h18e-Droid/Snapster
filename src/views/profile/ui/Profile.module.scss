@@ -1,55 +1,157 @@
+@use "@/shared/styles/breakpoints" as *;
+
+
 .profile {
   display: flex;
   flex-direction: column;
-  gap: 40px;
   width: 100%;
+}
+
+
+.headWrapper {
+  display: grid;
+  grid-template-columns: 204px auto;
+  gap: 20px 38px;
+  align-items: start;
+  max-width: 100%;
+  &.withButtons {
+    grid-template-areas:
+      "avatar username buttons"
+      "avatar stats stats"
+      "avatar bio bio";
+  }
+  &.noButtons {
+    grid-template-areas:
+      "avatar username"
+      "avatar stats"
+      "avatar bio";
+  }
+  @media (max-width: $mobileBreakPoint) {
+    grid-template-columns: 100px auto;
+    &.withButtons {
+      grid-template-areas:
+        "avatar stats"
+        "username username"
+        "buttons buttons"
+        "bio bio";
+    }
+    &.noButtons {
+      grid-template-areas:
+        "avatar stats"
+        "username username"
+        "bio bio";
+    }
+    grid-template-rows: auto;
+    gap: 15px 20px;
+  }
+  @media (max-width: 400px) {
+    grid-template-columns: 70px auto;
+    gap: 10px 10px;
+  }
+}
+
+
+.avatarWrapper {
+  grid-area: avatar;
+  @media (max-width: $mobileBreakPoint) {
+
+  }
 }
 
 .avatar {
+  width: 204px;
+  height: 204px;
+  object-fit: cover;
   border-radius: 50%;
+  @media (max-width: $mobileBreakPoint) {
+    width: 96px;
+    height: 96px;
+  }
+  @media (max-width: 400px) {
+    width: 72px;
+    height: 72px;
+  }
 }
 
-.head {
+.stats {
+  grid-area: stats;
   display: flex;
-  width: 100%;
-  gap: 40px;
-}
-
-.profileInfo {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.navWrapper {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.profileStats {
-  display: flex;
-  gap: 80px;
-}
-
-.statsItem {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.description {
-  width: 100%;
-  font-family: var(--font-family-secondary), sans-serif;
+  height: 100%;
+  gap: 90px;
+  font-weight: 500;
   font-size: 16px;
-  font-weight: 400;
+  span {
+    display: block;
+  }
+  @media (max-width: $mobileBreakPoint) {
+    justify-content: space-between;
+    align-items: center;
+    max-width: 400px;
+    gap: 0;
+  }
 }
+
+.userName {
+  grid-area: username;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: var(--font-size-xxl);
+  line-height: var(--line-height-l);
+  font-weight: 700;
+  @media (max-width: 400px) {
+    font-size: 16px;
+    line-height: var(--line-height-m);
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: end;
+  grid-area: buttons;
+  gap: 12px;
+  :first-child {
+    width: 98px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  :last-child {
+    width: 167px;
+    font-size: 16px;
+  }
+
+  @media (max-width: $mobileBreakPoint) {
+    width: 100%;
+    flex-direction: column;
+    :first-child {
+      width: 100%;
+      height: 48px;
+    }
+    :last-child {
+      width: 100%;
+      height: 48px;
+    }
+  }
+}
+
+
+.bio {
+  grid-area: bio;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
 
 .divider {
   height: 1.5px;
   width: 100%;
   background-color: var(--color-dark-500);
+  margin: 5px 0 30px;
+  @media (max-width: $mobileBreakPoint) {
+    margin: 5px 0 25px;
+  }
 }
 
 .postsList {
@@ -59,9 +161,17 @@
   grid-template-columns: repeat(4, 1fr);
   column-gap: 12px;
   row-gap: 12px;
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 3px;
+    row-gap: 0;
+  }
+  @media (max-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.postImage{
+.postImage {
   width: 100%;
   height: auto;
   aspect-ratio: 291 / 284;
@@ -69,7 +179,7 @@
   cursor: pointer;
 }
 
-.emptyPosts{
+.emptyPosts {
   width: 100%;
   height: 150px;
   display: flex;
