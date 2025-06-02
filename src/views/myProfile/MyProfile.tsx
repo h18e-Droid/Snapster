@@ -8,7 +8,7 @@ import { UserData } from "@/app/(private)/myProfile/[id]/page"
 
 
 
-const MyProfile = ({userName, ...rest}: UserData) => {
+const MyProfile = ({userName}: UserData) => {
   const numberFollowing = {
     userName,
     following: 12254,

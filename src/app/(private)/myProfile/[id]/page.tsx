@@ -50,7 +50,8 @@ const Page =  () => {
         console.error("Error fetching user data:", err)
       }
     }
-    getUserData()
+   void getUserData()
+
   }, [])
 
   if (!userData) return <Loader/>

@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { initialStateType, user } from "@/entities/user/lib/types/types"
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { initialStateType, PostType, user } from "@/entities/user/lib/types/types"
+import { RootState } from "@/app/store"
 
 const initialState: initialStateType = {
   user: null as user | null,

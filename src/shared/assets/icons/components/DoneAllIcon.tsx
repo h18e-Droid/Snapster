@@ -1,7 +1,7 @@
 import { IconProps, IconWrapper } from "@/shared/assets/icons/IconWrapper"
 
 export const DoneAllIcon = (allProps: IconProps) => {
-  const { svgProps: props, ...restProps } = allProps
+  const { ...restProps } = allProps
 
   return (
     <IconWrapper
