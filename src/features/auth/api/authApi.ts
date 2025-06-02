@@ -1,9 +1,9 @@
 import { axiosInstance } from "@/shared/api/axiosInstance"
 import {
-  confirmRegistrationPayload,
+  confirmRegistrationPayload, forgotPasswordPayload,
   signInPayload,
   signUpPayload,
-  verificationEmailPayload,
+  verificationEmailPayload
 } from "@/features/auth/lib/types/types"
 
 export const authApi = {
@@ -18,5 +18,8 @@ export const authApi = {
   },
   verificationEmail: async (payload: verificationEmailPayload) => {
     return axiosInstance.post("/api/v1/auth/registration-email-resending", payload)
+  },
+  forgotPassword: async (payload: forgotPasswordPayload) => {
+    return axiosInstance.post("/api/v1/auth/password-recovery", payload)
   },
 }
