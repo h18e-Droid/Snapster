@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { initialStateType, PostType, user } from "@/entities/user/lib/types/types"
-import img from "@/public/photogirl.png"
-import imgPost from "@/public/menphoto.png"
 import { RootState } from "@/app/store"
 
 const initialState: initialStateType = {

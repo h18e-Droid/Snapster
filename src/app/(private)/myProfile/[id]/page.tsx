@@ -25,7 +25,7 @@ export type UserData = {
 }
 
 
-const Page = async () => {
+const Page =  () => {
   const [userData, setUserData] = useState<UserData | null>(null)
 
   useEffect(() => {
