@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { initialStateType, PostType, user } from "@/entities/user/lib/types/types"
-import { RootState } from "@/app/store"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { initialStateType, user } from "@/entities/user/lib/types/types"
 
 const initialState: initialStateType = {
   user: null as user | null,
@@ -25,6 +24,9 @@ const slice = createSlice({
     toggleFollow: (state: initialStateType, action: PayloadAction<{ id: string; follow: boolean }>) => {
       const index = state.followersList.findIndex((item) => item.id === action.payload.id)
       state.followersList[index].follow = action.payload.follow
+    },
+    clearUser: (state) => {
+      state.user = null
     },
   },
   extraReducers: (builder) => {

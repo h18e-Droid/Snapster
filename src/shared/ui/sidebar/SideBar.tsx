@@ -15,9 +15,11 @@ import { PersonOutlineIcon } from "@/shared/assets/icons/components/PersonOutlin
 import { MessageIcon } from "@/shared/assets/icons/components/MessageIcon"
 import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 import { Button } from "@/shared/ui/button"
-import { useRouter } from "next/navigation"
 import { Modal } from "@/shared/ui/modal"
-import { appRoutes } from "@/shared/lib/routes"
+import { useAppSelector } from "@/shared/lib/state/useAppSelector"
+import { RootState } from "@/app/store"
+import { useLogout } from "@/shared/hooks/useLogout"
+
 
 type TypeItem = {
   id: number | string
@@ -50,7 +52,10 @@ const SideBar = () => {
 
   const [isActive, setIsActive] = useState<Record<string | number, boolean>>({})
   const [showLogoutModal, setShowLogoutModal] = useState(false)
-  const router = useRouter()
+  const logOut = useLogout()
+
+  const currentUser = useAppSelector((state: RootState) => state.user.user)
+  const userName = currentUser?.username
 
   const handleMouseDown = (id: number | string) => {
     setIsActive((prev) => ({ ...prev, [id]: true }))
@@ -66,9 +71,9 @@ const SideBar = () => {
 
   const closeModal = () => setShowLogoutModal(false)
 
-  const logOutModal = () => {
+  const logOutModal = async () => {
     setShowLogoutModal(false)
-    router.push(appRoutes.public.signIn)
+    await logOut()
   }
 
   return (
@@ -103,7 +108,8 @@ const SideBar = () => {
       {showLogoutModal && (
         <Modal title={"Log Out"} setActive={setShowLogoutModal} active={showLogoutModal}>
           <hr className={styles.line} />
-          <p className={styles.moduleText}>Are you really want to log out of your account ___ email name ___?</p>
+          <p className={styles.moduleText}>Are you really want to log out of your account ___ email name {userName}?</p>
+          {/*//доделать мыло  */}
           <div className={styles.buttonContainerModule}>
             <Button variant={"primary"} onClick={logOutModal}>
               Yes
