@@ -37,7 +37,7 @@ const SideBar = () => {
       icon: [<PlusSquareIcon key="filled" />, <PlusSquareOutlineIcon key="outline" />],
       link: "",
     },
-    { id: 3, title: "My Profile", icon: [<PersonIcon key="filled" />, <PersonOutlineIcon key="outline" />], link: "" },
+    { id: 3, title: "My Profile", icon: [<PersonIcon key="filled" />, <PersonOutlineIcon key="outline" />], link: "/myProfile" },
     { id: 4, title: "Messenger", icon: [<MessageIcon key="filled" />, <MessageOutlineIcon key="outline" />], link: "" },
     { id: 5, title: "Search", icon: [<SearchIcon key="filled" />, <SearchIcon key="outline" />], link: "" },
     { id: 6, title: "Statistics", icon: [<TrendingUpIcon key="filled" />, <TrendingUpIcon key="outline" />], link: "" },

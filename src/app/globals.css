@@ -49,8 +49,7 @@ a {
   }
 }
 
-
-.contentWrapper{
+.content-wrapper{
   height: 100%;
   padding-top: 60px;
   color: var(--color-light-100);

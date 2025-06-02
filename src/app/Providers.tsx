@@ -4,6 +4,7 @@ import { Provider } from "react-redux"
 import { store } from "@/app/store"
 import { AppInitializer } from "@/app/AppInitializer"
 
+
 type Providers = {
   children: React.ReactNode
 }

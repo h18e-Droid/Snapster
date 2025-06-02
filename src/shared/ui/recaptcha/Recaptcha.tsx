@@ -6,51 +6,62 @@ import { CheckmarkOutlineIcon } from "@/shared/assets/icons/components/Checkmark
 import clsx from "clsx"
 import Link from "next/link"
 import { appRoutes } from "@/shared/lib/routes"
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
 
 export type RecaptchaStatus = "idle" | "verifying" | "success" | "expired" | "error"
 
 interface RecaptchaProps {
-  onVerify?: (isVerified: boolean) => void
+  onVerify: (token: string | null, isHuman: boolean) => void
+  action?: string
 }
 
-export const Recaptcha = ({ onVerify }: RecaptchaProps) => {
+export const Recaptcha = ({ onVerify, action = "form_submit" }: RecaptchaProps) => {
   const [status, setStatus] = useState<RecaptchaStatus>("idle")
   const [errorMessage, setErrorMessage] = useState("")
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
-  const STATUS_TIMEOUTS = {
-    verifying: 3200,
-    success: 5000,
+  const handleVerify = async () => {
+    if (!executeRecaptcha) {
+      setStatus("error")
+      setErrorMessage("Recaptcha not loaded")
+      onVerify(null, false)
+      return
+    }
+    setStatus("verifying")
+    setErrorMessage("")
+
+    try {
+      const token = await executeRecaptcha(action)
+      setStatus("success")
+      onVerify(token, true)
+    } catch (error) {
+      setStatus("error")
+      setErrorMessage("Verification failed. Please try again")
+      onVerify(null, false)
+      console.log(error)
+    }
   }
 
-  useEffect(() => {
-    const timers: NodeJS.Timeout[] = []
-
-    if (status === "verifying") {
-      timers.push(
-        setTimeout(() => {
-          setStatus("success")
-          setErrorMessage("Verification expired. Please try again.")
-          onVerify?.(true)
-        }, STATUS_TIMEOUTS.verifying),
-      )
-    } else if (status === "success") {
-      timers.push(
-        setTimeout(() => {
-          setStatus("idle")
-          setErrorMessage("")
-        }, STATUS_TIMEOUTS.success),
-      )
-    }
-
-    return () => timers.forEach((timer) => clearTimeout(timer))
-  }, [status])
+  const resetRecaptcha = () => {
+    setStatus("idle")
+    setErrorMessage("")
+  }
 
   const handleCheckboxChange = () => {
     if (status === "idle" || status === "expired" || status === "error") {
-      setStatus("verifying")
-      setErrorMessage("")
+      handleVerify()
     }
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      resetRecaptcha()
+    }, 10000)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [status])
 
   const shouldShowCheckbox = status === "idle" || status === "expired" || status === "error"
   const isVerifying = status === "verifying"
@@ -91,7 +102,7 @@ export const Recaptcha = ({ onVerify }: RecaptchaProps) => {
         <div className={styles.recaptchaSection}>
           <RecaptchaLogoIcon size={50} aria-hidden="true" />
           <span id="recaptcha-description" className={styles.recaptchaDescription}>
-            <Link href={appRoutes.public.privacyPolicy}>FPrivacy</Link> -{" "}
+            <Link href={appRoutes.public.privacyPolicy}>Privacy</Link> -{" "}
             <Link href={appRoutes.public.termsOfService}>Terms</Link>
           </span>
         </div>
