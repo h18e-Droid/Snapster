@@ -40,7 +40,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header isAuth={isAuth} />
-          <div className="contentWrapper">{children}</div>
+          <div className="content-wrapper">{children}</div>
         </Providers>
       </body>
     </html>

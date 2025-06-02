@@ -41,6 +41,7 @@ const Input = ({
     disabled && styles.disabled,
     errorText && styles.errorInput,
     active && styles.activeInput,
+    className,
   )
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
