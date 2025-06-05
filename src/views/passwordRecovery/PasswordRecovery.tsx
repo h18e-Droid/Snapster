@@ -11,7 +11,6 @@ const PasswordRecovery = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [countdown, setCountdown] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
   const handleResendLink = async () => {
     setIsLoading(true)
 
