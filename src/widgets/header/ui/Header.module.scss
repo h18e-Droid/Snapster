@@ -1,7 +1,8 @@
-@import "@/shared/styles/breakpoints";
+@use "@/shared/styles/breakpoints" as *;
 
 .headerWrapper {
   width: 100%;
+  margin: 0 auto;
   height: 60px;
   padding: 0 calc((100% - $containerDesktopWidth) / 2);
   position: fixed;
@@ -10,15 +11,15 @@
   background-color: var(--color-dark-700);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.38);
   border-bottom: 1px solid var(--color-dark-500);
-  @media only screen and (max-width: $mobileBreakPoint) {
+  @media only screen and (max-width: $md) {
     padding: 0 calc((100% - $containerMobileWidth) / 2);
     margin: 0 auto;
   }
 }
 
 .header {
+  margin: 0 auto;
   height: 100%;
-  width: 1156px;
   display: flex;
   align-items: center;
   justify-content: space-between;

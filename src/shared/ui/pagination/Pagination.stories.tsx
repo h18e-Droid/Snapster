@@ -25,7 +25,7 @@ export const PaginationDefault: Story = {
     totalSize: 1100,
     currentPage: 1,
     onChange: (page: number, portion: number) => {
-      console.log("Page:", page, "Portion:", portion)
+      console.log("Modal:", page, "Portion:", portion)
     },
   },
   argTypes: {

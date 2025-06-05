@@ -1,11 +1,7 @@
 export const appRoutes = {
-  private: {
-    profile: "/profile",
-    feed: "/feed",
-    myProfile: "/myProfile",
-  },
+  private: {},
   public: {
-    home: "/",
+    profile: "/profile",
     createNewPassword: "/createNewPassword",
     forgotPassword: "/forgotPassword",
     passwordRecovery: "/passwordRecovery",
@@ -14,6 +10,7 @@ export const appRoutes = {
     signUp: "/signUp",
     termsOfService: "/termsOfService",
   },
+  home: "/",
 } as const
 
 type Routes = typeof appRoutes

@@ -16,6 +16,7 @@ import {
 } from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
+import { userActions } from "@/entities/user"
 
 const initialState: InitialState = {
   isAuth: false,
@@ -103,14 +104,13 @@ export const verificationEmail = createAppAsyncThunk<void, verificationEmailPayl
   },
 )
 
-//буду переделивать rejectWithValue и return value пока что так
 export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/signIn`, async (arg, thunkAPI) => {
   const { dispatch } = thunkAPI
   try {
     dispatch(setStatus({ status: "loading" }))
     const res = await authApi.signIn(arg)
     localStorage.setItem("accessToken", res.data.accessToken)
-    dispatch(setIsAuth({ isAuth: true }))
+    await dispatch(authMe())
     dispatch(setStatus({ status: "success" }))
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -142,6 +142,19 @@ export const forgotPassword = createAppAsyncThunk<void, forgotPasswordPayload>(
   },
 )
 
+export const authMe = createAppAsyncThunk<void, void>(`${slice.name}/fetchMe`, async (_, thunkAPI) => {
+  const { dispatch } = thunkAPI
+  try {
+    const res = await authApi.me()
+    dispatch(slice.actions.setIsAuth({ isAuth: true }))
+    dispatch(userActions.setUserId({ userId: res.data.userId }))
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      dispatch(setAuthError({ error: "Failed to fetch user data" }))
+    }
+  }
+})
+
 export const createNewPassword = createAppAsyncThunk<void, createNewPasswordPayload>(
   `${slice.name}/createNewPassword`,
   async (arg, thunkApi) => {
@@ -164,5 +177,3 @@ export const createNewPassword = createAppAsyncThunk<void, createNewPasswordPayl
 export const authReducer = slice.reducer
 export const { setStatus, setAuthError, setFieldErrors, setLoader, setIsAuth, setIsEmailRegistered, setPasswordReset } =
   slice.actions
-// export const authActions = slice.actions
-export const authThunks = { signIn }

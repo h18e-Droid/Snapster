@@ -1,9 +1,9 @@
-import { Follower } from "@/views/myProfile/headerInfoUserModal/HeaderInfoUserModal"
+import { Follower } from "@/views/profile/ui/headerInfoUserModal/HeaderInfoUserModal"
 import { StaticImageData } from "next/image"
 
 export type user = {
   id: string
-  username: string
+  /*username: string*/
 }
 
 export type PostType = {
@@ -14,15 +14,16 @@ export type PostType = {
   pictures: [
     {
       url: StaticImageData
-    }
+    },
   ]
 }
 
 export type initialStateType = {
   user: null | user
+  userId: string | null
   followersList: Follower[]
   posts: PostType[]
-  visiblePosts: PostType[],
-  hasMore: boolean,
-  isLoading: boolean,
+  visiblePosts: PostType[]
+  hasMore: boolean
+  isLoading: boolean
 }
