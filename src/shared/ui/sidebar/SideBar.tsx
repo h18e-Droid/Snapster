@@ -16,10 +16,7 @@ import { MessageIcon } from "@/shared/assets/icons/components/MessageIcon"
 import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 import { Button } from "@/shared/ui/button"
 import { Modal } from "@/shared/ui/modal"
-import { useAppSelector } from "@/shared/lib/state/useAppSelector"
-import { RootState } from "@/app/store"
 import { useLogout } from "@/shared/hooks/useLogout"
-
 
 type TypeItem = {
   id: number | string
@@ -37,7 +34,12 @@ const SideBar = () => {
       icon: [<PlusSquareIcon key="filled" />, <PlusSquareOutlineIcon key="outline" />],
       link: "",
     },
-    { id: 3, title: "My Profile", icon: [<PersonIcon key="filled" />, <PersonOutlineIcon key="outline" />], link: "" },
+    {
+      id: 3,
+      title: "My Profile",
+      icon: [<PersonIcon key="filled" />, <PersonOutlineIcon key="outline" />],
+      link: "/myProfile",
+    },
     { id: 4, title: "Messenger", icon: [<MessageIcon key="filled" />, <MessageOutlineIcon key="outline" />], link: "" },
     { id: 5, title: "Search", icon: [<SearchIcon key="filled" />, <SearchIcon key="outline" />], link: "" },
     { id: 6, title: "Statistics", icon: [<TrendingUpIcon key="filled" />, <TrendingUpIcon key="outline" />], link: "" },
@@ -54,8 +56,8 @@ const SideBar = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false)
   const logOut = useLogout()
 
-  const currentUser = useAppSelector((state: RootState) => state.user.user)
-  const userName = currentUser?.username
+  //const currentUser = useAppSelector((state: RootState) => state.user.user)
+  const userName = "userName"
 
   const handleMouseDown = (id: number | string) => {
     setIsActive((prev) => ({ ...prev, [id]: true }))

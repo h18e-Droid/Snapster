@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import styles from "./Navbar.module.scss"
 import { appRoutes } from "@/shared/lib/routes"
 import { Modal } from "@/shared/ui/modal"
@@ -9,12 +9,15 @@ import { items } from "../model/navItems"
 import { TypeItem } from "../lib/types"
 import Link from "next/link"
 import clsx from "clsx"
+import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 
 export const Navbar = () => {
   const currentBasePath = `/${usePathname().split("/")[1]}`
+  const currentUserId = useAppSelector((state) => state.user.userId)
   const defaultActiveItem = items.find((item) => item.link === currentBasePath)
   const [activeItem, setActiveItem] = useState<number[]>(defaultActiveItem ? [defaultActiveItem.id] : [])
   const [showLogoutModal, setShowLogoutModal] = useState(false)
+
   const router = useRouter()
 
   const onCLickHandler = (id: number) => {
@@ -33,6 +36,15 @@ export const Navbar = () => {
     router.push(appRoutes.public.signIn)
   }
 
+  useEffect(() => {
+    if (currentUserId) {
+      items[2].link = currentUserId
+    }
+    if (`/${currentUserId}` === currentBasePath) {
+      setActiveItem([items[2].id])
+    }
+  }, [currentBasePath, currentUserId])
+
   return (
     <nav className={styles.navbarWrapper}>
       <div className={styles.navbar}>
@@ -44,7 +56,7 @@ export const Navbar = () => {
             >
               <li className={styles.listItem} key={item.id}>
                 <Link
-                  href={item.link}
+                  href={item.id === 3 && currentUserId ? currentUserId : item.link}
                   className={clsx(styles.listItem, { [styles.active]: activeItem.includes(item.id) })}
                   onClick={item.id === 8 ? logOutHandler : () => onCLickHandler(item.id)}
                 >

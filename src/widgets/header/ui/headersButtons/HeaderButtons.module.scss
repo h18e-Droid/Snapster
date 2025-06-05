@@ -1,4 +1,4 @@
-@import "@/shared/styles/breakpoints";
+@use "@/shared/styles/breakpoints" as *;
 
 .moreButton {
   width: 30px;
@@ -62,7 +62,7 @@
 }
 
 
-@media (max-width: $mobileBreakPoint) {
+@media (max-width: $md) {
   .buttonsWrapper {
     display: none;
   }

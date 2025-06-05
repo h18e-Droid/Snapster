@@ -1,4 +1,6 @@
 export type authStatus = "idle" | "success" | "failed" | "loading"
+export type emailRegisteredType = 'idle' | 'registered' | 'not_registered'
+export type PasswordResetStatus = "idle" | "success" | "expired"
 
 export type InitialState = {
   status: authStatus
@@ -6,6 +8,8 @@ export type InitialState = {
   error: string
   fieldErrors: FieldErrors
   loader: boolean
+  emailRegistered: emailRegisteredType
+  passwordResetStatus: PasswordResetStatus
 }
 
 export type signInPayload = {
@@ -25,6 +29,16 @@ export type confirmRegistrationPayload = {
 
 export type verificationEmailPayload = {
   email: string
+}
+
+export type forgotPasswordPayload = {
+  email: string
+  reCaptchaToken: string
+}
+
+export type createNewPasswordPayload = {
+  newPassword: string
+  recoveryCode: string
 }
 
 export type FieldError = {

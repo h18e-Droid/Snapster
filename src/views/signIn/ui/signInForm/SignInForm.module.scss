@@ -1,4 +1,4 @@
-@import "@/shared/styles/breakpoints";
+@use "@/shared/styles/breakpoints" as *;
 
 .formWrapper{
   height: 100%;
@@ -7,7 +7,7 @@
   flex-direction: column;
   gap: 20px;
   color: white;
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     gap: 30px;
 
   }
@@ -32,7 +32,7 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     gap: 20px;
   }
 }
@@ -45,7 +45,7 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     height: 48px;
   }
 

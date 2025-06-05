@@ -1,0 +1,82 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.postImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 234/240;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  background-color: #8D9094;
+}
+
+.postInfo {
+  position: relative;
+  left: 0;
+  width: 100%;
+  background: var(--color-dark-700);
+  z-index: 2;
+  padding: 10px 0 0 0;
+  transition: all 1s ease;
+}
+
+.expanded{
+  position: absolute;
+  bottom: 0;
+  transition: all 1s ease;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  >h3 {
+    cursor: pointer;
+  }
+  >img {
+    cursor: pointer;
+  }
+}
+
+.icon{
+  height: 36px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--color-light-900);
+}
+
+.postText {
+  font-family: var(--font-family-secondary) sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+.expandedText{
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
+  overflow: visible;
+}
+
+
+.toggleButton {
+  color: var(--color-info-500);
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover{
+    color: var(--color-info-100);
+  }
+}

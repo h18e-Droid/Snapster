@@ -13,7 +13,7 @@ const slice = createSlice({
     setStatus: (state, action: PayloadAction<{ status: statusType }>) => {
       state.status = action.payload.status
     },
-    setError: (state, action: PayloadAction<{ error: string }>) => {
+    setAuthError: (state, action: PayloadAction<{ error: string }>) => {
       state.error = action.payload.error
     },
   },

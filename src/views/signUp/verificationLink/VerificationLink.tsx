@@ -7,7 +7,7 @@ import Input from "@/shared/ui/input/Input"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { EmailInputs, emailSchema } from "@/shared/lib/Schemas/emailSchema"
-import { authActions, verificationEmail } from "@/features/auth/model/slice"
+import { setAuthError, verificationEmail } from "@/features/auth/model/slice"
 import { AppDispatch, RootState } from "@/app/store"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
@@ -31,7 +31,7 @@ const VerificationLink = () => {
   })
   const onSubmit: SubmitHandler<EmailInputs> = (data) => {
     dispatch(verificationEmail({ email: data.email }))
-    dispatch(authActions.setError({ error: "" }))
+    dispatch(setAuthError({ error: "" }))
   }
 
   useEffect(() => {
