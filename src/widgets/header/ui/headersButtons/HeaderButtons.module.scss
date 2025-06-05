@@ -62,7 +62,7 @@
 }
 
 
-@media (max-width: $mobileBreakPoint) {
+@media (max-width: $md) {
   .buttonsWrapper {
     display: none;
   }

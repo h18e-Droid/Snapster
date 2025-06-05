@@ -5,14 +5,14 @@
   display: flex;
   align-items: center;
   margin-bottom: 60px;
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     padding-top: 5%;
     align-items: start;
   }
 }
 
 .card{
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     width: 100% !important;
     > div {
       background-color: transparent;
@@ -30,7 +30,7 @@
 .contentWrapper {
   width: 330px;
   min-height: 418px;
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@
   display: flex;
   gap: 50px;
   justify-content: center;
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     padding-top: 15px;
   }
 }

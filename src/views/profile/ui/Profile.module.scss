@@ -26,7 +26,11 @@
       "avatar stats"
       "avatar bio";
   }
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $lg) {
+    gap: 20px 24px;
+  }
+
+  @media (max-width: $md) {
     grid-template-columns: 100px auto;
     &.withButtons {
       grid-template-areas:
@@ -44,18 +48,15 @@
     grid-template-rows: auto;
     gap: 15px 20px;
   }
-  @media (max-width: 400px) {
-    grid-template-columns: 70px auto;
-    gap: 10px 10px;
+  @media (max-width: 460px) {
+    grid-template-columns: 80px auto;
+    gap: 10px 0;
   }
 }
 
 
 .avatarWrapper {
   grid-area: avatar;
-  @media (max-width: $mobileBreakPoint) {
-
-  }
 }
 
 .avatar {
@@ -63,11 +64,12 @@
   height: 204px;
   object-fit: cover;
   border-radius: 50%;
-  @media (max-width: $mobileBreakPoint) {
+  background-color:  #8D9094;
+  @media (max-width: $md) {
     width: 96px;
     height: 96px;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 460px) {
     width: 72px;
     height: 72px;
   }
@@ -80,10 +82,11 @@
   gap: 90px;
   font-weight: 500;
   font-size: 16px;
+  padding-bottom: 10px;
   span {
     display: block;
   }
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     justify-content: space-between;
     align-items: center;
     max-width: 400px;
@@ -100,7 +103,8 @@
   line-height: var(--line-height-l);
   font-weight: 700;
   @media (max-width: 400px) {
-    font-size: 16px;
+    font-size: 23px;
+    padding: 5px 0;
     line-height: var(--line-height-m);
   }
 }
@@ -121,7 +125,7 @@
     font-size: 16px;
   }
 
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     width: 100%;
     flex-direction: column;
     :first-child {
@@ -149,11 +153,19 @@
   width: 100%;
   background-color: var(--color-dark-500);
   margin: 5px 0 30px;
-  @media (max-width: $mobileBreakPoint) {
+  @media (max-width: $md) {
     margin: 5px 0 25px;
   }
 }
 
+.statsItem{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/*
 .postsList {
   width: 100%;
   height: 100%;
@@ -161,10 +173,10 @@
   grid-template-columns: repeat(4, 1fr);
   column-gap: 12px;
   row-gap: 12px;
-  @media (max-width: 992px) {
+  @media (max-width: $lg) {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 3px;
-    row-gap: 0;
+    row-gap: 3px;
   }
   @media (max-width: 576px) {
     grid-template-columns: repeat(2, 1fr);
@@ -173,18 +185,9 @@
 
 .postImage {
   width: 100%;
+  min-height: 100%;
   height: auto;
   aspect-ratio: 291 / 284;
   object-fit: cover;
   cursor: pointer;
-}
-
-.emptyPosts {
-  width: 100%;
-  height: 150px;
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+}*/

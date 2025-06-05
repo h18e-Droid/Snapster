@@ -3,5 +3,5 @@ import React from "react"
 
 export const isUserAuthenticated = (): boolean => {
   const cookiesResponse = cookies()
-  return React.use(cookiesResponse).has("refreshTokenCustom")
+  return React.use(cookiesResponse).has("refreshToken")
 }

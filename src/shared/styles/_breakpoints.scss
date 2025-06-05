@@ -1,4 +1,14 @@
 $containerDesktopWidth: 95%;
 $containerMobileWidth: 90%;
-$mobileBreakPoint : 768px;
-$containerDesktopMaxWidth: 1200px;
+
+
+//different Breakpoint sizes
+// Small	    sm
+// Medium	    md
+// Large	    lg
+// Extra large	xl
+
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;

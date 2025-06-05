@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} ${roboto.className}`}>
       <body>
-        <Providers>
+        <Providers isAuth={isAuth}>
           <Header isAuth={isAuth} />
           <div className="content-wrapper">{children}</div>
         </Providers>

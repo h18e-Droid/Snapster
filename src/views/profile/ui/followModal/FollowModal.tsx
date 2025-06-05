@@ -12,9 +12,7 @@ type Props = {
   id: string
 }
 
-const FollowModal = ({title, textFollowers, onClickButton, onClose, isOpen, id}: Props) => {
-
-
+const FollowModal = ({ title, textFollowers, onClickButton, onClose, isOpen, id }: Props) => {
   return (
     <Modal active={isOpen} setActive={onClose} className={styles.modalFollowers}>
       <div className={styles.containerModal}>

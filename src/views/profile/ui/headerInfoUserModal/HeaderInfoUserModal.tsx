@@ -1,13 +1,12 @@
 "use client"
-
 import styles from "./HeaderInfoUserModal.module.scss"
 import { Modal } from "@/shared/ui/modal"
 import { Button } from "@/shared/ui/button"
 import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 import { StaticImageData } from "next/image"
 import Overlay from "@/shared/ui/overlay/Overlay"
-import Following from "@/views/myProfile/following/Following"
-import Followers from "@/views/myProfile/followers/Followers"
+import { ReactNode } from "react"
+import { useParams, useRouter } from "next/navigation"
 
 export type Follower = {
   id: string
@@ -16,34 +15,26 @@ export type Follower = {
   img: StaticImageData
 }
 type Props = {
-  type: string
-  onClose: () => void
-  isOpen: boolean
-  dataButton: { nameButton: string; data: number }
+  title: string
+  count: number
+  children: ReactNode
 }
-const HeaderInfoUserModal = ({ type, onClose, isOpen, dataButton }: Props) => {
-  const renderContent = () => {
-    switch (type) {
-      case "Following":
-        return <Following />
-      case "Followers":
-        return <Followers />
-      default:
-        return null
-    }
-  }
+const HeaderInfoUserModal = ({ children, title, count }: Props) => {
+  const params = useParams()
+  const router = useRouter()
+  const closeModal = () => router.replace(`/${params.userId}`, { scroll: false })
 
   return (
     <>
-      {isOpen && <Overlay />}
-      <Modal active={isOpen} setActive={onClose} className={styles.modalHeaderInfoUser}>
+      <Overlay />
+      <Modal active={true} setActive={closeModal} className={styles.modalHeaderInfoUser}>
         <div className={styles.containerModal}>
           <div className={styles.boxModalHead}>
             <h2>
-              {dataButton.data} {dataButton.nameButton}
+              {count} {title}
             </h2>
             <Button
-              onClick={onClose}
+              onClick={closeModal}
               style={{
                 background: "none",
                 border: "none",
@@ -57,7 +48,7 @@ const HeaderInfoUserModal = ({ type, onClose, isOpen, dataButton }: Props) => {
               <CloseIcon />
             </Button>
           </div>
-          <div className={styles.boxModalBody}>{renderContent()}</div>
+          <div className={styles.boxModalBody}>{children}</div>
         </div>
       </Modal>
     </>

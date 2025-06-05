@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://snap-ster.net/"
 
 type RequestOptions<TBody = unknown> = {
   method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH"

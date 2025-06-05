@@ -4,8 +4,9 @@ import styles from "./Post.module.scss"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { PersonIcon } from "@/shared/assets/icons"
+import { user } from "@/views/homePage/lib/types"
 
-const Post = ({ user }: { user: any }) => {
+const Post = ({ user }: { user: user }) => {
   const [expanded, setExpanded] = useState(false)
   const [isClamped, setIsClamped] = useState(false)
   const router = useRouter()
@@ -40,7 +41,7 @@ const Post = ({ user }: { user: any }) => {
     router.push(`/${user.id}`, { scroll: true })
   }
 
-  //должно быть сначала user.id а потом post.id
+  //должно быть сначала username а потом post.id
   const redirectToPost = () => {
     router.push(`/${user.id}/${user.id}`)
   }

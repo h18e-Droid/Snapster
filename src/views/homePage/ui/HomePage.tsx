@@ -1,9 +1,9 @@
 import React from "react"
 import styles from "./HomePage.module.scss"
 import Post from "@/views/homePage/ui/post/Post"
-import { usersPosts } from "@/views/homePage/lib/posts"
+import { user } from "@/views/homePage/lib/types"
 
-const HomePage = ({ users }: { users: unknown[] }) => {
+const HomePage = ({ users }: { users: user[] }) => {
   const digits = String(users.length).padStart(6, "0")
 
   return (
@@ -20,7 +20,7 @@ const HomePage = ({ users }: { users: unknown[] }) => {
         </div>
       </div>
       <div className={styles.postsList}>
-        {usersPosts.slice(0, 4).map((el: unknown, index) => (
+        {users.slice(0, 4).map((el: user, index) => (
           <Post key={index} user={el} />
         ))}
       </div>

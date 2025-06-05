@@ -4,14 +4,14 @@ import styles from "./Following.module.scss"
 import Input from "@/shared/ui/input/Input"
 import Image from "next/image"
 import { Button } from "@/shared/ui/button"
-import { Follower } from "@/views/myProfile/headerInfoUserModal/HeaderInfoUserModal"
 import { userActions } from "@/entities/user"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/app/store"
 import { useModal } from "@/features/auth/hooks/useModal"
 import Overlay from "@/shared/ui/overlay/Overlay"
-import FollowModal from "@/views/myProfile/followModal/FollowModal"
 import { ChangeEvent, useState } from "react"
+import { Follower } from "../headerInfoUserModal/HeaderInfoUserModal"
+import FollowModal from "@/views/profile/ui/followModal/FollowModal"
 
 const Following = () => {
   const { isOpen: isModalOpen, open: openModal, close: closeModal } = useModal()
@@ -38,9 +38,7 @@ const Following = () => {
     setValueSearch(e.currentTarget.value)
   }
 
-  const filteredFollowers = followersList.filter(user =>
-    user.name.toLowerCase().includes(valueSearch.toLowerCase())
-  )
+  const filteredFollowers = followersList.filter((user) => user.name.toLowerCase().includes(valueSearch.toLowerCase()))
 
   return (
     <div className={styles.profileBox}>
@@ -51,7 +49,7 @@ const Following = () => {
         value={valueSearch}
         className={styles.inputSearch}
       />
-      {(valueSearch.length>0 ? filteredFollowers : followersList).map((item) => {
+      {(valueSearch.length > 0 ? filteredFollowers : followersList).map((item) => {
         return (
           <div className={styles.profileActionBox} key={item.id}>
             <div className={styles.userInfo}>

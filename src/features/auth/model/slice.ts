@@ -14,6 +14,7 @@ import {
 } from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
+import { userActions } from "@/entities/user"
 
 const initialState: InitialState = {
   isAuth: false,
@@ -97,18 +98,13 @@ export const verificationEmail = createAppAsyncThunk<void, verificationEmailPayl
   },
 )
 
-//буду переделивать rejectWithValue и return value пока что так
 export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/signIn`, async (arg, thunkAPI) => {
   const { dispatch } = thunkAPI
   try {
     dispatch(setStatus({ status: "loading" }))
     const res = await authApi.signIn(arg)
     localStorage.setItem("accessToken", res.data.accessToken)
-    dispatch(setIsAuth({ isAuth: true }))
-    dispatch(setStatus({ status: "success" }))
     await dispatch(authMe())
-    document.cookie = `refreshTokenCustom=someValue; path=/; max-age=3600`
-    dispatch(slice.actions.setIsAuth({ isAuth: true }))
     dispatch(setStatus({ status: "success" }))
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -147,7 +143,8 @@ export const authMe = createAppAsyncThunk<void, void>(`${slice.name}/fetchMe`, a
   const { dispatch } = thunkAPI
   try {
     const res = await authApi.me()
-    localStorage.setItem("currentUserId", res.data.userId)
+    dispatch(slice.actions.setIsAuth({ isAuth: true }))
+    dispatch(userActions.setUserId({ userId: res.data.userId }))
   } catch (error) {
     if (axios.isAxiosError(error)) {
       dispatch(setAuthError({ error: "Failed to fetch user data" }))
@@ -156,13 +153,6 @@ export const authMe = createAppAsyncThunk<void, void>(`${slice.name}/fetchMe`, a
 })
 
 export const authReducer = slice.reducer
-export const {
-  setStatus,
-  setAuthError,
-  setFieldErrors,
-  setLoader,
-  setIsAuth,
-  setIsEmailRegistered,
-} = slice.actions
+export const { setStatus, setAuthError, setFieldErrors, setLoader, setIsAuth, setIsEmailRegistered } = slice.actions
 // export const authActions = slice.actions
 export const authThunks = { signIn }

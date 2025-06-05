@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/app/store"
 import { initialStateType } from "@/entities/user/lib/types/types"
 import { fetchMorePosts } from "@/entities/user/model/slice"
+import { BlockIcon } from "@/shared/assets/icons"
 
 const Posts = () => {
   const dispatch = useDispatch<AppDispatch>()
@@ -17,14 +18,14 @@ const Posts = () => {
     (node: HTMLDivElement | null) => {
       if (isLoading) return
       if (observer.current) observer.current.disconnect()
-      observer.current = new IntersectionObserver(entries => {
+      observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
           dispatch(fetchMorePosts())
         }
       })
       if (node) observer.current.observe(node)
     },
-    [isLoading, hasMore, dispatch]
+    [isLoading, hasMore, dispatch],
   )
 
   useEffect(() => {
@@ -44,7 +45,12 @@ const Posts = () => {
         )
       })}
       {isLoading && <p className={styles.loader}>Loading...</p>}
-      {!hasMore && <p className={styles.loader}>There are no more posts</p>}
+      {!isLoading && !hasMore && (
+        <div className={styles.emptyPosts}>
+          <BlockIcon size={45} />
+          <h2>No Posts Yet</h2>
+        </div>
+      )}
     </div>
   )
 }

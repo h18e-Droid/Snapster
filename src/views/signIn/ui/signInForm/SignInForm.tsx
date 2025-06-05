@@ -18,7 +18,6 @@ export const SignInForm = () => {
   const {
     handleSubmit,
     control,
-    reset,
     resetField,
     clearErrors,
     formState: { errors },

@@ -1,17 +1,20 @@
 "use client"
 import React, { useEffect } from "react"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
-import { authThunks } from "@/features/auth"
+import { authMe } from "@/features/auth/model/slice"
 
 type AppInitializerProps = {
   children: React.ReactNode
+  isAuth: boolean
 }
 
-export const AppInitializer = ({ children }: AppInitializerProps) => {
+export const AppInitializer = ({ children, isAuth }: AppInitializerProps) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(authThunks.authMe())
+    if (isAuth) {
+      dispatch(authMe())
+    } else return
   }, [dispatch])
 
   return <>{children}</>
