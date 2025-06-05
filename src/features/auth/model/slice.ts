@@ -177,5 +177,3 @@ export const createNewPassword = createAppAsyncThunk<void, createNewPasswordPayl
 export const authReducer = slice.reducer
 export const { setStatus, setAuthError, setFieldErrors, setLoader, setIsAuth, setIsEmailRegistered, setPasswordReset } =
   slice.actions
-// export const authActions = slice.actions
-export const authThunks = { signIn }
