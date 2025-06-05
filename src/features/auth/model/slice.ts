@@ -11,6 +11,8 @@ import {
   verificationEmailPayload,
   forgotPasswordPayload,
   emailRegisteredType,
+  createNewPasswordPayload,
+  PasswordResetStatus,
 } from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"
@@ -22,6 +24,7 @@ const initialState: InitialState = {
   fieldErrors: [],
   loader: false,
   emailRegistered: "idle" as emailRegisteredType,
+  passwordResetStatus: "idle" as PasswordResetStatus,
 }
 
 const slice = createSlice({
@@ -43,8 +46,11 @@ const slice = createSlice({
     setLoader: (state, action: PayloadAction<boolean>) => {
       state.loader = action.payload
     },
-    setIsEmailRegistered(state, action: PayloadAction<{ emailRegistered: "idle" | "registered" | "not_registered" }>) {
+    setIsEmailRegistered(state, action: PayloadAction<{ emailRegistered: emailRegisteredType }>) {
       state.emailRegistered = action.payload.emailRegistered
+    },
+    setPasswordReset(state, action: PayloadAction<{ passwordResetStatus: PasswordResetStatus }>) {
+      state.passwordResetStatus = action.payload.passwordResetStatus
     },
   },
 })
@@ -126,11 +132,8 @@ export const forgotPassword = createAppAsyncThunk<void, forgotPasswordPayload>(
 
       if (result.status === 204) {
         dispatch(setIsEmailRegistered({ emailRegistered: "registered" }))
-        console.log("555")
       }
-      console.log(result.status)
     } catch (error) {
-      console.log(error)
       if (axios.isAxiosError(error)) {
         dispatch(setAuthError({ error: error.response?.data.errorsMessages[0].message }))
         dispatch(setIsEmailRegistered({ emailRegistered: "not_registered" }))
@@ -139,14 +142,27 @@ export const forgotPassword = createAppAsyncThunk<void, forgotPasswordPayload>(
   },
 )
 
+export const createNewPassword = createAppAsyncThunk<void, createNewPasswordPayload>(
+  `${slice.name}/createNewPassword`,
+  async (arg, thunkApi) => {
+    const { dispatch } = thunkApi
+    try {
+      dispatch(setPasswordReset({ passwordResetStatus: "idle" }))
+      const result = await authApi.createNewPassword(arg)
+      if (result.status === 204) {
+        dispatch(setPasswordReset({ passwordResetStatus: "success" }))
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        dispatch(setAuthError({ error: error.response?.data.errorsMessages[0].message }))
+        dispatch(setPasswordReset({ passwordResetStatus: "expired" }))
+      }
+    }
+  },
+)
+
 export const authReducer = slice.reducer
-export const {
-  setStatus,
-  setAuthError,
-  setFieldErrors,
-  setLoader,
-  setIsAuth,
-  setIsEmailRegistered,
-} = slice.actions
+export const { setStatus, setAuthError, setFieldErrors, setLoader, setIsAuth, setIsEmailRegistered, setPasswordReset } =
+  slice.actions
 // export const authActions = slice.actions
 export const authThunks = { signIn }

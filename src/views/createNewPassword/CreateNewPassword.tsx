@@ -1,5 +1,5 @@
 "use client"
-import React, { ChangeEvent } from "react"
+import React, { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import styles from "./CreateNewPassword.module.scss"
@@ -9,6 +9,9 @@ import { Button } from "@/shared/ui/button"
 import { z } from "zod"
 import { useRouter } from "next/navigation"
 import { appRoutes } from "@/shared/lib/routes"
+import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
+import { createNewPassword } from "@/features/auth/model/slice"
+import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 
 const CreateNewPasswordSchema = z
   .object({
@@ -42,19 +45,35 @@ const CreateNewPassword = () => {
     resolver: zodResolver(CreateNewPasswordSchema),
     defaultValues: { password: "", passwordConfirm: "" },
   })
+
+  const passwordResetStatus = useAppSelector((state) => state.auth.passwordResetStatus)
+  const dispatch = useAppDispatch()
   const router = useRouter()
   const passwordValue = watch("password")
   const passwordConfirmValue = watch("passwordConfirm")
+  const [recoveryCode, setRecoveryCode] = useState("")
 
   const onSubmit = async (data: FormData) => {
     try {
-      console.log("Form data:", data)
-      // Перенаправление с push (добавляет в историю)
-      router.push(appRoutes.public.signIn)
+      dispatch(createNewPassword({ newPassword: data.password, recoveryCode: recoveryCode }))
     } catch (error) {
       console.error("Error:", error)
     }
   }
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search)
+    const code = queryParams.get("code")
+
+    if (code) {
+      setRecoveryCode(code)
+    }
+    if (passwordResetStatus === "success") {
+      router.push(appRoutes.public.signIn)
+    } else if (passwordResetStatus === "expired") {
+      router.push(appRoutes.public.passwordRecovery)
+    }
+  }, [passwordResetStatus])
 
   return (
     <div className={styles.root}>
