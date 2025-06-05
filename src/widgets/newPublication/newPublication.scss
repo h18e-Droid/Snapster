@@ -1,0 +1,272 @@
+.modal-header {
+  display: flex; /* Используем flex для выравнивания по горизонтали */
+  align-items: center; /* Выравнивание по центру по вертикали */
+
+  justify-content: space-between;
+  margin: 20px 35px 11px 25px;
+
+}
+
+.modal-header h2 {
+  margin: 0; /* Убираем отступы у заголовка */
+  font-family: 'Inter', sans-serif; /* Указываем запасной шрифт */
+  font-size: 20px; /* Устанавливаем размер шрифта (по желанию) */
+}
+
+.modalWrapper{
+  >div{
+    padding: 0px;
+  }
+}
+
+.divider {
+  display: flex;
+  height: 1px;
+  background-color: #595858;
+  //margin-top: 24px;
+  width: 100%;
+}
+
+.buttons-container {
+  padding: 0;
+  //margin-top: 60px;
+  //margin-bottom: 48px;
+  width: 219px;
+  margin: 0px auto 48px auto;
+
+
+}
+
+.containerButtonPlus{
+  height: 100px;
+  width: 36px;
+  position: fixed;
+  background-color: inherit;
+  display: flex;
+  align-items: start;
+}
+
+//.containerButtonPlus {
+//  height: 100px;
+//  width: 36px;
+//  position: absolute; /* Измените на absolute */
+//  top: 7px; /* Задайте верхний отступ */
+//  right: 0px; /* Задайте отступ справа */
+//  background-color: inherit;
+//  display: flex;
+//  align-items: start;
+//}
+
+
+.cards-container {
+  width: 222px;
+  height: 228px;
+}
+
+
+.close-button {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 23px;
+  right: 29px;
+  background: transparent;
+}
+
+.addImageBtn{
+  position: absolute;
+  cursor: pointer;
+  bottom: 10px;
+  right: 10px;
+  background: #171717;
+  border: none;
+  border-radius: 2%;
+  padding: 5px;
+  opacity: 0.8;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leftBtn {
+  width: 36px; /* Ширина кнопки */
+  height: 36px; /* Высота кнопки */
+  background-color: rgba(23, 23, 23, 0.8); /* Фон с цветом #171717 и 80% прозрачностью */
+  border: none; /* Убираем рамку */
+  position: absolute; /* Позволяет позиционировать кнопку */
+  left: 10px; /* Отступ от левой стороны контейнера */
+  top: 50%; /* Центрируем по вертикали */
+  transform: translateY(-50%); /* Центрирование по вертикали */
+  border-radius: 2px; /* Скругление углов */
+  cursor: pointer; /* Указатель при наведении */
+  z-index: 10; /* Обеспечивает, что кнопка будет выше других элементов */
+}
+.rightBtn {
+  width: 36px; /* Ширина кнопки */
+  height: 36px; /* Высота кнопки */
+  background-color: rgba(23, 23, 23, 0.8); /* Фон с цветом #171717 и 80% прозрачностью */
+  border: none; /* Убираем рамку */
+  position: absolute; /* Позволяет позиционировать кнопку */
+  right: 10px; /* Отступ от правой стороны контейнера */
+  top: 50%; /* Центрируем по вертикали */
+  transform: translateY(-50%); /* Центрирование по вертикали */
+  border-radius: 2px; /* Скругление углов */
+  cursor: pointer; /* Указатель при наведении */
+  z-index: 10; /* Обеспечивает, что кнопка будет выше других элементов */
+}
+
+.photo-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f0f0f0;
+
+
+  > img {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+}
+
+.nextBtn {
+  width: 37px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: #397DF6;
+  line-height: 24px;
+  cursor: pointer;
+  padding: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.backBtn {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.removeBtnOnPopup {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #000000;
+  margin-right: 2px;
+  margin-top: 2px;
+  border: none;
+  border-radius: 20%; /* Круглая форма */
+  width: 12px; /* Увеличьте ширину */
+  height: 12px; /* Увеличьте высоту */
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.8;
+  display: flex; /* Используйте flex для центрирования */
+  align-items: center; /* Центрирование по вертикали */
+  justify-content: center; /* Центрирование по горизонтали */
+}
+
+.plusBtnOnPopup{
+  width: 36px;
+  height: 36px;
+  background: none; /* Убираем фоновый цвет */
+  border: none; /* Убираем рамку */
+  cursor: pointer; /* Устанавливаем курсор в виде указателя */
+  margin-right:120px; /* Задаем отступ слева */
+}
+
+.preview-popup {
+  position: absolute;
+  bottom: 60px;
+  right: 8px;
+  width: 244px;
+  height: 106px;
+  background: #171717;
+  opacity: 0.8;
+  border-radius: 2px;
+  //padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.publish-content{
+  display: flex; /* Горизонтальное расположение для дочерних дива */
+  flex: 1; /* Занять оставшееся пространство */
+  height: 506px;
+}
+.left {
+  flex: 1; /* Занять равную долю пространства */
+}
+
+.right {
+  display: flex; /* Сделать правый контейнер флекс-контейнером для вертикального расположения */
+  flex-direction: column; /* Вертикальное расположение для дочерних дива */
+  flex: 1; /* Занять равную долю пространства */
+
+}
+
+.top {
+  flex: 1; /* Занять равную долю пространства внутри правого контейнера */
+
+}
+
+.bottom {
+  flex: 1; /* Занять равную долю пространства внутри правого контейнера */
+
+}
+//-----------------
+.confirmation-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 378px;
+  height: 252px;
+  border: 1px solid #595858;
+  border-radius: 2px;
+  background: #4C4C4C;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.confirmation-text{
+  width: 333px;
+  height: 72px;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  color: #FFFFFF;
+  margin: 24px 30px 18px 24px;
+}
+
+.confirmation-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+.modal-header-confirmation{
+  display: flex; /* Используем flex для выравнивания по горизонтали */
+  align-items: center; /* Выравнивание по центру по вертикали */
+  width: 80%;
+  height: 59px ;
+  font-size: 20px;
+  justify-content: space-between;
+  //margin: 20px 35px 11px 25px;
+}
