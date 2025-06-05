@@ -105,7 +105,7 @@ const ForgotPassword = () => {
             <Recaptcha onVerify={handleRecaptchaVerify} action={"forgot_password"} />
           </div>
         </Cards>
-        <EmailSentModal isOpen={isShowModal} onClose={() => handleCloseModal()} email={"epam@epam.com"} />
+        <EmailSentModal isOpen={isShowModal} onClose={() => handleCloseModal()} email={emailValue} />
       </div>
     </GoogleReCaptchaProvider>
   )
