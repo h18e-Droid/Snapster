@@ -96,7 +96,11 @@ const ForgotPassword = () => {
               )}
             />
             <p className={styles.formHint}>Enter your email address and we will send you further instructions</p>
-            <Button variant={"primary"} type={"submit"} disabled={!watch("recaptcha") || isSubmitting}>
+            <Button
+              variant={"primary"}
+              type={"submit"}
+              disabled={!watch("recaptcha") || !!errors.email || !watch("email") || isSubmitting}
+            >
               Send Link
             </Button>
           </form>

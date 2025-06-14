@@ -37,7 +37,7 @@ export const SignUpSuccessModal = ({
         <div className={styles.boxModalBody}>
           <p>We have sent a link to confirm your email to {email}</p>
           <div className={styles.boxModalButton}>
-            <Button onClick={onClose} variant={"primary"}>
+            <Button onClick={onClose} variant={"primary"} className={styles.buttonOK}>
               OK
             </Button>
           </div>

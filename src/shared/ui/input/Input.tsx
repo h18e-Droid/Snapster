@@ -77,6 +77,7 @@ const Input = ({
             setIsSearchVisible(true)
           }}
           onKeyDown={onKeyDown}
+          autoComplete={type}
         />
         {type === "password" && (
           <span className={clsx(styles.eyeIcon, disabled && styles.disabled)} onClick={togglePasswordVisibility}>

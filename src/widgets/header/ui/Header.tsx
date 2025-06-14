@@ -11,6 +11,7 @@ type Props = {
 }
 
 export const Header = ({ isAuth }: Props) => {
+
   return (
     <header className={styles.headerWrapper}>
       <div className={styles.header}>
