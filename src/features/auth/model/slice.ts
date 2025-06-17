@@ -110,6 +110,12 @@ export const signIn = createAppAsyncThunk<void, signInPayload>(`${slice.name}/si
     dispatch(setStatus({ status: "loading" }))
     const res = await authApi.signIn(arg)
     localStorage.setItem("accessToken", res.data.accessToken)
+    //костыль, только для дев!!! --->
+    const date = new Date()
+    date.setTime(date.getTime() + 5 * 24 * 60 * 60 * 1000)
+    const expires = "expires=" + date.toUTCString()
+    document.cookie = `refreshToken=mockToken; ${expires}; path=/`
+    // <---
     await dispatch(authMe())
     dispatch(setStatus({ status: "success" }))
   } catch (error) {
