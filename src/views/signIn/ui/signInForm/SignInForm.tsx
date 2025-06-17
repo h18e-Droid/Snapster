@@ -47,6 +47,10 @@ export const SignInForm = () => {
     }
   }, [isAuth])
 
+  useEffect(() => {
+    dispatch(setAuthError({ error: "" }))
+  }, [])
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
