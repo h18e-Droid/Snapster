@@ -41,6 +41,7 @@ const Input = ({
     disabled && styles.disabled,
     errorText && styles.errorInput,
     active && styles.activeInput,
+    className,
   )
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -76,6 +77,7 @@ const Input = ({
             setIsSearchVisible(true)
           }}
           onKeyDown={onKeyDown}
+          autoComplete={type}
         />
         {type === "password" && (
           <span className={clsx(styles.eyeIcon, disabled && styles.disabled)} onClick={togglePasswordVisibility}>

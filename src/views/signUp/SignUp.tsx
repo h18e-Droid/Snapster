@@ -14,7 +14,7 @@ import { Inputs } from "@/shared/lib/Schemas/loginSchema"
 import { AuthIconButton } from "@/shared/ui/authIconButton/AuthIconButton"
 import { useSignUpForm } from "@/features/auth/hooks/useSignUpForm"
 import { appRoutes } from "@/shared/lib/routes"
-import { authActions, signUp } from "@/features/auth/model/slice"
+import { setFieldErrors, signUp } from "@/features/auth/model/slice"
 import { AppDispatch, RootState } from "@/app/store"
 import { useDispatch, useSelector } from "react-redux"
 import { SignUpSuccessModal } from "@/shared/ui/signUpSuccessModal/SignUpSuccessModal"
@@ -47,7 +47,7 @@ const SignUp = () => {
         password: data.password,
       }
       setEmail(data.email)
-      dispatch(authActions.setFieldErrors([]))
+      dispatch(setFieldErrors([]))
       dispatch(signUp(user))
     },
     [dispatch],

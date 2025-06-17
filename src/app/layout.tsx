@@ -3,9 +3,9 @@ import "@/shared/styles/_colors.scss"
 import "@/shared/styles/_typography.scss"
 import "./globals.css"
 import { Inter, Roboto } from "next/font/google"
-import { cookies } from "next/headers"
 import { Providers } from "./Providers"
 import { Header } from "@/widgets/header"
+import { isUserAuthenticated } from "@/shared/lib/state/isUserAuthenticated"
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -20,27 +20,19 @@ const roboto = Roboto({
   variable: "--font-roboto",
 })
 
-export const metadata = {
-  title: "My App",
-  description: "...",
-  viewport: "width=device-width, initial-scale=1, viewport-fit=cover", // ✅ додай сюди
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const cookiesResponse = cookies()
-  const isAuth = React.use(cookiesResponse).has("refreshTokenCustom")
-  console.log("cookiesResponse::", isAuth)
+  const isAuth = isUserAuthenticated()
 
   return (
     <html lang="en" className={`${inter.className} ${roboto.className}`}>
       <body>
-        <Providers>
+        <Providers isAuth={isAuth}>
           <Header isAuth={isAuth} />
-          <div className="contentWrapper">{children}</div>
+          <div className="content-wrapper">{children}</div>
         </Providers>
       </body>
     </html>

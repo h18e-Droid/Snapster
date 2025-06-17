@@ -1,7 +1,7 @@
 import { Modal } from "@/shared/ui/modal"
 import { Button } from "@/shared/ui/button"
 import styles from "./EmailSentModal.module.scss"
-import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon" // Создайте отдельный CSS модуль
+import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 
 interface EmailSentModalProps {
   isOpen: boolean

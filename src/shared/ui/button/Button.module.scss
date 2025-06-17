@@ -41,9 +41,9 @@
             background-color: var(--color-dark-100);
         }
 
-        &:focus {
+        &:focus-visible{
             background-color: var(--color-dark-300);
-            border: 1px solid var(--color-info-500);
+            outline: 2px solid var(--color-info-500);
         }
 
         &:disabled {
@@ -70,7 +70,7 @@
 
         &:focus {
             color: var(--color-info-700);
-            border: 2px solid var(--color-info-700);
+            outline: 2px solid var(--color-info-700);
         }
 
         &:disabled {

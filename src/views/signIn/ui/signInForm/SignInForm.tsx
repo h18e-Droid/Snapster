@@ -5,19 +5,18 @@ import { Button } from "@/shared/ui/button"
 import styles from "./SignInForm.module.scss"
 import Link from "next/link"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
-import { authActions, authThunks } from "@/features/auth"
 import { useFormConfig } from "@/views/signIn/model/schema"
 import { Input } from "@/shared/ui/input"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { appRoutes } from "@/shared/lib/routes"
 import { useRouter, useSearchParams } from "next/navigation"
 import { FormValues } from "@/views/signIn/lib/types"
+import { setAuthError, signIn } from "@/features/auth/model/slice"
 
 export const SignInForm = () => {
   const {
     handleSubmit,
     control,
-    reset,
     resetField,
     clearErrors,
     formState: { errors },
@@ -29,20 +28,19 @@ export const SignInForm = () => {
   const searchParams = useSearchParams()
 
   const onSubmit = (values: FormValues) => {
-    dispatch(authThunks.signIn(values))
+    dispatch(signIn(values))
     resetField("password")
   }
 
   const resetError = () => {
     if (error.trim() !== "") {
-      dispatch(authActions.setError({ error: "" }))
+      dispatch(setAuthError({ error: "" }))
     }
   }
 
   useEffect(() => {
     if (isAuth) {
-      reset()
-      const callbackUrl = searchParams.get("callbackUrl") || appRoutes.private.feed
+      const callbackUrl = searchParams.get("callbackUrl") || appRoutes.home
       router.replace(callbackUrl)
       router.refresh()
       return

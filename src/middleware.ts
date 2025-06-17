@@ -6,7 +6,7 @@ const privateRoutes = Object.values(appRoutes.private)
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const token = request.cookies.get("refreshTokenCustom")?.value
+  const token = request.cookies.get("refreshToken")?.value
   const isPrivatePage = privateRoutes.includes(pathname as PrivateRoutes)
 
   if (!token && isPrivatePage) {
