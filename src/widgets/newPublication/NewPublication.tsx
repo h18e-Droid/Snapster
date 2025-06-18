@@ -10,14 +10,14 @@ import { ModalFix } from "@/widgets/newPublication/windows/modalFix/Modal"
 import { CardsFix } from "@/widgets/newPublication/windows/cardsFix/Card"
 import { Confirmation } from "@/widgets/newPublication/Confirmation"
 
-export const NewPublication = () => {
+const NewPublication = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true)
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+  const [selectedFiles, setSelectedFiles] = useState<Array<File>>([])
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false)
   const [newPost, setNewPost] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const [showConfirmation, setShowConfirmation] = useState(false)
 
   const NextStageHandler = () => {
     setNewPost(true)
@@ -35,9 +35,9 @@ export const NewPublication = () => {
   // }
 
   const handleCloseModal = () => {
-    setShowConfirmation(true);
-    console.log("closeModal");
-  };
+    setShowConfirmation(true)
+    console.log("closeModal")
+  }
 
   const handleBackToFersPage = () => {
     setSelectedFiles([])
@@ -84,31 +84,33 @@ export const NewPublication = () => {
   }
 
   const handleNextImage = () => {
-    if (currentIndex < selectedFiles.length - 1) setCurrentIndex(currentIndex + 1);
-  };
+    if (currentIndex < selectedFiles.length - 1) setCurrentIndex(currentIndex + 1)
+  }
 
   const handlePrevImage = () => {
-    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
-  };
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1)
+  }
 
-  const imageUrl = selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[currentIndex]) : "";
-
+  const imageUrl = selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[currentIndex]) : ""
 
   return (
     <div className={"modalWrapper"}>
       {showConfirmation && (
         <Confirmation
           onConfirm={() => {
-            setIsModalOpen(false);
-            setSelectedFiles([]);
-            setIsPreviewOpen(false);
-            setShowConfirmation(false);
+            setIsModalOpen(false)
+            setSelectedFiles([])
+            setIsPreviewOpen(false)
+            setShowConfirmation(false)
           }}
           onCancel={() => setShowConfirmation(false)}
         />
       )}
       {newPost ? (
-        <PublicationPages handleCloseModal={handleCloseModal} selectedFiles={selectedFiles} handleBackToSecondPage={handleBackToSecondPage}
+        <PublicationPages
+          handleCloseModal={handleCloseModal}
+          selectedFiles={selectedFiles}
+          handleBackToSecondPage={handleBackToSecondPage}
         />
       ) : (
         <ModalFix
@@ -127,18 +129,20 @@ export const NewPublication = () => {
 
           {selectedFiles.length > 0 ? (
             <>
-              <ImagePreview imageUrl={imageUrl}
-                            handleAddPhotosClick={handleAddPhotosClick}
-                            noImage={true}
-                            handleNextImage={handleNextImage} // Передаем функции
-                            handlePrevImage={handlePrevImage} // Передаем функции
-                            currentIndex={currentIndex} // Передаем текущий индекс
-                            totalImages={selectedFiles.length} // Передаем общее количество изображений
-                            selectedFiles={selectedFiles} handleRemoveFile={handleRemoveFile} addFileFoo={addFileFoo}
-                            isPreviewOpen={isPreviewOpen}
+              <ImagePreview
+                imageUrl={imageUrl}
+                handleAddPhotosClick={handleAddPhotosClick}
+                noImage={true}
+                handleNextImage={handleNextImage} // Передаем функции
+                handlePrevImage={handlePrevImage} // Передаем функции
+                currentIndex={currentIndex} // Передаем текущий индекс
+                totalImages={selectedFiles.length} // Передаем общее количество изображений
+                selectedFiles={selectedFiles}
+                handleRemoveFile={handleRemoveFile}
+                addFileFoo={addFileFoo}
+                isPreviewOpen={isPreviewOpen}
               />
             </>
-
           ) : (
             <CardsFix title="" classNameContent={"content-special"} classNameContainer={"container-special"}>
               <ImageOutlineIcon />
@@ -159,3 +163,5 @@ export const NewPublication = () => {
     </div>
   )
 }
+
+export default NewPublication

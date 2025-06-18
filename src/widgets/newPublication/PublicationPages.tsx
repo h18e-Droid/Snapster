@@ -1,40 +1,62 @@
-
-import { ImagePreview } from "@/widgets/newPublication/ImagePreview";
-import { useState } from "react";
+import { ImagePreview } from "@/widgets/newPublication/ImagePreview"
+import { useState } from "react"
 import { Input } from "@/shared/ui/input"
 import { TextArea } from "@/shared/ui/textArea"
-import Profile from "@/views/profile/Profile"
+// import Profile from "@/views/profile/Profile"
 import { ModalFix } from "@/widgets/newPublication/windows/modalFix/Modal"
 
-
 type Props = {
-  handleCloseModal: () => void;
-  selectedFiles: File[];
-  handleBackToSecondPage:()=>void
-};
+  handleCloseModal: () => void
+  selectedFiles: File[]
+  handleBackToSecondPage: () => void
+}
 
-export const PublicationPages = ({ handleCloseModal, selectedFiles,handleBackToSecondPage }: Props) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [location, setLocation] = useState<string>(""); // Состояние для ввода локации
+export const PublicationPages = ({ handleCloseModal, selectedFiles: initialFiles, handleBackToSecondPage }: Props) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const [location, setLocation] = useState<string>("") // Состояние для ввода локации
+  const [selectedFiles, setSelectedFiles] = useState<File[]>(initialFiles)
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+
+  const handleRemoveFile = (index: number) => {
+    const newFiles = [...selectedFiles]
+    newFiles.splice(index, 1)
+    setSelectedFiles(newFiles)
+
+    // Корректируем currentIndex если удалили текущий или предыдущий файл
+    if (index <= currentIndex) {
+      setCurrentIndex(Math.max(0, currentIndex - 1))
+    }
+  }
+
+  const addFileFoo = () => {
+    // Здесь можно добавить логику для добавления новых файлов
+    // Например, открыть диалог выбора файлов
+    // Для примера просто закроем превью
+    setIsPreviewOpen(false)
+  }
+
+  const togglePreview = () => {
+    setIsPreviewOpen(!isPreviewOpen)
+  }
 
   const handleNextImage = () => {
     if (currentIndex < selectedFiles.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex(currentIndex + 1)
     }
-  };
+  }
 
   const handlePrevImage = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex(currentIndex - 1)
     }
-  };
+  }
 
-  const imageUrl = selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[currentIndex]) : "";
+  const imageUrl = selectedFiles.length > 0 ? URL.createObjectURL(selectedFiles[currentIndex]) : ""
 
   const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setLocation(value);
-  };
+    const value = event.target.value
+    setLocation(value)
+  }
 
   return (
     <ModalFix active={true} setActive={handleCloseModal} title="" classNameContent={"publication-pages"}>
@@ -58,12 +80,16 @@ export const PublicationPages = ({ handleCloseModal, selectedFiles,handleBackToS
           {selectedFiles.length > 0 ? (
             <ImagePreview
               noImage={false}
-              handleAddPhotosClick={() => {}}
+              handleAddPhotosClick={togglePreview}
               imageUrl={imageUrl}
               handleNextImage={handleNextImage}
               handlePrevImage={handlePrevImage}
               currentIndex={currentIndex}
               totalImages={selectedFiles.length}
+              isPreviewOpen={isPreviewOpen}
+              selectedFiles={selectedFiles}
+              handleRemoveFile={handleRemoveFile}
+              addFileFoo={addFileFoo}
             />
           ) : (
             <p>No images selected.</p>
@@ -71,24 +97,26 @@ export const PublicationPages = ({ handleCloseModal, selectedFiles,handleBackToS
         </div>
         <div className="right">
           <div className="top">
-            <Profile/>
+            {/*<Profile/>*/}
             <div style={{ width: "433px", height: "60px", position: "relative", margin: "24px" }}>
-
-              <TextArea title={'Add publication descriptions'} width={433} height={120}/>
+              <TextArea title={"Add publication descriptions"} width={433} height={120} />
             </div>
           </div>
           <div className="divider"></div>
 
-
           <div className="bottom">
-
             <div style={{ width: "433px", height: "60px", position: "relative", margin: "24px" }}>
-
-            <Input type={'text'} placeholder={'add location'} label={'Add location'} value={location} onChange={handleLocationChange}/>
+              <Input
+                type={"text"}
+                placeholder={"add location"}
+                label={"Add location"}
+                value={location}
+                onChange={handleLocationChange}
+              />
             </div>
           </div>
         </div>
       </div>
     </ModalFix>
   )
-};
+}

@@ -13,9 +13,9 @@ type Props = {
   totalImages: number
   //----
   isPreviewOpen?: boolean
-  selectedFiles?: Array<File>
-  handleRemoveFile?: (index: number) => void
-  addFileFoo?: () => void
+  selectedFiles: Array<File>
+  handleRemoveFile: (index: number) => void
+  addFileFoo: () => void
 }
 
 export const ImagePreview = ({
