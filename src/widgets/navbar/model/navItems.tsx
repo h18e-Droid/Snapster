@@ -27,7 +27,7 @@ export const items = [
     id: 2,
     title: "Create",
     icon: [<PlusSquareIcon key="filled" />, <PlusSquareOutlineIcon key="outline" />],
-    link: "",
+    link: appRoutes.private.create,
   },
   {
     id: 3,
