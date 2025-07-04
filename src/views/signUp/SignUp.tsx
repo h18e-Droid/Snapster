@@ -29,6 +29,8 @@ const SignUp = () => {
 
   const colorIcon = "var(--color-light-100)"
 
+  console.log("render")
+
   const {
     control,
     handleSubmit,

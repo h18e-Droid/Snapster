@@ -4,8 +4,8 @@ import { GoogleComIcon } from "@/shared/assets/icons/components/GoogleComIcon"
 import { GitHubComIcon } from "@/shared/assets/icons/components/GitHubComIcon"
 import styles from "./SignIn.module.scss"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
-import { SignInForm } from "@/views/signIn/ui/signInForm/SignInForm"
 import { Loader } from "@/shared/ui/loader"
+import { SignInForm } from "@/features/auth/signIn"
 
 export const SignIn = () => {
   const status = useAppSelector((state) => state.auth.status)

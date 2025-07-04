@@ -29,7 +29,3 @@ const HomePage = ({ users }: { users: user[] }) => {
 }
 
 export default HomePage
-
-//{String(count).padStart(6, "0")}
-//-240 |234
-//1.67

@@ -1,9 +1,11 @@
-import { axiosInstance } from "@/shared/api/axiosInstance"
+import { axiosInstance } from "@/shared/api/baseClientApi"
 import {
-  confirmRegistrationPayload, createNewPasswordPayload, forgotPasswordPayload,
+  confirmRegistrationPayload,
+  createNewPasswordPayload,
+  forgotPasswordPayload,
   signInPayload,
   signUpPayload,
-  verificationEmailPayload
+  verificationEmailPayload,
 } from "@/features/auth/lib/types/types"
 
 export const authApi = {
@@ -27,5 +29,5 @@ export const authApi = {
   },
   createNewPassword: async (payload: createNewPasswordPayload) => {
     return axiosInstance.post("/api/v1/auth/new-password", payload)
-  }
+  },
 }

@@ -4,68 +4,64 @@ import { Controller, useForm } from "react-hook-form"
 import { Button } from "@/shared/ui/button"
 import styles from "./SignInForm.module.scss"
 import Link from "next/link"
-import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
 import { useFormConfig } from "@/views/signIn/model/schema"
 import { Input } from "@/shared/ui/input"
-import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { appRoutes } from "@/shared/lib/routes"
 import { useRouter, useSearchParams } from "next/navigation"
 import { FormValues } from "@/views/signIn/lib/types"
-import { setAuthError, signIn } from "@/features/auth/model/slice"
+import { useSignInMutation } from "../api/signInApi"
+import { errorResponse } from "@/shared/types/types"
 
 export const SignInForm = () => {
-  const {
-    handleSubmit,
-    control,
-    resetField,
-    clearErrors,
-    formState: { errors },
-  } = useForm<FormValues>(useFormConfig)
-  const dispatch = useAppDispatch()
-  const error = useAppSelector((state) => state.auth.error)
-  const isAuth = useAppSelector((state) => state.auth.isAuth)
+  const form = useForm<FormValues>(useFormConfig)
+  const [signIn, { isSuccess, isError, error }] = useSignInMutation()
   const router = useRouter()
-  const searchParams = useSearchParams()
+  const params = useSearchParams()
 
   const onSubmit = (values: FormValues) => {
-    dispatch(signIn(values))
-    resetField("password")
+    signIn(values)
   }
 
-  const resetError = () => {
-    if (error.trim() !== "") {
-      dispatch(setAuthError({ error: "" }))
+  const clearError = (field: "password" | "email") => {
+    if (form.formState.errors[`${field}`]) {
+      form.clearErrors(field)
     }
   }
 
   useEffect(() => {
-    if (isAuth) {
-      const callbackUrl = searchParams.get("callbackUrl") || appRoutes.home
+    const err = error as errorResponse
+    if (err?.status === 401) {
+      form.setError("password", {
+        type: "manual",
+        message: err?.data?.errorsMessages[0].message,
+      })
+    }
+  }, [isError])
+
+  useEffect(() => {
+    if (isSuccess) {
+      const callbackUrl = params.get("callbackUrl") || appRoutes.home
       router.replace(callbackUrl)
       router.refresh()
       return
     }
-  }, [isAuth])
-
-  useEffect(() => {
-    dispatch(setAuthError({ error: "" }))
-  }, [])
+  }, [isSuccess])
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.formWrapper}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className={styles.formWrapper}>
         <Controller
           name={"email"}
           defaultValue={""}
-          control={control}
+          control={form.control}
           render={({ field }) => (
             <Input
               {...field}
               onChange={(e) => {
-                clearErrors("email")
+                clearError("email")
                 field.onChange(e)
               }}
-              errorText={errors?.email?.message}
+              errorText={form.formState.errors?.email?.message}
               placeholder={"example@example.com"}
               type={"email"}
               label={"email"}
@@ -74,17 +70,16 @@ export const SignInForm = () => {
         />
         <Controller
           name={"password"}
-          control={control}
+          control={form.control}
           defaultValue={""}
           render={({ field }) => (
             <Input
               {...field}
               onChange={(e) => {
-                clearErrors("password")
+                clearError("password")
                 field.onChange(e)
-                resetError()
               }}
-              errorText={error ? error : errors?.password?.message}
+              errorText={form.formState.errors?.password?.message}
               placeholder={"Password"}
               type={"password"}
               label={"password"}
@@ -101,7 +96,7 @@ export const SignInForm = () => {
           <Button
             type="submit"
             variant={"primary"}
-            disabled={!!errors.email?.message || !!errors.password?.message}
+            disabled={!!form.formState.errors.email?.message || !!form.formState.errors.password?.message}
             className={styles.button}
           >
             Sign In

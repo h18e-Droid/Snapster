@@ -3,16 +3,16 @@ import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
 import { authApi } from "@/features/auth/api/authApi"
 import {
   authStatus,
+  confirmRegistrationPayload,
+  createNewPasswordPayload,
+  emailRegisteredType,
   FieldErrors,
+  forgotPasswordPayload,
   InitialState,
+  PasswordResetStatus,
   signInPayload,
   signUpPayload,
-  confirmRegistrationPayload,
   verificationEmailPayload,
-  forgotPasswordPayload,
-  emailRegisteredType,
-  createNewPasswordPayload,
-  PasswordResetStatus,
 } from "@/features/auth/lib/types/types"
 import axios from "axios"
 import { FieldError } from "@/shared/types/types"

@@ -1,4 +1,3 @@
-
 const BASE_URL = "https://snap-ster.net/"
 
 type RequestOptions<TBody = unknown> = {
@@ -31,7 +30,7 @@ const request = async <TResponse = unknown, TBody = unknown>(
     const response = await fetch(url, {
       method,
       headers: {
-        "Content-Type": "application/json", // Дефолтний заголовок
+        "Content-Type": "application/json",
         ...headers,
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
