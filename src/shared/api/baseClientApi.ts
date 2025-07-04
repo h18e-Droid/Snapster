@@ -24,7 +24,10 @@ export const baseClientApi = createApi({
   reducerPath: "api",
   baseQuery: async (args, api, extraOptions) => {
     const result = await fetchBaseQuery({
-      baseUrl: "https://snap-ster.net/",
+      baseUrl: "https://snap-ster.net",
+      prepareHeaders: (headers) => {
+        headers.set("Authorization", `Bearer ${localStorage.getItem("accessToken")}`)
+      },
     })(args, api, extraOptions)
     handleClientError({ result, api })
     return result

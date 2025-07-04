@@ -1,21 +1,23 @@
 "use client"
 import React, { useEffect } from "react"
-import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
-import { authMe } from "@/features/auth/model/slice"
+import { useMeQuery } from "@/features/auth/me"
+import { Loader } from "@/shared/ui/loader"
 
 type AppInitializerProps = {
   children: React.ReactNode
-  isAuth: boolean
+  userData: { userId: string } | null
 }
 
-export const AppInitializer = ({ children, isAuth }: AppInitializerProps) => {
-  const dispatch = useAppDispatch()
+export const AppInitializer = ({ children, userData }: AppInitializerProps) => {
+  const { isLoading } = useMeQuery(undefined /*{ skip: !!userData }*/)
 
   useEffect(() => {
-    if (isAuth) {
-      dispatch(authMe())
-    } else return
-  }, [dispatch])
+    // meApi.util.upsertQueryData()
+  }, [])
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return <>{children}</>
 }

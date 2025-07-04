@@ -25,7 +25,6 @@ const request = async <TResponse = unknown, TBody = unknown>(
   { method = "GET", headers = {}, body, params }: RequestOptions<TBody> = {},
 ): Promise<TResponse> => {
   const url = buildUrl(path, params)
-
   try {
     const response = await fetch(url, {
       method,

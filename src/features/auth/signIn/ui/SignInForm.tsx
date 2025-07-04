@@ -14,7 +14,7 @@ import { errorResponse } from "@/shared/types/types"
 
 export const SignInForm = () => {
   const form = useForm<FormValues>(useFormConfig)
-  const [signIn, { isSuccess, isError, error }] = useSignInMutation()
+  const [signIn, { isSuccess, isError, error, isLoading }] = useSignInMutation()
   const router = useRouter()
   const params = useSearchParams()
 
@@ -96,7 +96,7 @@ export const SignInForm = () => {
           <Button
             type="submit"
             variant={"primary"}
-            disabled={!!form.formState.errors.email?.message || !!form.formState.errors.password?.message}
+            disabled={!!form.formState.errors.email?.message || !!form.formState.errors.password?.message || isLoading}
             className={styles.button}
           >
             Sign In

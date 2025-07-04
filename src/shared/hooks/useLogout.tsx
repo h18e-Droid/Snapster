@@ -1,6 +1,6 @@
 import { userActions } from "@/entities/user"
 import { useRouter } from "next/navigation"
-import { axiosInstance } from "@/shared/api/axiosInstance"
+import { axiosInstance } from "@/shared/api/baseClientApi"
 import { appRoutes } from "@/shared/lib/routes"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
 

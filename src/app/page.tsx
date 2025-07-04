@@ -4,8 +4,8 @@ import PublicHome from "./(public)/Home"
 import React, { Suspense } from "react"
 import { Loader } from "@/shared/ui/loader"
 
-export default function Home() {
-  const isAuth = isUserAuthenticated()
+export default async function Home() {
+  const isAuth = await isUserAuthenticated()
 
   return <Suspense fallback={<Loader />}>{isAuth ? <PrivateHome /> : <PublicHome />}</Suspense>
 }
