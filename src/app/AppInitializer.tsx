@@ -9,15 +9,21 @@ type AppInitializerProps = {
 }
 
 export const AppInitializer = ({ children, userData }: AppInitializerProps) => {
-  const { isLoading } = useMeQuery(undefined /*{ skip: !!userData }*/)
+  const { isLoading, isError } = useMeQuery(undefined, { skip: !!userData })
+
+  console.log(userData)
 
   useEffect(() => {
+    if (isError) {
+      localStorage.removeItem("accessToken")
+    }
     // meApi.util.upsertQueryData()
-  }, [])
+  }, [isError])
 
-  if (isLoading) {
-    return <Loader />
-  }
-
-  return <>{children}</>
+  return (
+    <>
+      {isLoading && <Loader />}
+      {children}
+    </>
+  )
 }

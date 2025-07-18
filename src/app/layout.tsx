@@ -5,7 +5,6 @@ import "./globals.css"
 import { Inter, Roboto } from "next/font/google"
 import { Providers } from "./Providers"
 import { Header } from "@/widgets/header"
-import { isUserAuthenticated } from "@/shared/lib/state/isUserAuthenticated"
 import { getUserData } from "@/shared/lib/state/getUserData"
 
 const inter = Inter({

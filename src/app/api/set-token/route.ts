@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     path: "/",
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 60 * 60, // 1 година
+    maxAge: 24 * 60 * 60, // 24 годин
   })
 
   return NextResponse.json({ success: true })

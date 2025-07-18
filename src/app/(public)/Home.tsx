@@ -1,6 +1,6 @@
 import React from "react"
 import HomePage from "@/views/homePage/ui/HomePage"
-import { api } from "@/shared/api/api"
+import { api } from "@/shared/api/baseServerApi"
 import Layout from "./layout"
 import { user } from "@/views/homePage/lib/types"
 

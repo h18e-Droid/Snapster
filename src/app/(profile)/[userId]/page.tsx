@@ -1,6 +1,6 @@
 import React from "react"
 import Profile from "@/views/profile"
-import { api } from "@/shared/api/api"
+import { api } from "@/shared/api/baseServerApi"
 import { cookies } from "next/headers"
 import UserNotFound from "@/app/(profile)/[userId]/userNotFound"
 
@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: Promise<{ userId: strin
       return <Profile isAuth={isAuth} user={user} />
     } else return <UserNotFound />
   } catch (e) {
-    console.error(e)
+    console.log(e)
     return <UserNotFound />
   }
 }

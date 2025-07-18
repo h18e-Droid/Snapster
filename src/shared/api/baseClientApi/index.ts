@@ -1,6 +1,8 @@
 import axios from "axios"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import handleClientError from "@/shared/lib/api/handleClientError"
+import { errorResponse } from "@/shared/types/types"
+import { baseQueryWithReauth } from "@/shared/api/baseClientApi/baseQueryWithReauth"
 
 export const axiosInstance = axios.create({
   baseURL: "https://snap-ster.net",
@@ -20,18 +22,22 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error),
 )
 
-export const baseClientApi = createApi({
-  reducerPath: "api",
-  baseQuery: async (args, api, extraOptions) => {
-    const result = await fetchBaseQuery({
+export const api = createApi({
+  reducerPath: "baseApi",
+  baseQuery: baseQueryWithReauth,
+  endpoints: () => ({}),
+  tagTypes: ["me"],
+})
+
+/* /*const result = await fetchBaseQuery({
       baseUrl: "https://snap-ster.net",
       prepareHeaders: (headers) => {
         headers.set("Authorization", `Bearer ${localStorage.getItem("accessToken")}`)
       },
-    })(args, api, extraOptions)
-    handleClientError({ result, api })
-    return result
-  },
-  endpoints: () => ({}),
-  tagTypes: ["me"],
-})
+    })(args, api, extraOptions)*/
+
+/* const res = result.error as errorResponse
+ if (res.status === 401) {
+ }*/
+// handleClientError({ result, api })
+// return result*/

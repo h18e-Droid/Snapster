@@ -3,7 +3,7 @@ import { authReducer } from "@/features/auth"
 import { userReducer } from "@/entities/user"
 import { appReducer } from "@/features/app"
 import { postReducer } from "@/features/crudPost"
-import { baseClientApi } from "@/shared/api/baseClientApi"
+import { api } from "@/shared/api/baseClientApi"
 import { setupListeners } from "@reduxjs/toolkit/query/react"
 import { signInApi } from "@/features/auth/signIn/api/signInApi"
 
@@ -13,11 +13,9 @@ export const store = configureStore({
     user: userReducer,
     app: appReducer,
     post: postReducer,
-    [baseClientApi.reducerPath]: baseClientApi.reducer,
-    [signInApi.reducerPath]: signInApi.reducer,
+    [api.reducerPath]: api.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseClientApi.middleware).concat(signInApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 })
 setupListeners(store.dispatch)
 

@@ -1,18 +1,26 @@
 import { cookies } from "next/headers"
-import { api } from "@/shared/api/api"
+import { api } from "@/shared/api/baseServerApi"
+import { serverApiError } from "@/shared/types/types"
 
 export const getUserData = async (): Promise<{ userId: string } | null> => {
   const cookiesResponse = await cookies()
-  const token = cookiesResponse.get("accessToken")?.value
+  const token = cookiesResponse?.get("accessToken")?.value
 
   try {
-    let res = null as { userId: string } | null
+    let result = null as { userId: string } | null
     if (token) {
-      res = await api.get("api/v1/auth/jwt-test", token ? { headers: { Authorization: `Bearer ${token}` } } : {})
+      result = await api.get("api/v1/auth/jwt-test")
     }
-    return res
+    if (result && result.userId) {
+      return result
+    }
+    return null
   } catch (error) {
-    console.error(error)
+    const err = error as serverApiError
+    if (err.status === 401) {
+      //refreshLogic
+    }
+
     return null
   }
 }

@@ -28,8 +28,13 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(isPending, (state) => {
+      .addMatcher(isPending, (state, action) => {
         state.loadingCount += 1
+        const meta = action.meta as { arg?: { endpointName?: string } } | undefined
+        if (meta?.arg?.endpointName === "me") {
+          return
+        }
+
         NProgress.start()
         state.status = "loading"
       })

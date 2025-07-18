@@ -1,17 +1,7 @@
-import handleClientError from "@/shared/lib/api/handleClientError"
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { setToken } from "@/features/auth/signIn/api/set-token"
+import { setToken } from "@/shared/api/set-token"
+import { api } from "@/shared/api/baseClientApi"
 
-export const signInApi = createApi({
-  reducerPath: "signIn",
-  baseQuery: async (args, api, extraOptions) => {
-    const result = await fetchBaseQuery({
-      baseUrl: "https://snap-ster.net/",
-    })(args, api, extraOptions)
-    await setToken({ result })
-    handleClientError({ result, api })
-    return result
-  },
+export const signInApi = api.injectEndpoints({
   endpoints: (build) => ({
     signIn: build.mutation({
       query: (payload) => {
@@ -19,6 +9,18 @@ export const signInApi = createApi({
           method: "POST",
           url: "/api/v1/auth/login",
           body: payload,
+        }
+      },
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+
+          const accessToken = (data as { accessToken: string }).accessToken
+          if (accessToken) {
+            await setToken(accessToken)
+          }
+        } catch (err) {
+          console.log(err)
         }
       },
     }),

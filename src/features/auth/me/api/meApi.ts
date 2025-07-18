@@ -1,6 +1,6 @@
-import { baseClientApi } from "@/shared/api/baseClientApi"
+import { api } from "@/shared/api/baseClientApi"
 
-export const meApi = baseClientApi.injectEndpoints({
+export const meApi = api.injectEndpoints({
   endpoints: (build) => ({
     me: build.query({
       query: () => {
@@ -9,6 +9,7 @@ export const meApi = baseClientApi.injectEndpoints({
           method: "GET",
         }
       },
+      providesTags: ["me"],
     }),
   }),
 })

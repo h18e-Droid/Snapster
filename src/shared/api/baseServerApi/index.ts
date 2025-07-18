@@ -1,3 +1,6 @@
+import { cookies } from "next/headers"
+import { serverApiError } from "@/shared/types/types"
+
 const BASE_URL = "https://snap-ster.net/"
 
 type RequestOptions<TBody = unknown> = {
@@ -25,15 +28,30 @@ const request = async <TResponse = unknown, TBody = unknown>(
   { method = "GET", headers = {}, body, params }: RequestOptions<TBody> = {},
 ): Promise<TResponse> => {
   const url = buildUrl(path, params)
+
+  const cookiesResponse = await cookies()
+  const token = cookiesResponse?.get("accessToken")?.value // важливо: .value
+
+  const headersWithAuth: HeadersInit = {
+    "Content-Type": "application/json",
+    ...headers,
+  }
+
+  if (token) {
+    headersWithAuth["Authorization"] = `Bearer ${token}`
+  }
+
   try {
     const response = await fetch(url, {
       method,
-      headers: {
-        "Content-Type": "application/json",
-        ...headers,
-      },
+      headers: headersWithAuth,
       ...(body ? { body: JSON.stringify(body) } : {}),
     })
+
+    if (!response.ok) {
+      const error = new Error(`HTTP error! status: ${response.status}`)
+      throw { ...error, status: response.status, response } as serverApiError
+    }
 
     const contentType = response.headers.get("content-type") || ""
     if (contentType.includes("application/json")) {
@@ -42,8 +60,7 @@ const request = async <TResponse = unknown, TBody = unknown>(
 
     return {} as TResponse
   } catch (error) {
-    console.error("Request error:", error)
-    throw error
+    throw error as serverApiError
   }
 }
 
