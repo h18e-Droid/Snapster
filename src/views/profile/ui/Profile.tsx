@@ -9,8 +9,9 @@ import { user } from "@/views/profile/lib/types"
 import { PersonIcon } from "@/shared/assets/icons"
 import Posts from "./posts/Posts"
 
-const Profile = ({ user, isAuth }: { user: user; isAuth: boolean }) => {
+const Profile = ({ user }: { user: user }) => {
   const currentUserId = useAppSelector((state) => state.user.userId)
+  const isAuth = useAppSelector((state) => state.auth.isAuth)
 
   const isMe = user.id === currentUserId
 

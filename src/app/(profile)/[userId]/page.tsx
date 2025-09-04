@@ -1,7 +1,6 @@
 import React from "react"
 import Profile from "@/views/profile"
-import { api } from "@/shared/api/api"
-import { cookies } from "next/headers"
+import { api } from "@/shared/api/baseServerApi"
 import UserNotFound from "@/app/(profile)/[userId]/userNotFound"
 
 type user = {
@@ -15,8 +14,6 @@ type user = {
 }
 
 export default async function Page({ params }: { params: Promise<{ userId: string }> }) {
-  const cookiesResponse = await cookies()
-  const isAuth = cookiesResponse.has("refreshToken")
   const awaitedParams = await params
   try {
     const res: user = await api.get(`api/v1/sa/users/${awaitedParams.userId}`)
@@ -30,10 +27,9 @@ export default async function Page({ params }: { params: Promise<{ userId: strin
         following: 4332,
         publications: 1234,
       }
-      return <Profile isAuth={isAuth} user={user} />
+      return <Profile user={user} />
     } else return <UserNotFound />
-  } catch (e) {
-    console.error(e)
+  } catch {
     return <UserNotFound />
   }
 }
