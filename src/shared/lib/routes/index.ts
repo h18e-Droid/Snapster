@@ -1,6 +1,6 @@
 export const appRoutes = {
   private: {
-    create: "/newPublication"
+    create: "/newPublication",
   },
   public: {
     profile: "/profile",
@@ -11,6 +11,7 @@ export const appRoutes = {
     signIn: "/signIn",
     signUp: "/signUp",
     termsOfService: "/termsOfService",
+    publicPage: "/public-page",
   },
   home: "/",
 } as const
@@ -21,5 +22,4 @@ export type AppRoutes = PrivateRoutes | PublicRoutes
 
 export type PrivateRoutes = Routes["private"][keyof Routes["private"]]
 
-// Для публічних:
 export type PublicRoutes = Routes["public"][keyof Routes["public"]]

@@ -1,19 +1,68 @@
 .success, .error {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    transform: translateX(100%);
+    margin: 0 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--color-success-900);
     border-radius: 2px;
     color: var(--color-light-100);
-    border: 1px solid var(--color-success-500);
     font-family: var(--font-family-secondary), sans-serif;
     line-height: var(--line-height-m);
     font-size: var(--font-size-s);
     text-align: center;
     gap: 30px;
     padding: 6px 24px;
+    animation: slide-in 0.3s forwards;
+    z-index: 9999;
+    @media (max-width: 768px){
+        top: 80px;
+        bottom: auto;
+    }
 }
+
 .error {
     background-color: var(--color-danger-900);
     border: 1px solid var(--color-danger-500);
+}
+
+.success {
+    background-color: var(--color-success-900);
+    border: 1px solid var(--color-success-500);
+}
+
+.hide {
+    animation: slide-out 0.3s forwards;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(-110%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-140%);
+    }
+}
+
+.btn {
+    cursor: pointer;
+    width: 25px;
+    padding: 0;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    border: none;
+    background: transparent;
 }

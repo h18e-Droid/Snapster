@@ -6,13 +6,12 @@ import { AppInitializer } from "@/app/AppInitializer"
 
 type Providers = {
   children: React.ReactNode
-  isAuth: boolean
 }
 
-export const Providers = ({ children, isAuth }: Providers) => {
+export const Providers = ({ children }: Providers) => {
   return (
     <Provider store={store}>
-      <AppInitializer isAuth={isAuth}>{children}</AppInitializer>
+      <AppInitializer>{children}</AppInitializer>
     </Provider>
   )
 }

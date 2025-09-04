@@ -20,7 +20,7 @@ const Posts = () => {
       if (observer.current) observer.current.disconnect()
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          dispatch(fetchMorePosts())
+          // dispatch(fetchMorePosts())
         }
       })
       if (node) observer.current.observe(node)
@@ -29,9 +29,9 @@ const Posts = () => {
   )
 
   useEffect(() => {
-    if (visiblePosts.length === 0) {
+    /*if (visiblePosts.length === 0) {
       dispatch(fetchMorePosts())
-    }
+    }*/
   }, [dispatch, visiblePosts.length])
 
   return (
