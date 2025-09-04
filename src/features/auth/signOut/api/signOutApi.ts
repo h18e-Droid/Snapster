@@ -1,20 +1,21 @@
 import { api } from "@/shared/api/baseClientApi"
-import { removeToken } from "@/shared/api/remove-token"
+import { authActions } from "@/entities/auth"
 
 export const signOutApi = api.injectEndpoints({
+  overrideExisting: true,
   endpoints: (build) => ({
     signOut: build.mutation({
       query: () => {
         return { method: "POST", url: "/api/v1/auth/logout" }
       },
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const res = await queryFulfilled
           if (res) {
-            await removeToken()
+            dispatch(authActions.clearAuth())
           }
         } catch (err) {
-          await removeToken()
+          dispatch(authActions.clearAuth())
           console.log(err)
         }
       },

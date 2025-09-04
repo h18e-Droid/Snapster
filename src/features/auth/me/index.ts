@@ -1,1 +1,1 @@
-export { useMeQuery, meApi } from "./api/meApi"
+export { useMeQuery, meApi, useLazyMeQuery } from "./api/meApi"

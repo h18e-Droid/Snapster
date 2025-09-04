@@ -6,13 +6,12 @@ import { AppInitializer } from "@/app/AppInitializer"
 
 type Providers = {
   children: React.ReactNode
-  userData: { userId: string } | null
 }
 
-export const Providers = ({ children, userData }: Providers) => {
+export const Providers = ({ children }: Providers) => {
   return (
     <Provider store={store}>
-      <AppInitializer userData={userData}>{children}</AppInitializer>
+      <AppInitializer>{children}</AppInitializer>
     </Provider>
   )
 }

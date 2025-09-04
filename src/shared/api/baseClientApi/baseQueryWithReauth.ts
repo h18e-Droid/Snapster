@@ -1,35 +1,47 @@
 import type { BaseQueryFn } from "@reduxjs/toolkit/query"
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import handleClientError from "@/shared/lib/api/handleClientError"
+import { RootState } from "@/app/store"
+import handleClientError from "./handleClientError"
+
+type ExtraOptions = {
+  skipGlobalError?: boolean
+}
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://snap-ster.net",
-  prepareHeaders: (headers) => {
-    headers.set("Authorization", `Bearer ${localStorage.getItem("accessToken")}`)
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth.accessToken
+    if (token) headers.set("authorization", `Bearer ${token}`)
+    return headers
   },
 })
 
-export const baseQueryWithReauth: BaseQueryFn = async (args, api, extraOptions) => {
+export const baseQueryWithReAuth: BaseQueryFn = async (args, api, extraOptions: ExtraOptions) => {
   let result = await baseQuery(args, api, extraOptions)
-  const token = localStorage.getItem("accessToken")
 
-  if (result.error?.status === 401 && token) {
+  const opts: Required<ExtraOptions> = {
+    skipGlobalError: false,
+    ...(extraOptions ?? {}),
+  }
+
+  if (result.error?.status === 401) {
     // оновити токен
     try {
-      const refreshResult = await baseQuery({ url: "/api/v1/auth/refresh-token", method: "POST" }, api, extraOptions)
-
-      if (refreshResult.data) {
-        const newAccessToken = (refreshResult.data as { accessToken: string }).accessToken
-        localStorage.setItem("accessToken", newAccessToken)
-
-        result = await baseQuery(args, api, extraOptions)
+      const url = typeof args === "string" ? args : args.url
+      if (!url.includes("/login")) {
+        const refreshResult = await baseQuery({ url: "/api/v1/auth/refresh-token", method: "POST" }, api, extraOptions)
+        if (refreshResult.data) {
+          result = await baseQuery(args, api, extraOptions)
+        }
       }
     } catch (err) {
       console.error(err)
-      localStorage.removeItem("accessToken")
     }
   }
-  handleClientError({ result, api })
+
+  if (!opts.skipGlobalError) {
+    handleClientError({ result, api })
+  }
 
   return result
 }

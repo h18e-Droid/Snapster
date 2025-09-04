@@ -4,12 +4,11 @@ import { BellIcon, MoreHorizontalIcon } from "@/shared/assets/icons"
 import { Button } from "@/shared/ui/button"
 import React from "react"
 import { appRoutes } from "@/shared/lib/routes"
+import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 
-type Props = {
-  isAuth: boolean
-}
+export const HeaderButtons = () => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth)
 
-export const HeaderButtons = ({ isAuth }: Props) => {
   if (isAuth) {
     return (
       <>

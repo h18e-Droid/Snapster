@@ -10,7 +10,7 @@ export type BaseResponse<D = object> = {
   data: D
 }
 
-export type errorResponse = {
+export type ErrorResponse = {
   status: number | string
   data: {
     errorsMessages: { field: string; message: string }[]

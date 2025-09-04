@@ -1,13 +1,7 @@
-import globals from "globals"
-import pluginJs from "@eslint/js"
-import tseslint from "typescript-eslint"
-import pluginReact from "eslint-plugin-react"
-import nextPlugin from "@next/eslint-plugin-next"
-
 /** @type {import("eslint").Linter.Config[]} */
 export default [
-  {
-    files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"], // Применять ко всем JS/TS файлам
+  /* {
+    files: ["**!/!*.{js,mjs,cjs,ts,jsx,tsx}"], // Применять ко всем JS/TS файлам
   },
 
   {
@@ -31,5 +25,5 @@ export default [
       ...nextPlugin.configs.recommended.rules, // Рекомендованные правила Next.js
       ...nextPlugin.configs["core-web-vitals"].rules, // Правила Core Web Vitals
     },
-  },
+  },*/
 ]

@@ -1,4 +1,6 @@
 import { api } from "@/shared/api/baseClientApi"
+import { authActions } from "@/entities/auth"
+import { userActions } from "@/entities/user"
 
 export const meApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -9,9 +11,18 @@ export const meApi = api.injectEndpoints({
           method: "GET",
         }
       },
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const res = await queryFulfilled
+          dispatch(authActions.setIsAuth({ isAuth: true }))
+          dispatch(userActions.setUserId({ userId: res.data.userId }))
+        } catch {
+          dispatch(authActions.clearAuth())
+        }
+      },
       providesTags: ["me"],
     }),
   }),
 })
 
-export const { useMeQuery } = meApi
+export const { useMeQuery, useLazyMeQuery } = meApi

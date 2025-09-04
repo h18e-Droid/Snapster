@@ -44,13 +44,16 @@ export const Navbar = () => {
               className={item.id === 6 ? styles.itemStatistic : item.id === 7 ? styles.itemFavorite : styles.item}
             >
               <li className={styles.listItem} key={item.id}>
-                <Link
-                  href={item.id === 3 && currentUserId ? currentUserId : item.link}
-                  className={clsx(styles.listItem, { [styles.active]: activeItem.includes(item.id) })}
-                  onClick={item.id === 8 ? signOutHandler : () => onCLickHandler(item.id)}
-                >
-                  {activeItem.includes(item.id) ? <span>{item.icon[0]}</span> : <span>{item.icon[1]}</span>}
-                  <span className={styles.titleIcon}>{item.title}</span>
+                <Link href={item.id === 3 && currentUserId ? `/${currentUserId}` : item.link}>
+                  <div
+                    className={clsx(styles.listItem, { [styles.active]: activeItem.includes(item.id) })}
+                    onClick={item.id === 8 ? signOutHandler : () => onCLickHandler(item.id)}
+                  >
+                    <span style={{ pointerEvents: "none" }}>
+                      {activeItem.includes(item.id) ? item.icon[0] : item.icon[1]}
+                    </span>
+                    <span className={styles.titleIcon}>{item.title}</span>
+                  </div>
                 </Link>
               </li>
             </div>

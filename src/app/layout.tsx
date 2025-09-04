@@ -5,7 +5,6 @@ import "./globals.css"
 import { Inter, Roboto } from "next/font/google"
 import { Providers } from "./Providers"
 import { Header } from "@/widgets/header"
-import { getUserData } from "@/shared/lib/state/getUserData"
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -25,13 +24,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const userData = await getUserData()
-
   return (
     <html lang="en" className={`${inter.className} ${roboto.className}`}>
       <body>
-        <Providers userData={userData}>
-          <Header isAuth={!!userData} />
+        <Providers>
+          <Header />
           <div className="content-wrapper">{children}</div>
         </Providers>
       </body>

@@ -36,7 +36,7 @@ const slice = createSlice({
       })
       .addCase(fetchPost.rejected, (state, action) => {
         state.isLoading = false
-        state.error = action.error.message || 'Failed to fetch post'
+        state.error = action.error.message || "Failed to fetch post"
       })
       .addCase(updatePost.pending, (state) => {
         state.isLoading = true
@@ -48,7 +48,7 @@ const slice = createSlice({
       })
       .addCase(updatePost.rejected, (state, action) => {
         state.isLoading = false
-        state.error = action.error.message || 'Failed to update post'
+        state.error = action.error.message || "Failed to update post"
       })
   },
 })
@@ -58,11 +58,11 @@ export const fetchPost = createAppAsyncThunk<PostType, number>(
   async (postId, { rejectWithValue }) => {
     try {
       const response = await postApi.getPost(postId)
-      return response.data
+      return (response as any).data
     } catch (error) {
       return rejectWithValue(error)
     }
-  }
+  },
 )
 
 export const updatePost = createAppAsyncThunk<PostType, { postId: number; description: string }>(
@@ -70,11 +70,11 @@ export const updatePost = createAppAsyncThunk<PostType, { postId: number; descri
   async ({ postId, description }, { rejectWithValue }) => {
     try {
       const response = await postApi.updatePost(postId, { description })
-      return response.data
+      return (response as any).data
     } catch (error) {
       return rejectWithValue(error)
     }
-  }
+  },
 )
 
 export const postActions = slice.actions

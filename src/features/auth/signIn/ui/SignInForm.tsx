@@ -1,16 +1,16 @@
 "use client"
 import React, { useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { Button } from "@/shared/ui/button"
-import styles from "./SignInForm.module.scss"
+import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { useFormConfig } from "@/views/signIn/model/schema"
+import { Button } from "@/shared/ui/button"
 import { Input } from "@/shared/ui/input"
 import { appRoutes } from "@/shared/lib/routes"
-import { useRouter, useSearchParams } from "next/navigation"
-import { FormValues } from "@/views/signIn/lib/types"
 import { useSignInMutation } from "../api/signInApi"
-import { errorResponse } from "@/shared/types/types"
+import { useFormConfig } from "../model/schema"
+import { FormValues } from "../lib/types"
+import { ErrorResponse } from "@/shared/types/types"
+import styles from "./SignInForm.module.scss"
 
 export const SignInForm = () => {
   const form = useForm<FormValues>(useFormConfig)
@@ -29,7 +29,7 @@ export const SignInForm = () => {
   }
 
   useEffect(() => {
-    const err = error as errorResponse
+    const err = error as ErrorResponse
     if (err?.status === 401) {
       form.setError("password", {
         type: "manual",

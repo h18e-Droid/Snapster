@@ -7,6 +7,7 @@ const initialState: InitialState = {
   error: null as string | null,
   success: null as string | null,
   status: "idle" as statusType,
+  initialized: false,
   loadingCount: 0,
 }
 
@@ -25,6 +26,9 @@ const slice = createSlice({
       state.error = null
       state.success = null
     },
+    setInitialized: (state) => {
+      state.initialized = true
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -32,6 +36,9 @@ const slice = createSlice({
         state.loadingCount += 1
         const meta = action.meta as { arg?: { endpointName?: string } } | undefined
         if (meta?.arg?.endpointName === "me") {
+          return
+        }
+        if (!state.initialized) {
           return
         }
 
