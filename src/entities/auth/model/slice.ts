@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit/react"
 import { PayloadAction } from "@reduxjs/toolkit"
+import { sessionTokenCleared, sessionTokenReceived } from "@/shared/api/baseClientApi/events/session"
 
 const slice = createSlice({
   name: "authSlice",
@@ -19,6 +20,15 @@ const slice = createSlice({
     setIsAuth: (state, action: PayloadAction<{ isAuth: boolean }>) => {
       state.isAuth = action.payload.isAuth
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(sessionTokenReceived, (state, action: PayloadAction<{ accessToken: string }>) => {
+        state.accessToken = action.payload.accessToken
+      })
+      .addCase(sessionTokenCleared, (state, action) => {
+        state.accessToken = null
+      })
   },
 })
 export const authReducer = slice.reducer
