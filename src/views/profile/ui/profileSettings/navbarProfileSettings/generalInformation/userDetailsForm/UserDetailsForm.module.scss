@@ -1,0 +1,58 @@
+.boxInput {
+  margin-top: 24px;
+  max-width: 740px;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.boxSelects {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+}
+
+.boxSelects > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.labelSelect {
+  font-size: 14px;
+  font-family: var(--font-family-secondary), serif;
+  color: var(--color-light-1000);
+}
+
+.buttonSaveChanges {
+  margin-top: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.inputAll {
+  color: var(--color-light-100) !important;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.errorText {
+  font-size: 12px;
+  color: var(--color-danger-500);
+}
+
+.link {
+  text-decoration: underline;
+  color: var(--color-danger-500);
+}
+
+

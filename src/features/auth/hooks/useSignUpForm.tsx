@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { loginSchema, Inputs } from "@/shared/lib/Schemas/loginSchema"
+import { loginSchema, Inputs } from "@/shared/lib/schemas/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useMemo } from "react"
 import { useSelector } from "react-redux"

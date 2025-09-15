@@ -4,14 +4,23 @@ import styles from "./PrivacyPolicy.module.scss"
 import Link from "next/link"
 import { ArrowLeftIcon } from "@/shared/assets/icons/components/ArrowLeftIcon"
 import { appRoutes } from "@/shared/lib/routes"
+import { useSearchParams } from "next/navigation"
 
 const PrivacyPolicy = () => {
+  const searchParams = useSearchParams()
+
+  const source = searchParams.get("source")
+  const userId = searchParams.get("userId")
+
+  const backHref =
+    source === "generalInfo" ? (userId ? appRoutes.private.generalInformation(userId) : "") : appRoutes.public.signUp
+
   return (
     <div className={styles.container}>
       <div className={styles.containerLink}>
-        <Link href={appRoutes.public.signUp} className={styles.link}>
+        <Link href={backHref} className={styles.link}>
           <ArrowLeftIcon />
-          Back to Sign Up
+          {source === "generalInfo" ? "Back" : "Back to Sign Up"}
         </Link>
       </div>
       <div className={styles.containerText}>

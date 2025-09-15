@@ -1,7 +1,7 @@
 .selectBox {
   display: flex;
   flex-direction: column;
-  height: 36px;
+  min-height: 36px;
 }
 
 .label {
@@ -42,7 +42,7 @@
 
   .selectedValue {
     height: 36px;
-    background-color: var(--color-dark-900);
+    background-color: var(--color-dark-700);
     color: var(--color-light-100);
     font-family: var(--font-family-secondary), serif;
     font-size: 16px;
@@ -85,8 +85,12 @@
     right: 0;
     border: 1px solid var(--color-light-100);
     border-radius: 2px;
-    background: var(--color-dark-900);
+    background: var(--color-dark-700);
     z-index: 1000;
+
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     .option {
       height: 36px;
@@ -101,5 +105,9 @@
       }
     }
   }
+}
+
+.placeholder {
+  color: var(--color-light-100);
 }
 

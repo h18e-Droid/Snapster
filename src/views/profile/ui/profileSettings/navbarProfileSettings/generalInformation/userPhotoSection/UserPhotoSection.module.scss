@@ -1,0 +1,50 @@
+.boxPhoto {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 48px;
+  max-width: 198px;
+  width: 100%;
+}
+
+.avatarWrapper {
+  grid-area: avatar;
+}
+
+.avatarWrapper {
+  position: relative;
+}
+
+.avatar {
+  width: 192px;
+  height: 192px;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: var(--color-dark-500);
+
+}
+
+.addPhotoButton {
+  font-size: 16px;
+}
+
+.buttonDelPhoto {
+  position: absolute;
+  border: solid 4px var(--color-dark-700);
+  border-radius: 50%;
+  background-color: var(--color-danger-500);
+  left: 155px;
+  top: 10px;
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.closeIcon {
+  width: 16px;
+  height: 16px;
+}

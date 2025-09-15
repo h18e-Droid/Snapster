@@ -6,7 +6,7 @@ import { VerificationLinkIcon } from "@/shared/assets/icons/components/Verificat
 import Input from "@/shared/ui/input/Input"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { EmailInputs, emailSchema } from "@/shared/lib/Schemas/emailSchema"
+import { EmailInputs, emailSchema } from "@/shared/lib/schemas/emailSchema"
 import { setAuthError, verificationEmail } from "@/features/auth/model/slice"
 import { AppDispatch, RootState } from "@/app/store"
 import { useDispatch, useSelector } from "react-redux"

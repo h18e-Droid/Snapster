@@ -25,10 +25,10 @@ export default async function Page({ params }: { params: Promise<{ userId: strin
         userName: res.userName,
         id: res.id,
         bio: res.bio,
-        avatarUrl: res.bio,
-        followers: 1234,
-        following: 4332,
-        publications: 1234,
+        avatarUrl: res.avatarUrl,
+        followers: res.followers,
+        following: res.following,
+        publications: res.publications,
       }
       return <Profile isAuth={isAuth} user={user} />
     } else return <UserNotFound />

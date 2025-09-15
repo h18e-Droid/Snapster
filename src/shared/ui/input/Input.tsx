@@ -9,7 +9,7 @@ import clsx from "clsx"
 
 export type CustomInputProps = {
   type: string
-  placeholder: string
+  placeholder?: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
@@ -56,8 +56,13 @@ const Input = ({
 
   return (
     <div className={styles.inputBox}>
-      {label && <label className={styles.label}>{label}</label>}
-      <div className={clsx(styles.inputContainer, className, disabled && styles.disabled)}>
+      {label && (
+        <label className={styles.label}>
+          {label.replace("*", "")}
+          {label.includes("*") && <span className={styles.required}>*</span>}
+        </label>
+      )}
+      <div className={clsx(styles.inputContainer, disabled && styles.disabled)}>
         {type === "search" && !isSearchVisible && !value && (
           <div className={styles.placeholderContainer}>
             <SearchIcon className={clsx(styles.icon, disabled && styles.iconDisabled)} />

@@ -1,6 +1,7 @@
 export const appRoutes = {
   private: {
-    create: "/newPublication"
+    create: "/newPublication",
+    generalInformation: (id: string) => `/${id}/profileSettings`,
   },
   public: {
     profile: "/profile",

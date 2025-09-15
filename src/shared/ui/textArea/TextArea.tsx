@@ -5,12 +5,12 @@ type TextAreaProps = ComponentPropsWithoutRef<"textarea"> & {
   width?: string | number,
   height?: string | number,
   error?: boolean,
-  title?:string
+  title?:string,
+  placeholder?: string,
 }
 
 
- export const TextArea = ({ title,width, height, error, ...props }: TextAreaProps) => {
-
+export const TextArea = ({ title, width, height, error, placeholder, ...props }: TextAreaProps) => {
 
   const textAreaStyle: CSSProperties = {
     width: width || 284,
@@ -24,10 +24,11 @@ type TextAreaProps = ComponentPropsWithoutRef<"textarea"> & {
       className={error? styles.error :`${styles.default} ${props.className}`}
       style={{ ...textAreaStyle }}
       value={props.value}
-    >{props.defaultValue}</textarea>
+      placeholder={placeholder}
+      {...props}
+    />
       {error &&
         <label className={styles.labelError}>Error text</label>
-
       }
     </div>
 
