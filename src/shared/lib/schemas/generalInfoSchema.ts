@@ -25,7 +25,7 @@ export const generalInfoSchema = z.object({
   aboutMe: z.string()
     .trim()
     .max(200, "Maximum number of characters is 200")
-    .regex(/^[0-9A-Za-zА-Яа-я!@#$%^&*()_+\-=[\]{};':"\\|,.<>/? ]+$/)
+    .regex(/^[0-9A-Za-zА-Яа-я!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]+$/)
     .or(z.literal(""))
     .optional(),
 });
