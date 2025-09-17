@@ -6,12 +6,12 @@ const privateRoutes = Object.values(appRoutes.private)
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const token = request.cookies.get("refreshToken")?.value
+  const token = request.cookies.get("accessToken")?.value
   const isPrivatePage = privateRoutes.includes(pathname as PrivateRoutes)
 
   if (!token && isPrivatePage) {
     const loginUrl = new URL(appRoutes.public.signIn, request.url)
-    loginUrl.searchParams.set("callbackUrl", pathname) // pathname = /profile наприклад
+    loginUrl.searchParams.set("callbackUrl", pathname)
     return NextResponse.redirect(loginUrl)
   }
 
@@ -19,5 +19,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!index|_next/static|_next/image|favicon.ico).*)"],
 }

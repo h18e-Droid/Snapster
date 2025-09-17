@@ -1,0 +1,16 @@
+.boxBtnInput {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 36px;
+  max-width: 229px;
+  width: 100%;
+
+}
+
+
+.buttonSend {
+  width: 229px;
+  background-color: var(--color-info-500);
+}

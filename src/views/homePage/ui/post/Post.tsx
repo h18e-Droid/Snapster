@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { PersonIcon } from "@/shared/assets/icons"
 import { user } from "@/views/homePage/lib/types"
+import Link from "next/link"
 
 const Post = ({ user }: { user: user }) => {
   const [expanded, setExpanded] = useState(false)
@@ -59,21 +60,23 @@ const Post = ({ user }: { user: user }) => {
       <div style={{ minHeight: "134px" }}>
         <div className={`${styles.postInfo} ${expanded ? styles.expanded : ""}`} ref={postRef}>
           <div className={styles.avatar}>
-            {user.avatar ? (
-              <Image
-                src={user.avatar}
-                alt={user.userName}
-                width={36}
-                height={36}
-                style={{ borderRadius: "50%" }}
-                onClick={redirectToProfile}
-              />
-            ) : (
-              <div className={styles.icon}>
-                <PersonIcon size={30} />
-              </div>
-            )}
-            <h3 onClick={redirectToProfile}>{user.userName}</h3>
+            <Link href={`/${user.id}`} scroll={true} className={styles.avatar}>
+              {user.avatar ? (
+                <Image
+                  src={user.avatar}
+                  alt={user.userName}
+                  width={36}
+                  height={36}
+                  style={{ borderRadius: "50%" }}
+                  onClick={redirectToProfile}
+                />
+              ) : (
+                <div className={styles.icon}>
+                  <PersonIcon size={30} />
+                </div>
+              )}
+              <h3 onClick={redirectToProfile}>{user.userName}</h3>
+            </Link>
           </div>
           <span ref={postTextRef} className={`${styles.postText} ${expanded ? styles.expandedText : ""}`}>
             {user.bio}

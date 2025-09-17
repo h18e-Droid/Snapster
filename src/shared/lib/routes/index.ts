@@ -12,6 +12,7 @@ export const appRoutes = {
     signIn: "/signIn",
     signUp: "/signUp",
     termsOfService: "/termsOfService",
+    publicPage: "/public-page",
   },
   home: "/",
 } as const

@@ -1,4 +1,4 @@
-import styles from "./Alert.module.scss"
+import styles from "./Alert.module.css"
 import { useEffect, useRef, useState } from "react"
 import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 

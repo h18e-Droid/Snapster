@@ -5,6 +5,9 @@ import { appReducer } from "@/features/app"
 import { postReducer } from "@/features/crudPost"
 import { generalInfoReducer } from "@/features/generalInfo/model/generalInfoSlice"
 import { profileReducer } from "@/features/profile/model/profileReducer"
+import { api } from "@/shared/api/baseClientApi"
+import { setupListeners } from "@reduxjs/toolkit/query/react"
+import { authReducer } from "@/entities/auth"
 
 export const store = configureStore({
   reducer: {
@@ -14,8 +17,12 @@ export const store = configureStore({
     post: postReducer,
     generalInfo: generalInfoReducer,
     profile: profileReducer,
+    [api.reducerPath]: api.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 })
+
+setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof store.getState>
 

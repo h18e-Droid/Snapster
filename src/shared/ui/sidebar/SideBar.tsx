@@ -16,7 +16,6 @@ import { MessageIcon } from "@/shared/assets/icons/components/MessageIcon"
 import { BookmarkIcon } from "@/shared/assets/icons/components/BookmarkIcon"
 import { Button } from "@/shared/ui/button"
 import { Modal } from "@/shared/ui/modal"
-import { useLogout } from "@/shared/hooks/useLogout"
 
 type TypeItem = {
   id: number | string
@@ -54,7 +53,6 @@ const SideBar = () => {
 
   const [isActive, setIsActive] = useState<Record<string | number, boolean>>({})
   const [showLogoutModal, setShowLogoutModal] = useState(false)
-  const logOut = useLogout()
 
   //const currentUser = useAppSelector((state: RootState) => state.user.user)
   const userName = "userName"
@@ -75,7 +73,6 @@ const SideBar = () => {
 
   const logOutModal = async () => {
     setShowLogoutModal(false)
-    await logOut()
   }
 
   return (

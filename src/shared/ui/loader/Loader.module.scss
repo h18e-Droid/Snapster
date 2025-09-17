@@ -8,12 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 99;
+  z-index: 999;
 }
 
 .multiLetterLoader {
-  font-size: 40px;
-  font-weight: bold;
   height: 60px;
   width: 60px;
   display: flex;
@@ -22,101 +20,20 @@
   position: relative;
   background-color: var(--color-dark-300);
   border-radius: 15px;
-  padding-bottom: 6px;
 }
 
-.letter {
-  position: absolute;
-  opacity: 0;
-  transform: scale(0.7);
-  transition: opacity 0.5s ease, transform 0.3s ease;
+
+.spinner {
+  border: 4px solid var(--color-dark-300);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 0.6s linear infinite;
 }
 
-.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.letter0 {
-  color: #4C8DFF;
-  animation: pulse 1s infinite;
-}
-
-.letter1 {
-  color: #ffd135;
-  animation: rotate 1s infinite;
-}
-
-.letter2 {
-  color: #744dff;
-  animation: scaleUp 1s infinite;
-}
-
-.letter3 {
-  color: #407d3d;
-  animation: fadeInOut 1s infinite;
-}
-
-.letter4 {
-  color: #4C8DFF;
-  animation: pulse 1s infinite;
-}
-
-.letter5 {
-  color: #ffd135;
-  animation: rotate 1s infinite;
-}
-
-.letter6 {
-  color: #ff3d3d;
-  animation: scaleUp 1s infinite;
-}
-
-.letter7 {
-  color: #ff7500;
-  animation: fadeInOut 1s infinite;
-}
-
-/*@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
-  }
-  50% {
-    transform: rotate(10deg);
-  }
-  100% {
-    transform: rotate(0);
-  }
-}
-@keyframes scaleUp {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.4);
-  }
-  100% {
-    transform: scale(1);
-  }
-}*/
-
-/*
-@keyframes fadeInOut {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
-*/

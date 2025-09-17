@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/shared/api/axiosInstance"
+import { api } from "@/shared/api/baseClientApi"
 
 export type PostType = {
   id: number
@@ -11,10 +11,10 @@ type UpdatePostPayload = {
 
 export const postApi = {
   updatePost: async (postId: number, data: UpdatePostPayload) => {
-    return axiosInstance.patch<PostType>(`/api/v1/posts/${postId}`, data)
+    // return api.patch<PostType>(`/api/v1/posts/${postId}`, data)
   },
-  
+
   getPost: async (postId: number) => {
-    return axiosInstance.get<PostType>(`/api/v1/posts/${postId}`)
-  }
+    // return api.get<PostType>(`/api/v1/posts/${postId}`)
+  },
 }
