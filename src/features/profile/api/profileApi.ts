@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/shared/api/axiosInstance"
+import { axiosInstance } from "@/shared/api/baseClientApi"
+
 
 export type ProfileType = {
   userName: string
