@@ -1,7 +1,7 @@
 "use client"
 
 import styles from "./GeneralInformation.module.scss"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { Loader } from "@/shared/ui/loader"
 import { Alert, AlertProps } from "@/shared/ui/alert/Alert"
@@ -51,12 +51,12 @@ const GeneralInformation = () => {
         </>
       )}
       {(success || error) && (
-        <Alert message={success ? alerts.success.text : alerts.error.text}
-               status={success ? alerts.success.status : alerts.error.status}
-               duration={3000}
+        <Alert
+          message={success ? alerts.success.text : alerts.error.text}
+          status={success ? alerts.success.status : alerts.error.status}
+          duration={3000}
         />
       )}
-
     </div>
   )
 }

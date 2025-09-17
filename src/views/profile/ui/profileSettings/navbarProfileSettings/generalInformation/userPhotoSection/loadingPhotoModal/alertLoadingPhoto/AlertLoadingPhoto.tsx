@@ -1,6 +1,5 @@
 import styles from "./AlertLoadingPhoto.module.scss"
 import { CSSProperties } from "react"
-import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 
 export type AlertProps = {
   size?: string
