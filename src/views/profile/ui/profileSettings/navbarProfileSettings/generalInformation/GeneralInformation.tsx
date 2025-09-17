@@ -13,21 +13,17 @@ import { Button } from "@/shared/ui/button"
 
 const GeneralInformation = () => {
   const { isLoading, success, error } = useAppSelector((state) => state.generalInfo)
-  const [alertMessage, setAlertMessage] = useState<null | AlertProps["message"]>(null)
   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    if (success) {
-      setAlertMessage("SettingSaved")
-    } else if (error) {
-      setAlertMessage("ServerError")
-    }
-    const time = setTimeout(() => setAlertMessage(null), 3000)
-    return () => clearTimeout(time)
-  }, [success, error])
-
-  const onClickCloseAlert = () => {
-    setAlertMessage(null)
+  const alerts: Record<NonNullable<AlertProps["message"]>, { text: string; status: "success" | "error" }> = {
+    success: {
+      text: "Your settings are saved!",
+      status: "success",
+    },
+    error: {
+      text: "Error! Server is not available!",
+      status: "error",
+    },
   }
 
   useEffect(() => {
@@ -54,9 +50,13 @@ const GeneralInformation = () => {
           </div>
         </>
       )}
-      {alertMessage && (
-        <Alert message={alertMessage} classNameProps={styles.alertMessage} onClickClose={onClickCloseAlert} />
+      {(success || error) && (
+        <Alert message={success ? alerts.success.text : alerts.error.text}
+               status={success ? alerts.success.status : alerts.error.status}
+               duration={3000}
+        />
       )}
+
     </div>
   )
 }

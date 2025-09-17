@@ -5,9 +5,10 @@ import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 import React, { ChangeEvent, useRef, useState } from "react"
 import Image from "next/image"
 import { ImageOutlineIcon } from "@/shared/assets/icons/components/ImageOutlineIcon"
-import { Alert } from "@/shared/ui/alert"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
 import { profileActions } from "@/features/profile/model/profileReducer"
+import AlertLoadingPhoto
+  from "@/views/profile/ui/profileSettings/navbarProfileSettings/generalInformation/userPhotoSection/loadingPhotoModal/alertLoadingPhoto/AlertLoadingPhoto"
 
 type Props = {
   onClickButton: (id: string) => void
@@ -95,7 +96,7 @@ const LoadingPhotoModal = ({ title, onClose, isOpen }: Props) => {
             </div>
           ) : (
             <div className={styles.boxModalBodyLoading}>
-              {error && <Alert message={error} size={"445px"} classNameProps={styles.alertMessage} />}
+              {error && <AlertLoadingPhoto message={error} size={"445px"} classNameProps={styles.alertMessage} />}
               <div className={styles.containerLabelButton}>
                 <label className={styles.uploadBox}>
                   <div

@@ -7,7 +7,7 @@ const meta = {
   tags: ["autodocs"],
   parameters: {
     layout: "centered",
-  }
+  },
 } satisfies Meta<typeof Alert>
 
 export default meta
@@ -15,23 +15,27 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    message: 'SettingSaved',
+    message: "SettingSaved",
+    status: "success",
   },
 }
 
 export const Secondary: Story = {
   args: {
-    message: 'ServerError',
+    message: "ServerError",
+    status: "success",
   },
 }
 
 export const ErrorPhotoSize: Story = {
   args: {
-    message: 'ErrorPhotoSize',
+    message: "ErrorPhotoSize",
+    status: "success",
   },
 }
 export const ErrorPhotoFormat: Story = {
   args: {
-    message: 'ErrorPhotoFormat',
+    message: "ErrorPhotoFormat",
+    status: "success",
   },
 }
