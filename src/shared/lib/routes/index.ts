@@ -1,6 +1,7 @@
 export const appRoutes = {
   private: {
     create: "/newPublication",
+    generalInformation: (id: string) => `/${id}/profileSettings`,
   },
   public: {
     profile: "/profile",
@@ -22,4 +23,5 @@ export type AppRoutes = PrivateRoutes | PublicRoutes
 
 export type PrivateRoutes = Routes["private"][keyof Routes["private"]]
 
+// Для публічних:
 export type PublicRoutes = Routes["public"][keyof Routes["public"]]

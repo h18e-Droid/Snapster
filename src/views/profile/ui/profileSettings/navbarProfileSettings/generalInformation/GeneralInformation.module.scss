@@ -1,0 +1,33 @@
+.container {
+  display: grid;
+  grid-template-columns: 198px 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 24px 36px;
+}
+
+.photoSection {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.formSection {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.line {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  border: none;
+  height: 1px;
+  background: var(--color-dark-300);
+}
+
+.buttonWrapper {
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: end;
+  margin-bottom: 16px;
+}
+
+

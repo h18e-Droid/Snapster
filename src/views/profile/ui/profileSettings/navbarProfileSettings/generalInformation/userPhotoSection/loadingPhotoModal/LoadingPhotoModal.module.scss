@@ -1,0 +1,98 @@
+.modalLoadingPhoto {
+  z-index: 902;
+}
+
+.containerModal {
+  width: 492px;
+  min-height: 564px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.boxModalHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-dark-100);
+  padding: 12px 24px 11px 24px;
+
+  h1 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+    color: var(--color-light-100);
+  }
+}
+
+.boxModalBodyLoading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.boxModalBodyImage {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding: 28px 24px 36px 24px;
+}
+
+.boxModalButtonLoading {
+  display: flex;
+  justify-content: center;
+}
+
+.boxModalButtonSave {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.containerLabelButton {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.uploadBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 42px;
+
+  div:hover {
+    cursor: pointer;
+  }
+}
+
+.avatar {
+  width: 222px;
+  height: 228px;
+  object-fit: cover;
+  position: relative;
+  background-color: var(--color-dark-500);
+}
+
+.boxImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .overlay {
+    position: absolute;
+    width: 332px;
+    height: 340px;
+    background: rgba(0, 0, 0, 0.6);
+
+    mask-image: radial-gradient(circle 158px at center, transparent 99%, black 100%);
+    -webkit-mask-image: radial-gradient(circle 158px at center, transparent 99%, black 100%);
+  }
+}
+
+.alertMessage {
+  display: block;
+  margin-left: 24px;
+}
+

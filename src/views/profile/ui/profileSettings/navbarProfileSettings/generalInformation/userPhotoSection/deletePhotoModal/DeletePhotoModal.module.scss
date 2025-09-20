@@ -1,5 +1,10 @@
+.modalDeletePhoto {
+  z-index: 902;
+}
+
 .containerModal {
-  width: 378px;
+  width: 492px;
+  min-height: 564px;
   margin: 0;
   padding: 0;
   display: flex;
@@ -13,17 +18,13 @@
   border-bottom: 1px solid var(--color-dark-100);
   padding: 12px 24px 11px 24px;
 
-  h2 {
+  h1 {
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
+    line-height: 36px;
     color: var(--color-light-100);
   }
-}
-
-.modalFollowers {
-  z-index: 902;
-  transform: translate(-450px, -60px);
 }
 
 .boxModalBody {

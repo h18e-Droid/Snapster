@@ -1,4 +1,5 @@
 "use client"
+
 import React from "react"
 import styles from "./Profile.module.scss"
 import Image from "next/image"
@@ -62,7 +63,7 @@ const Profile = ({ user }: { user: user }) => {
         <div className={styles.buttons}>
           {isAuth && currentUserId ? (
             isMe ? (
-              <Link href={"/settings"}>
+              <Link href={`${currentUserId}/profileSettings`}>
                 <Button variant={"secondary"}>Profile Settings</Button>
               </Link>
             ) : (

@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit"
 import { userReducer } from "@/entities/user"
 import { appReducer } from "@/features/app"
 import { postReducer } from "@/features/crudPost"
+import { generalInfoReducer } from "@/features/generalInfo/model/generalInfoSlice"
+import { profileReducer } from "@/features/profile/model/profileReducer"
 import { api } from "@/shared/api/baseClientApi"
 import { setupListeners } from "@reduxjs/toolkit/query/react"
 import { authReducer } from "@/entities/auth"
@@ -12,6 +14,8 @@ export const store = configureStore({
     user: userReducer,
     app: appReducer,
     post: postReducer,
+    generalInfo: generalInfoReducer,
+    profile: profileReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),

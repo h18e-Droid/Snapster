@@ -145,10 +145,10 @@ export const CalendarGrid = ({ selectedDate, onSelect, onSelectRange }: Calendar
           })}
         </h2>
         <div className={styles.buttonGroup}>
-          <button onClick={prevMonth} aria-label="Предыдущий месяц">
+          <button type={"button"} onClick={prevMonth} aria-label="Предыдущий месяц">
             <ArrowBackIcon size={20} aria-hidden="true" />
           </button>
-          <button onClick={nextMonth} aria-label="Следующий месяц">
+          <button type={"button"} onClick={nextMonth} aria-label="Следующий месяц">
             <ArrowForwardIcon size={20} aria-hidden="true" />
           </button>
         </div>
