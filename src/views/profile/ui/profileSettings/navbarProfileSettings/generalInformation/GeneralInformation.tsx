@@ -1,34 +1,29 @@
 "use client"
 
 import styles from "./GeneralInformation.module.scss"
-import React, { useEffect } from "react"
-import { useAppSelector } from "@/shared/lib/state/useAppSelector"
+import React, { useMemo } from "react"
 import { Loader } from "@/shared/ui/loader"
-import { Alert, AlertProps } from "@/shared/ui/alert/Alert"
+import { Alert } from "@/shared/ui/alert/Alert"
 import UserDetailsForm from "./userDetailsForm/UserDetailsForm"
-import { fetchGeneralInfo } from "@/features/generalInfo/model/generalInfoSlice"
-import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
 import UserPhotoSection from "./userPhotoSection/UserPhotoSection"
 import { Button } from "@/shared/ui/button"
+import { useGetGeneralInfoQuery, useUpdateGeneralInfoMutation } from "@/features/generalInfo/api/generalInfoApi"
 
 const GeneralInformation = () => {
-  const { isLoading, success, error } = useAppSelector((state) => state.generalInfo)
-  const dispatch = useAppDispatch()
 
-  const alerts: Record<NonNullable<AlertProps["message"]>, { text: string; status: "success" | "error" }> = {
-    success: {
-      text: "Your settings are saved!",
-      status: "success",
-    },
-    error: {
-      text: "Error! Server is not available!",
-      status: "error",
-    },
-  }
+  const { data, isLoading, error } = useGetGeneralInfoQuery()
+  const [ updateGeneralInfo, { isSuccess: isUpdated, error: updateError }] =
+    useUpdateGeneralInfoMutation()
 
-  useEffect(() => {
-    dispatch(fetchGeneralInfo())
-  }, [])
+  const alert = useMemo(() => {
+    if (error || updateError) {
+      return { text: "Error! Server is not available!", status: "error" as const }
+    }
+    if (isUpdated) {
+      return { text: "Your settings are saved!", status: "success" as const }
+    }
+    return null
+  }, [error, updateError, isUpdated])
 
   return (
     <div className={styles.container}>
@@ -40,7 +35,7 @@ const GeneralInformation = () => {
             <UserPhotoSection />
           </div>
           <div className={styles.formSection}>
-            <UserDetailsForm idForm={"userDetailsForm"} />
+            <UserDetailsForm idForm={"userDetailsForm"} userDate={data} updateGeneralInfo={updateGeneralInfo}/>
           </div>
           <hr className={styles.line}></hr>
           <div className={styles.buttonWrapper}>
@@ -50,10 +45,10 @@ const GeneralInformation = () => {
           </div>
         </>
       )}
-      {(success || error) && (
+      {alert && (
         <Alert
-          message={success ? alerts.success.text : alerts.error.text}
-          status={success ? alerts.success.status : alerts.error.status}
+          message={alert.text}
+          status={alert.status}
           duration={3000}
         />
       )}

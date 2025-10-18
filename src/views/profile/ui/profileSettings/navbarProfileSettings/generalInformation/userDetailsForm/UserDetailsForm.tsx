@@ -11,7 +11,7 @@ import { TextArea } from "@/shared/ui/textArea"
 import React, { useEffect } from "react"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
-import { generalInfoActions, updateFetchGeneralInfo } from "@/features/generalInfo/model/generalInfoSlice"
+import { generalInfoActions } from "@/features/generalInfo/model/generalInfoSlice"
 import { components } from "react-select"
 import { ArrowUpIcon } from "@/shared/assets/icons/components/ArrowUpIcon"
 import { ArrowDownIcon } from "@/shared/assets/icons/components/ArrowDownIcon"
@@ -50,12 +50,13 @@ const selectStyles: StylesConfig<unknown, boolean> = {
 
 type Props = {
   idForm?: string
+  userDate?: GeneralInfoFormValues
+  updateGeneralInfo: (data: GeneralInfoFormValues) => void
 }
 
-const UserDetailsForm = ({ idForm }: Props) => {
-  const userDate = useAppSelector((state) => state.generalInfo.currentGeneralInfo)
-  const userId = useAppSelector((state) => state.user.userId)
+const UserDetailsForm = ({ idForm, updateGeneralInfo, userDate }: Props) => {
 
+  const userId = useAppSelector((state) => state.user.userId)
   const dispatch = useAppDispatch()
 
   const DropdownIndicator = (props: DropdownIndicatorProps<any, false>) => {
@@ -70,11 +71,19 @@ const UserDetailsForm = ({ idForm }: Props) => {
 
   const { control, handleSubmit, reset, watch, setValue, setError, clearErrors } = useForm<GeneralInfoFormValues>({
     resolver: zodResolver(generalInfoSchema),
-    defaultValues: userDate,
+    defaultValues: userDate ?? {
+      userName: "",
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      country: "",
+      city: "",
+      aboutMe: "",
+    },
   })
 
   const onSubmit = (data: GeneralInfoFormValues) => {
-    dispatch(updateFetchGeneralInfo(data))
+    updateGeneralInfo(data)
   }
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/shared/api/baseClientApi"
+import { api } from "@/shared/api/baseClientApi"
 
 
 export type GeneralInformationType = {
@@ -11,12 +11,21 @@ export type GeneralInformationType = {
   aboutMe?: string
 }
 
-export const generalInfoApi = {
-  getGeneralInfo: async () => {
-    return axiosInstance.get<GeneralInformationType>(`/api/v1/general-information`)
-  },
-  putGeneralInfo: async (date: GeneralInformationType) => {
-    return axiosInstance.put<GeneralInformationType>(`/api/v1/general-information`, date)
-}
+export const generalInfoApi = api.injectEndpoints({
+  endpoints: (build) => ({
+    getGeneralInfo: build.query<GeneralInformationType, void>({
+      query: () => "/api/v1/general-information",
+      providesTags: ["me"],
+    }),
+    updateGeneralInfo: build.mutation<GeneralInformationType, GeneralInformationType>({
+      query: (body) => ({
+        url: "/api/v1/general-information",
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["me"],
+    }),
+  }),
+})
 
-}
+export const {useGetGeneralInfoQuery, useUpdateGeneralInfoMutation} = generalInfoApi

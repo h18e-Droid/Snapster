@@ -10,6 +10,7 @@ type ExtraOptions = {
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "https://snap-ster.net",
+  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.accessToken
     if (token) headers.set("authorization", `Bearer ${token}`)
