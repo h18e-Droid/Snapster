@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import styles from "@/views/privacyPolicy/PrivacyPolicy.module.scss"
+import styles from "./TermsOfService.module.scss"
 import { ArrowLeftIcon } from "@/shared/assets/icons/components/ArrowLeftIcon"
 import { appRoutes } from "@/shared/lib/routes"
 
