@@ -69,6 +69,13 @@ export const ForgotPasswordForm = ({ setEmailValue, setIsShowModal }: Props) => 
     }
   }, [error])
 
+  useEffect(() => {
+    if (recaptchaToken) {
+      setRecaptchaToken(null)
+      setValue("recaptcha", false)
+    }
+  }, [emailValue])
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
