@@ -1,10 +1,10 @@
 
 import styles from "./Post.module.scss"
-import Image, { StaticImageData } from "next/image"
+import Image from "next/image"
 import { Button } from "@/shared/ui/button"
 
 type Props = {
-  image: StaticImageData
+  image: string
 }
 
 const Post = ({image}: Props) => {

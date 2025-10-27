@@ -8,15 +8,23 @@ import Link from "next/link"
 import clsx from "clsx"
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { SignOutModal } from "@/features/auth/signOut"
+import NewPublication from "@/widgets/newPublication/NewPublication"
+import Overlay from "@/shared/ui/overlay/Overlay"
 
 export const Navbar = () => {
   const currentBasePath = `/${usePathname().split("/")[1]}`
   const defaultActiveItem = items.find((item) => item.link === currentBasePath)
   const currentUserId = useAppSelector((state) => state.user.userId)
+  console.log("useID: " + currentUserId)
   const [activeItem, setActiveItem] = useState<number[]>(defaultActiveItem ? [defaultActiveItem.id] : [])
   const [showLogoutModal, setShowLogoutModal] = useState(false)
+  const [showCreateModal, setShowCreateModal] = useState(false)
 
   const onCLickHandler = (id: number) => {
+    if(id === 2) {
+      setShowCreateModal(true)
+      return
+    }
     setActiveItem([id])
   }
 
@@ -35,6 +43,7 @@ export const Navbar = () => {
   }, [currentBasePath, currentUserId])
 
   return (
+    <>
     <nav className={styles.navbarWrapper}>
       <div className={styles.navbar}>
         <ul className={styles.listWrapper}>
@@ -61,6 +70,17 @@ export const Navbar = () => {
         </ul>
       </div>
       {showLogoutModal && <SignOutModal setShowSignOutModal={(isModalOpen) => setShowLogoutModal(isModalOpen)} />}
+
+
     </nav>
+  {showCreateModal && (
+
+    <div >
+      <Overlay/>
+      <NewPublication onClose={() => setShowCreateModal(false)}/>
+      <div className="overlay-bg" onClick={() => setShowCreateModal(false)}></div>
+    </div>
+  )}
+    </>
   )
 }

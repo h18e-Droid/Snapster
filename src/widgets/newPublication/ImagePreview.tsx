@@ -32,7 +32,7 @@ export const ImagePreview = ({
   addFileFoo
 }: Props) => {
   return (
-    <div style={{ display: "flex", width: "100%", height: "100%", position: "relative" }}>
+    <div style={{ display: "flex", width: "490px", height: "494px", position: "relative" }}>
       <button className={"leftBtn"} onClick={handlePrevImage} disabled={currentIndex === 0}>
         <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -41,7 +41,7 @@ export const ImagePreview = ({
           />
         </svg>
       </button>
-      <img src={imageUrl} alt="Selected" style={{ width: "100%", height: "100%", objectFit: "fill" }} />
+      <img src={imageUrl} alt="Selected" style={{ width: "490px", height: "494px", objectFit: "fill" }} />
       <button className={"rightBtn"} onClick={handleNextImage} disabled={currentIndex === totalImages - 1}>
         <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

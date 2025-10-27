@@ -10,7 +10,12 @@ import { ModalFix } from "@/widgets/newPublication/windows/modalFix/Modal"
 import { CardsFix } from "@/widgets/newPublication/windows/cardsFix/Card"
 import { Confirmation } from "@/widgets/newPublication/Confirmation"
 
-const NewPublication = () => {
+
+type Props = {
+  onClose: () => void
+}
+
+const NewPublication = ({onClose}: Props) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true)
   const [selectedFiles, setSelectedFiles] = useState<Array<File>>([])
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -18,6 +23,8 @@ const NewPublication = () => {
   const [newPost, setNewPost] = useState(false)
   const [currentIndex, setCurrentIndex] = useState<number>(0)
   const [showConfirmation, setShowConfirmation] = useState(false)
+
+
 
   const NextStageHandler = () => {
     setNewPost(true)
@@ -102,8 +109,10 @@ const NewPublication = () => {
             setSelectedFiles([])
             setIsPreviewOpen(false)
             setShowConfirmation(false)
+            if (onClose) onClose()
           }}
-          onCancel={() => setShowConfirmation(false)}
+          onCancel={() =>{setShowConfirmation(false)
+            if (onClose) onClose()}}
         />
       )}
       {newPost ? (
@@ -111,6 +120,7 @@ const NewPublication = () => {
           handleCloseModal={handleCloseModal}
           selectedFiles={selectedFiles}
           handleBackToSecondPage={handleBackToSecondPage}
+          onClose={onClose}
         />
       ) : (
         <ModalFix

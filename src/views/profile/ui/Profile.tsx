@@ -9,12 +9,15 @@ import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { user } from "@/views/profile/lib/types"
 import { PersonIcon } from "@/shared/assets/icons"
 import Posts from "./posts/Posts"
+import { useGetAllPostsQuery } from "@/features/crudPost/api/postApi"
 
 const Profile = ({ user }: { user: user }) => {
   const currentUserId = useAppSelector((state) => state.user.userId)
   const isAuth = useAppSelector((state) => state.auth.isAuth)
 
   const isMe = user.id === currentUserId
+
+  const {data} = useGetAllPostsQuery({userId: user.id})
 
   return (
     <div className={styles.profile}>
@@ -77,7 +80,7 @@ const Profile = ({ user }: { user: user }) => {
         <span className={styles.bio}>{user.bio}</span>
       </div>
       <span className={styles.divider} />
-      <Posts />
+      <Posts dataPosts={data}/>
     </div>
   )
 }
