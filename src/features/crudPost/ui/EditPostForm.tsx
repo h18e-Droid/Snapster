@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import {  useAppSelector } from '@/shared/lib/state/useAppSelector'
-import { fetchPost, updatePost, postActions } from '../model/postSlice'
+import { postActions } from '../model/postSlice'
 // import { useRouter } from 'next/navigation'
 import { Button } from '@/shared/ui/button'
 import { TextArea } from '@/shared/ui/textArea/TextArea'
@@ -29,10 +29,10 @@ export const EditPostForm: React.FC<EditPostFormProps> = ({
   const { register, handleSubmit, setValue } = useForm<FormData>()
 
   useEffect(() => {
-    if (postId) {
-      dispatch(fetchPost(postId))
-    }
-    
+    // if (postId) {
+    //   dispatch(fetchPost(postId))
+    // }
+    //
     return () => {
       dispatch(postActions.clearPostState())
     }
@@ -48,10 +48,10 @@ export const EditPostForm: React.FC<EditPostFormProps> = ({
     if (!postId) return
     
     try {
-      await dispatch(updatePost({ 
-        postId, 
-        description: data.description 
-      })).unwrap()
+      // await dispatch(updatePost({
+      //   postId,
+      //   description: data.description
+      // })).unwrap()
       
       onSuccess?.()
     } catch (error) {

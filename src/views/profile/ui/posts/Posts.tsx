@@ -6,10 +6,15 @@ import { useEffect, useRef, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/app/store"
 import { initialStateType } from "@/entities/user/lib/types/types"
-import { fetchMorePosts } from "@/entities/user/model/slice"
 import { BlockIcon } from "@/shared/assets/icons"
+import { GetAllPosts } from "@/features/crudPost/api/postApi"
+import { fetchMorePosts } from "@/entities/user/model/slice"
 
-const Posts = () => {
+type Props = {
+  dataPosts: GetAllPosts | undefined
+}
+
+const Posts = ({dataPosts}: Props) => {
   const dispatch = useDispatch<AppDispatch>()
   const { visiblePosts, hasMore, isLoading } = useSelector<RootState, initialStateType>((state) => state.user)
 
@@ -20,7 +25,7 @@ const Posts = () => {
       if (observer.current) observer.current.disconnect()
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          // dispatch(fetchMorePosts())
+          dispatch(fetchMorePosts())
         }
       })
       if (node) observer.current.observe(node)
@@ -36,7 +41,7 @@ const Posts = () => {
 
   return (
     <div className={styles.wrapperPosts}>
-      {visiblePosts.map((post, index) => {
+      {dataPosts?.items?.map((post, index) => {
         const isLast = index === visiblePosts.length - 1
         return (
           <div key={post.id} ref={isLast ? lastPostRef : null}>

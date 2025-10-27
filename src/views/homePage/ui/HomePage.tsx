@@ -20,7 +20,7 @@ const HomePage = ({ users }: { users: user[] }) => {
         </div>
       </div>
       <div className={styles.postsList}>
-        {users.slice(0, 4).map((el: user, index) => (
+        {users.slice(0, 30).map((el: user, index) => (
           <Post key={index} user={el} />
         ))}
       </div>

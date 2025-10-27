@@ -1,21 +1,50 @@
 import { ImagePreview } from "@/widgets/newPublication/ImagePreview"
-import { useState } from "react"
+import React, { useState } from "react"
 import { Input } from "@/shared/ui/input"
 import { TextArea } from "@/shared/ui/textArea"
-// import Profile from "@/views/profile/Profile"
 import { ModalFix } from "@/widgets/newPublication/windows/modalFix/Modal"
+import { useAddPostMutation } from "@/features/crudPost/api/postApi"
+
 
 type Props = {
   handleCloseModal: () => void
   selectedFiles: File[]
   handleBackToSecondPage: () => void
+  onClose: () => void
 }
 
-export const PublicationPages = ({ handleCloseModal, selectedFiles: initialFiles, handleBackToSecondPage }: Props) => {
+export const PublicationPages = ({
+  handleCloseModal,
+  selectedFiles: initialFiles,
+  handleBackToSecondPage,
+  onClose,
+}: Props) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0)
   const [location, setLocation] = useState<string>("") // Состояние для ввода локации
   const [selectedFiles, setSelectedFiles] = useState<File[]>(initialFiles)
   const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+  const [description, setDescription] = useState<string>("")
+
+  const [addPost] = useAddPostMutation()
+
+
+  const handleSubmitPost = async () => {
+    try {
+      const formData = new FormData()
+      formData.append("description", description)
+      selectedFiles.forEach((file) => {
+        formData.append("files", file)
+      })
+      await addPost(formData).unwrap()
+      onClose()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onChangeText = (arg: string) => {
+    setDescription(arg)
+  }
 
   const handleRemoveFile = (index: number) => {
     const newFiles = [...selectedFiles]
@@ -59,7 +88,13 @@ export const PublicationPages = ({ handleCloseModal, selectedFiles: initialFiles
   }
 
   return (
-    <ModalFix active={true} setActive={handleCloseModal} title="" classNameContent={"publication-pages"}>
+    <ModalFix
+      active={true}
+      setActive={handleCloseModal}
+      title=""
+      classNameContent={"publication-pages"}
+      typeModal={"publicationPages"}
+    >
       <div className="modal-header">
         <button className={"backBtn"} onClick={handleBackToSecondPage}>
           <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,7 +105,7 @@ export const PublicationPages = ({ handleCloseModal, selectedFiles: initialFiles
           </svg>
         </button>
         <h2>Publication</h2>
-        <button className={"nextBtn"} onClick={() => {}}>
+        <button className={"nextBtn"} onClick={handleSubmitPost}>
           Publish
         </button>
       </div>
@@ -99,7 +134,7 @@ export const PublicationPages = ({ handleCloseModal, selectedFiles: initialFiles
           <div className="top">
             {/*<Profile/>*/}
             <div style={{ width: "433px", height: "60px", position: "relative", margin: "24px" }}>
-              <TextArea title={"Add publication descriptions"} width={433} height={120} />
+              <TextArea title={"Add publication descriptions"} width={433} height={120} onChangeText={onChangeText} />
             </div>
           </div>
           <div className="divider"></div>

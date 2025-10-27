@@ -8,12 +8,15 @@ type Props = {
   title: string
   children: ReactNode
   classNameContent?: string
+  typeModal?: string
 }
 
-export const ModalFix = ({ active, setActive,title, children,classNameContent }: Props) => {
+export const ModalFix = ({ active, setActive,title, children,classNameContent, typeModal }: Props) => {
 
-  const StyleCards=active?"modal active" : "modal"
-  // const StyleContent=active ? "modal-content active" : "modal-content"
+  let StyleCards= active ? "modal active" : "modal"
+  if(typeModal === "publicationPages" && active) {
+    StyleCards = "modalPublicationPage active"
+  }
 
   const StyleContent = active
     ? `modal-content active ${classNameContent ? classNameContent : ''}`
