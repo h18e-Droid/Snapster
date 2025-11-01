@@ -10,6 +10,7 @@ import { user } from "@/views/profile/lib/types"
 import { PersonIcon } from "@/shared/assets/icons"
 import Posts from "./posts/Posts"
 import { useGetAllPostsQuery } from "@/features/crudPost/api/postApi"
+import { useGetProfileQuery } from "@/features/profile/api/profileApi"
 
 const Profile = ({ user }: { user: user }) => {
   const currentUserId = useAppSelector((state) => state.user.userId)
@@ -17,6 +18,7 @@ const Profile = ({ user }: { user: user }) => {
 
   const isMe = user.id === currentUserId
 
+  const { data: profile }  = useGetProfileQuery(user.id)
   const {data} = useGetAllPostsQuery({userId: user.id})
 
   return (
@@ -26,8 +28,8 @@ const Profile = ({ user }: { user: user }) => {
         style={isAuth ? { paddingBottom: "30px" } : {}}
       >
         <div className={styles.avatarWrapper}>
-          {user.avatarUrl ? (
-            <Image src={user.avatarUrl} alt={"User Avatar"} width={204} height={204} className={styles.avatar} />
+          {profile?.avatarUrl ? (
+            <Image src={profile.avatarUrl} alt={"User Avatar"} width={204} height={204} className={styles.avatar} />
           ) : (
             <div className={styles.avatar} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
               <PersonIcon size={180} />

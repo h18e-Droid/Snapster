@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { profileApi, ProfileType } from "@/features/profile/api/profileApi"
-import { createAppAsyncThunk } from "@/shared/lib/state/createAppAsyncThunk"
+import { ProfileType } from "@/features/profile/api/profileApi"
+
 
 type ProfileStateType = {
   currentProfile: ProfileType
@@ -35,34 +35,8 @@ const slice = createSlice({
       state.currentProfile.avatarUrl = ""
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchProfile.pending, (state) => {
-        state.isLoading = true
-        state.error = null
-      })
-      .addCase(fetchProfile.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.currentProfile = action.payload
-      })
-      .addCase(fetchProfile.rejected, (state, action) => {
-        state.isLoading = false
-        state.error = action.error.message || "Failed to fetch profile"
-      })
-  },
 })
 
-export const fetchProfile = createAppAsyncThunk<ProfileType, string>(
-  `${slice.name}/fetchProfile`,
-  async (userId, { rejectWithValue }) => {
-    try {
-      const response = await profileApi.getProfile(userId)
-      return response.data
-    } catch (error) {
-      return rejectWithValue(error)
-    }
-  },
-)
 
 export const profileActions = slice.actions
 export const profileReducer = slice.reducer

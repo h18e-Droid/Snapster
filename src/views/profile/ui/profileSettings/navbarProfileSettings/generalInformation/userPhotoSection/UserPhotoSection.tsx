@@ -9,22 +9,27 @@ import LoadingPhotoModal from "@/views/profile/ui/profileSettings/navbarProfileS
 import { useAppSelector } from "@/shared/lib/state/useAppSelector"
 import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 import DeletePhotoModal from "@/views/profile/ui/profileSettings/navbarProfileSettings/generalInformation/userPhotoSection/deletePhotoModal/DeletePhotoModal"
+import { useGetProfileQuery } from "@/features/profile/api/profileApi"
 
 const UserPhotoSection = () => {
   const { isOpen: isAddOpen, open: openAddModal, close: closeAddModal } = useModal()
   const { isOpen: isDeleteOpen, open: openDeleteModal, close: closeDeleteModal } = useModal()
+  const currentUserId = useAppSelector((state) => state.user.userId)
 
-  const avatarUrl = useAppSelector((state) => state.profile.currentProfile.avatarUrl)
+  const { data: profile } = useGetProfileQuery(currentUserId!, {
+    skip: !currentUserId,
+  })
+
 
   return (
     <div className={styles.boxPhoto}>
       <div className={styles.avatarWrapper}>
-        {avatarUrl ? (
+        {profile?.avatarUrl ? (
           <div className={styles.avatarWrapper}>
             <button className={styles.buttonDelPhoto} type={"button"} onClick={openDeleteModal}>
               <CloseIcon className={styles.closeIcon} />
             </button>
-            <Image src={avatarUrl} alt={"User Avatar"} width={192} height={192} className={styles.avatar} />
+            <Image src={profile.avatarUrl} alt={"User Avatar"} width={192} height={192} className={styles.avatar} />
           </div>
         ) : (
           <div className={styles.avatar} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>

@@ -7,8 +7,8 @@ import Image from "next/image"
 import { ImageOutlineIcon } from "@/shared/assets/icons/components/ImageOutlineIcon"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
 import { profileActions } from "@/features/profile/model/profileReducer"
-import AlertLoadingPhoto
-  from "@/views/profile/ui/profileSettings/navbarProfileSettings/generalInformation/userPhotoSection/loadingPhotoModal/alertLoadingPhoto/AlertLoadingPhoto"
+import AlertLoadingPhoto from "@/views/profile/ui/profileSettings/navbarProfileSettings/generalInformation/userPhotoSection/loadingPhotoModal/alertLoadingPhoto/AlertLoadingPhoto"
+import { useUpdateProfileMutation } from "@/features/profile/api/profileApi"
 
 type Props = {
   onClickButton: (id: string) => void
@@ -22,15 +22,25 @@ const LoadingPhotoModal = ({ title, onClose, isOpen }: Props) => {
   const [error, setError] = useState<"ErrorPhotoSize" | "ErrorPhotoFormat" | null>(null)
   const [image, setImage] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-
+  const [file, setFile] = useState<File | null>(null);
+  const [updateProfile] = useUpdateProfileMutation()
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
     fileInputRef.current?.click()
   }
-  const savePhoto = () => {
-    if (image) {
-      dispatch(profileActions.setPhotoUser(image))
+  const savePhoto = async () => {
+    if(!file) return
+    const formData = new FormData()
+    formData.set("files", file);
+
+    try {
+      const result = await updateProfile(formData).unwrap()
+      const image = result?.avatarUrl
+      dispatch(profileActions.setPhotoUser(image??''))
+    } catch (err) {
+      console.log(err)
+    } finally {
       onClose()
     }
   }
@@ -59,6 +69,7 @@ const LoadingPhotoModal = ({ title, onClose, isOpen }: Props) => {
       }
     }
     reader.readAsDataURL(file)
+    setFile(file)
   }
 
   return (
@@ -89,7 +100,7 @@ const LoadingPhotoModal = ({ title, onClose, isOpen }: Props) => {
                 <div className={styles.overlay}></div>
               </div>
               <div className={styles.boxModalButtonSave}>
-                <Button onClick={savePhoto} variant={"primary"}>
+                <Button onClick={savePhoto} style={{width: "auto"}} variant={"primary"}>
                   Save
                 </Button>
               </div>
@@ -114,7 +125,7 @@ const LoadingPhotoModal = ({ title, onClose, isOpen }: Props) => {
                   />
                 </label>
                 <div className={styles.boxModalButtonLoading}>
-                  <Button onClick={handleClick} variant={"primary"}>
+                  <Button onClick={handleClick} style={{width: "auto"}} variant={"primary"}>
                     Select from Computer
                   </Button>
                 </div>
