@@ -16,7 +16,7 @@ const ForgotPassword = () => {
   }
 
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={"6Lf88RsrAAAAACaYiEXM1UKDa6Gc3lTaiOCSHZW7"}>
+    <GoogleReCaptchaProvider reCaptchaKey={"6LfFQfsrAAAAAIQDB9yk4q_7UTDDTeT8UEKKR-fM"}>
       <div className={styles.root}>
         <Cards title={"Forgot Password"}>
           <ForgotPasswordForm
