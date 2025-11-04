@@ -100,7 +100,7 @@ const LoadingPhotoModal = ({ title, onClose, isOpen }: Props) => {
                 <div className={styles.overlay}></div>
               </div>
               <div className={styles.boxModalButtonSave}>
-                <Button onClick={savePhoto} style={{width: "auto"}} variant={"primary"}>
+                <Button onClick={savePhoto} variant={"primary"}>
                   Save
                 </Button>
               </div>

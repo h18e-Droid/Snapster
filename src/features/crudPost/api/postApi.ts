@@ -4,6 +4,7 @@ import { api } from "@/shared/api/baseClientApi"
 export type PostType = {
   id: string
   description: string
+  location: string
   userName: string
   createdAt: string
   pictures: {url: string}[]
@@ -11,16 +12,18 @@ export type PostType = {
 
 export type UpdatePostPayload = {
   description: string
+  location?: string
 }
 
 export type ResponsesAddPost = {
   id: string
   description: string
+  location: string
   userName: string
   createdAt: string
 }
 
-export type ResponsesGetAllPosts = {
+export type GetAllPosts  = {
   userId: string
   sortDirection?: string
   pageNumber?: number
@@ -28,7 +31,7 @@ export type ResponsesGetAllPosts = {
   sortBy?: string
 }
 
-export type GetAllPosts = {
+export type ResponsesGetAllPosts = {
   pagesCount: number
   pageNumber: number
   pageSize: number
@@ -36,15 +39,6 @@ export type GetAllPosts = {
   items: PostType[]
 }
 
-// export const postApi = {
-//   updatePost: async (postId: number, data: UpdatePostPayload) => {
-//     // return api.patch<PostType>(`/api/v1/posts/${postId}`, data)
-//   },
-//
-//   getPost: async (postId: number) => {
-//     // return api.get<PostType>(`/api/v1/posts/${postId}`)
-//   },
-// }
 
 export const postApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -52,7 +46,7 @@ export const postApi = api.injectEndpoints({
       query: (postId: number) => `/api/v1/posts/${postId}`,
       providesTags: ["me"],
     }),
-    getAllPosts: build.query<GetAllPosts, ResponsesGetAllPosts>({
+    getAllPosts: build.query<ResponsesGetAllPosts, GetAllPosts>({
       query: (arg) => `/api/v1/posts/all-posts/${arg.userId}`,
       providesTags: ["me"],
     }),

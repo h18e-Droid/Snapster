@@ -11,7 +11,7 @@ export const ButtonsGroup = (props: Props) => {
         <Button className={'width-for-newPublished'} variant="primary" onClick={props.addFileFoo} style={{ marginBottom: 14 }}>
           Select from Computer
         </Button>
-        <Button className={'width-for-newPublishedSmall'} variant="outline" style={{ marginBottom: 18 }}>
+        <Button className={'width-for-newPublishedSmall'} variant="outline" style={{ marginBottom: 18, width: "100%" }}>
           Open draft
         </Button>
     </div>

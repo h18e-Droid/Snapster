@@ -5,6 +5,7 @@ import { CloseIcon } from "@/shared/assets/icons/components/CloseIcon"
 import React from "react"
 import { profileActions } from "@/features/profile/model/profileReducer"
 import { useAppDispatch } from "@/shared/lib/state/useAppDispatch"
+import { useUpdateProfileMutation } from "@/features/profile/api/profileApi"
 
 type Props = {
   onClickButton: (id: string) => void
@@ -16,8 +17,12 @@ type Props = {
 
 const DeletePhotoModal = ({ title, onClose, isOpen }: Props) => {
   const dispatch = useAppDispatch()
+  const [updateProfile] = useUpdateProfileMutation()
 
-  const deletePhoto = () => {
+  const deletePhoto =  () => {
+    const formData = new FormData()
+    formData.set("files", "");
+    updateProfile(formData)
     dispatch(profileActions.delPhotoUser())
     onClose()
   }
