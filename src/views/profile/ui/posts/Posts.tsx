@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/app/store"
 import { initialStateType } from "@/entities/user/lib/types/types"
 import { BlockIcon } from "@/shared/assets/icons"
-import { GetAllPosts } from "@/features/crudPost/api/postApi"
+import { ResponsesGetAllPosts } from "@/features/crudPost/api/postApi"
 import { fetchMorePosts } from "@/entities/user/model/slice"
 
 type Props = {
-  dataPosts: GetAllPosts | undefined
+  dataPosts: ResponsesGetAllPosts | undefined
 }
 
 const Posts = ({dataPosts}: Props) => {

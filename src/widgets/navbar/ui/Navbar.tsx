@@ -15,7 +15,6 @@ export const Navbar = () => {
   const currentBasePath = `/${usePathname().split("/")[1]}`
   const defaultActiveItem = items.find((item) => item.link === currentBasePath)
   const currentUserId = useAppSelector((state) => state.user.userId)
-  console.log("useID: " + currentUserId)
   const [activeItem, setActiveItem] = useState<number[]>(defaultActiveItem ? [defaultActiveItem.id] : [])
   const [showLogoutModal, setShowLogoutModal] = useState(false)
   const [showCreateModal, setShowCreateModal] = useState(false)
